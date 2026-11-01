@@ -1,6 +1,13 @@
 # The Technical-Analysis Signal Rulebook (for agents)
 
-**Version 2.1.2 (final).** Revised after three blind agent tests:
+**Version 2.2.** v2.1.2 plus three evidence-tested additions:
+- an **earnings-risk flag (E1)**;
+- a **survivorship check** on stocks that later delisted;
+- a **forward paper-trading** scoreboard.
+
+Two further candidates were tested and **rejected**: post-earnings-drift signals and fast crash overlays (§6).
+
+**v2.1.2 history.** Revised after three blind agent tests:
 - **Round 1:** the agent matched the deterministic engine on 39 of 40 cases and logged 17 ambiguities, all fixed in v2.1.
 - **Round 2:** 40 of 40.
 - **Round 3, the final exam** on never-seen holdout tickers from 2020–2026: 49 of 50. The one miss came from a rounded input.
@@ -45,12 +52,13 @@ See `experiments/ITERATION_LOG.md` and `BELIEFS_VS_EVIDENCE.md`.
 |---|---|
 | `mcp-tv-get-ohlcv(symbol, interval="1D", count=300, format="columns")` | Stock daily bars. ≥ 260 are required. |
 | `mcp-tv-get-ohlcv("AMEX:SPY", interval="1D", count=300, format="columns")` | Market regime. |
+| `mcp-tv-get-earnings-calendar(symbols=[symbol])` | Next report date (`release_next_date`, possibly under `out_of_window`). Feeds earnings flag E1 (§5). |
 | `mcp-tv-get-technicals-rating(symbol, "1D")` (optional) | Cross-checks RSI, ADX and MAs. Its Buy/Sell "Recommend" value is **not** a signal: every component it averages was tested in §6 and showed no edge. |
 
 Use only **completed** daily bars. If the market is open, drop the last bar. The reference implementation is `platform/tagym/live.py`:
 
 ```
-python -m tagym.live stock.json spy.json --symbol EXCH:TICKER [--drop-last]
+python -m tagym.live stock.json spy.json --symbol EXCH:TICKER --next-earnings YYYY-MM-DD [--drop-last]
 ```
 
 It returns the §9 JSON. When code execution is available, **prefer running it** to hand calculation, and report its output.
@@ -131,7 +139,18 @@ The regime is a **risk dial**. It never creates a stock signal by itself.
 - The effect holds within every volatility tercile (1.4–2.9×).
 - It also holds on 29 survivorship-free ETFs. P(≥ 10% fall in 60 days) is 11.8% for HEALTHY + RISK_ON against 35.1% for BROKEN, and mean 60-day return is 2.2% against 1.4%.
 - Expected *excess* returns between stock classes are ≈ 0 (±0.4% over 60 days).
-- Delisted stocks are missing from the stock universe, so true BROKEN risk is **higher** than shown.
+- **Survivorship check (v2.2).** The development universe is today's index members, so later-delisted stocks were missing. I applied the frozen rulebook to a random sample of 90 NYSE/NASDAQ stocks that were later delisted (EODHD). 76 had usable histories and 38 were ever tradeable; 34 of the 76 ended ≥ 80% below their peak.
+
+  | Delisted stocks | P(≥ 20% fall in 60d) | P(≥ 40% fall in 60d) | 60-day return |
+  |---|---|---|---|
+  | BULLISH | 14.3% | 1.9% | +4.7% |
+  | NO_SIGNAL | 23.9% | 6.0% | −0.8% |
+  | BEARISH | **37.5%** | **15.4%** | **−1.4%** |
+
+  - The class ordering holds (2.6×), but absolute risk is about **2× higher** than in survivors.
+  - Among delisted names, BEARISH also had worse *returns*; survivorship had hidden that.
+  - Stocks ≥ 40% below their 52-week high returned +4.7% over 60 days among survivors, but **−3.4% among delisted stocks**, with a 48.6% chance of a further ≥ 20% fall.
+  - Deep drawdowns are **not** bargains, whatever the survivor-only data suggests.
 
 ---
 
@@ -165,6 +184,21 @@ Apply the rows in order; the first match wins.
 | D4 | HEALTHY **and** EXTENDED | `NO_SIGNAL` | "The trend is fine, but buying after a spike has lagged. Wait for a pullback." If regime ≠ RISK_ON, also say "and the market is unhealthy" and check A1. |
 | D5 | HEALTHY **and** regime ≠ RISK_ON | `NO_SIGNAL` | "Healthy stock in an unhealthy market." Check rule A1. |
 | D6 | Everything else (NEUTRAL) | `NO_SIGNAL` | "No technical edge." |
+
+**Earnings flag E1 (v2.2), checked on every row.** If the next scheduled report falls within **10 trading days**:
+- attach warning E1;
+- report `p_drop10_10d_est` from the table below;
+- downgrade a D3 `risk_flag` from LOW to NORMAL.
+
+The signal itself does not change: earnings timing predicts *risk*, not direction.
+
+| Class | P(≥ 10% drop within 10 trading days): earnings due | no earnings due |
+|---|---|---|
+| BULLISH | **9.6%** | 3.9% |
+| NO_SIGNAL | 13.2% | 7.1% |
+| BEARISH | 17.8% | 12.6% |
+
+These are means of 6 samples: development 2000–14 and 2015–19, the 600 holdout tickers in all three periods, and 2020–26. The flag replicated in **every** sample (for example BULLISH 8.5–12.2% with earnings due, against 2.7–5.8% without). A healthy stock with earnings due carries the short-term crash risk of an average stock.
 
 **Rule A1 is checked on every row.** If the SPY month-end test is **false** (SPY below its 10-month SMA, whatever the SMA50/200 state) and RS6 is top-decile, attach the A1 warning. Such a stock can never be BULLISH.
 
@@ -201,6 +235,8 @@ Every rule here was coded exactly and tested on about 900 stocks over 2000–201
 | Divergences | RSI bullish and bearish divergence | No edge. |
 | YouTube "claimed" systems | MACD + 200 EMA (claimed 86%), Stoch + RSI + MACD, ICT fair-value gap, ICT liquidity sweep, 50-MA pullback, 200-day breakout, RSI(10) pullback | Real win rates 37–71%. No significant event-study edge. |
 | Dow Theory | Industrials confirmed by Transports | Fragile; use as context only. |
+| Post-earnings drift (v2.2) | Earnings-day gap ±5% on ≥ 2× volume; top/bottom-decile earnings reaction; EPS surprise ≥ +10% / ≤ −10%; surprise and reaction agreeing (128k earnings events, EODHD) | No rule reached t ≥ 3. The gap-down drift (−0.8%/60d, same sign in 2000–14 and 2015–19) **vanished or reversed in 2020–26** (+0.45%, −0.29%). EPS surprise alone showed no drift. |
+| Fast crash overlays (v2.2) | VIX ≥ 30; VIX +50% in 5 days; SPY −7% / −10% in 20 days; 20-day realized vol ≥ 30%; combinations (designed on 2000–19 only) | Cut BULLISH crash odds by at most 0.17 pts. On the index they **worsened** Sharpe and drawdown (whipsaw). Shocks arrive before any trigger can fire. |
 
 ---
 
@@ -228,7 +264,9 @@ Every rule here was coded exactly and tested on about 900 stocks over 2000–201
    - Moving-average exits were the most expensive.
 2. **Size by volatility.** Make position risk proportional to 1/ATR%. A high-vol BULLISH stock gets `risk_flag = NORMAL`, not LOW.
 3. **Don't switch individual stocks in and out on their 200-day line.** It lowered Sharpe for about 80% of stocks.
-4. **Hedge or de-risk at market level with the slow regime (§2).** Expect about −1%/yr of return for about 25 points less drawdown.
+4. **Hedge or de-risk at market level with the slow regime (§2).** Expect about −1%/yr of return for about 25 points less drawdown. In 2020–26 the cost was about −3%/yr.
+5. **Earnings (E1).** Size down, or widen the stop, ahead of a report within 10 trading days. Never treat a post-earnings gap as a signal (§6).
+6. **No signal protects against market-wide shocks.** Diversification and position size are the only defences that worked; every fast overlay tested failed.
 
 ---
 
@@ -241,7 +279,10 @@ Every rule here was coded exactly and tested on about 900 stocks over 2000–201
   "signal": "BULLISH | BEARISH | NO_SIGNAL",
   "decision_row": "D1..D6",
   "layers": {"regime": "RISK_ON|MIXED|RISK_OFF", "health": "HEALTHY|NEUTRAL|BROKEN", "timing": "EXTENDED|PULLBACK|NORMAL"},
-  "risk": {"p_drawdown20_60d_est": 0.06, "p_drawdown20_60d_2020_26_observed": 0.125, "risk_flag": "LOW|NORMAL|HIGH", "atr_pct": 2.1},
+  "rulebook_version": "2.2",
+  "risk": {"p_drawdown20_60d_est": 0.06, "p_drawdown20_60d_2020_26_observed": 0.125,
+           "p_drop10_10d_est": 0.039, "earnings_in_next_10d": false, "next_earnings": "YYYY-MM-DD",
+           "risk_flag": "LOW|NORMAL|HIGH", "atr_pct": 2.1},
   "confidence": "low | medium",
   "near_threshold": ["inputs within a hair of a cut-off"],
   "horizon_days": 60,
@@ -256,7 +297,7 @@ Every rule here was coded exactly and tested on about 900 stocks over 2000–201
 
 **`risk_flag`:**
 - `HIGH` if BROKEN, or if high-vol in RISK_OFF.
-- `LOW` if D3 and not high-vol.
+- `LOW` if D3, not high-vol, and no earnings due within 10 trading days.
 - `NORMAL` otherwise. That includes a high-vol, non-BROKEN stock in a MIXED regime, and a high-vol D3 stock.
 
 **`confidence`:** `medium` by default. Downgrade to `low` if **any** of the inputs below is within its band, whether or not crossing it would change the output. **This list is exhaustive**: other thresholds (the −25% of B3, the PULLBACK cuts, the ATR cuts, the D1 floor) never lower confidence.
@@ -277,3 +318,16 @@ Every rule here was coded exactly and tested on about 900 stocks over 2000–201
 - *11% below a still-rising SMA200, SMA50 < SMA200, 27% off the high.* → D2 `BEARISH` via B3.
 - *18% below its high, above SMA200, SMA200 slope −0.05%, MACD bull cross.* → D6 `NO_SIGNAL`. Confidence is low (slope near zero), and the MACD cross goes under `ignored_noise`.
 - *A top-RS, HEALTHY, not-extended stock while SPY is below its 10-month SMA.* → D5 `NO_SIGNAL` with the A1 warning. If it is also extended, D4 matches first, and the A1 warning is still attached.
+
+---
+
+## 11. Forward validation (paper trading)
+
+The rulebook is now scored forward on live data.
+
+- Every US trading day, a scheduled job applies it to a 98-stock, sector-balanced watchlist (`paper/watchlist.csv`), using TradingView's next earnings dates.
+- Each verdict is appended to `paper/journal.csv`. Our closes are cross-checked against TradingView in `paper/integrity_log.csv`; the first 8 checks differed by 0.000%.
+- Each call is graded once its 10-, 20- and 60-day windows have passed. `paper/SCOREBOARD.md` compares realized crash rates with the expected ones above, using a binomial 95% test.
+- If a class shows `calibrated? = NO` for several consecutive weeks, re-run the evidence pipeline before trusting the numbers.
+
+The first verdicts (2026-10-30) were 23 BULLISH, 42 NO_SIGNAL and 33 BEARISH. The 10-day scores mature in mid-November 2026, the 60-day scores in late January 2027.

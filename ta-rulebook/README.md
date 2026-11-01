@@ -12,6 +12,8 @@
 | `experiments/ITERATION_LOG.md` | Every feedback-loop iteration: the hypothesis, the test, the result, and the decision. Includes all 246 rule-level tests. |
 | `experiments/results/` | Raw results: `ledger.jsonl` (every rule test), CSVs for timing, risk, RL, ML, exits, YouTube systems, the fine-tuning grid, and the final locked test. |
 | `experiments/test_access_log.md` | Audit trail of every access to the locked out-of-sample data. |
+| `paper/` | **Forward paper trading**: `watchlist.csv` (98 stocks), `journal.csv` (daily verdicts), `SCOREBOARD.md` (realized vs expected crash rates), `integrity_log.csv` (TradingView cross-checks). |
+| `../.claude/skills/ta-signal/SKILL.md` | Claude skill: the agent procedure (TradingView calls → engine → report). |
 | `experiments/live_journal_2026-11-01.md` | The rulebook applied to live TradingView data, as forward predictions to be scored later. |
 | `blind_tests/` | Anonymised blind cases, the agents' answers, scores, and the agents' feedback on rulebook ambiguities. |
 | `research/books/` | Rule extractions from 6 classic books: Hamilton, Nelson, Lefèvre/Livermore, Selden and Wyckoff read in full; Schabacker's trading half (Ch. XIX–XXVII) read in full. Plus a survey of the modern canon (Murphy, Edwards & Magee, Bulkowski, Nison, Weinstein, O'Neil, Minervini, Elder, Wilder, Bollinger, Aronson, Connors). |
@@ -35,6 +37,11 @@
 | `live.py` | **the rulebook applied to live TradingView OHLCV** (`python -m tagym.live stock.json spy.json`) |
 | `blind.py` | anonymised blind-case generator and scorer |
 | `final_test.py` | the one-time locked out-of-sample test |
+| `earnings.py`, `earn_rules.py`, `final_earnings.py` | earnings calendar (EODHD, 128k events), earnings-risk flag E1, post-earnings-drift tests and their locked test |
+| `delisted.py` | survivorship check on stocks that were later delisted (EODHD) |
+| `overlay.py` | fast crash-overlay candidates (rejected) |
+| `paper.py` | daily paper-trading journal, TradingView cross-check log, automatic scoring |
+| `tests/` | pytest unit tests for the agent engine (`python -m pytest -q tests`) |
 
 Reproduce:
 
@@ -50,7 +57,7 @@ Set `TAGYM_DATA` to choose where the parquet files go.
 
 ## Honest limits
 
-- **Survivorship bias.** The stock universe is today's S&P 1500, so delisted stocks are missing. This biases "buy the dip" rules upward and makes BROKEN-stock risk look *smaller* than it is. Index and ETF tests have no survivorship bias.
+- **Survivorship bias.** The development universe is today's S&P 1500. In v2.2 a sample of 76 later-delisted stocks (EODHD) was checked. The class ordering holds, but absolute crash risk is about 2× higher among those names, and dip-buying looks worse. See RULEBOOK §3.
 - **US equities, daily bars only.** Nothing here validates intraday, forex or crypto TA.
 - **No transcripts.** YouTube blocks transcript downloads from cloud servers, so the creators' beliefs come from their written material plus video titles, descriptions and chapters. Run `research/videos/fetch_transcripts_locally.py` on your own machine to add transcripts.
 - **Copyrighted books.** Modern copyrighted books were studied through legitimate summaries, author sites and published statistics, not full texts.

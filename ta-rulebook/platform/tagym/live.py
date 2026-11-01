@@ -3,7 +3,8 @@
 Input: JSON saved from `mcp-tv-get-ohlcv(..., format="columns")` for the stock
 and for AMEX:SPY (either the raw tool response or just its "bars" object).
 Usage:
-    python -m tagym.live stock.json spy.json [--symbol NASDAQ:XYZ] [--drop-last]
+    python -m tagym.live stock.json spy.json [--symbol NASDAQ:XYZ] [--drop-last] [--next-earnings YYYY-MM-DD]
+(--next-earnings: next report date from mcp-tv-get-earnings-calendar; enables flag E1)
 Prints the rulebook JSON verdict (Section 9 of RULEBOOK.md).
 """
 from __future__ import annotations
@@ -51,8 +52,28 @@ def regime(spy: pd.DataFrame):
     return lab, {"spy_above_10m_sma": ten, "spy_sma50_gt_sma200": cross}
 
 
-def classify(df: pd.DataFrame, spy: pd.DataFrame, symbol="?", healthy_max_from_high=-0.10, broken_from_high=-0.40):
-    out = {"symbol": symbol, "as_of": str(df.index[-1].date())}
+RULEBOOK_VERSION = "2.2"
+
+# P(>=10% drop within 10 trading days), mean of 6 samples (dev + holdout + 2020-26 test)
+EARN_CAL = {("BULLISH", True): 0.096, ("BULLISH", False): 0.039,
+            ("NO_SIGNAL", True): 0.132, ("NO_SIGNAL", False): 0.071,
+            ("BEARISH", True): 0.178, ("BEARISH", False): 0.126}
+
+
+def trading_days_until(as_of, date_str):
+    """Business days from as_of (exclusive) to date (inclusive); None if unknown/past."""
+    if not date_str:
+        return None
+    d = np.datetime64(str(date_str)[:10])
+    a = np.datetime64(str(as_of)[:10])
+    if d <= a:
+        return None
+    return int(np.busday_count(a + np.timedelta64(1, "D"), d + np.timedelta64(1, "D")))
+
+
+def classify(df: pd.DataFrame, spy: pd.DataFrame, symbol="?", healthy_max_from_high=-0.10, broken_from_high=-0.40,
+             next_earnings=None):
+    out = {"symbol": symbol, "as_of": str(df.index[-1].date()), "rulebook_version": RULEBOOK_VERSION}
     c = df.c
     if len(df) < 260:
         return {**out, "signal": "NO_SIGNAL", "decision_row": "D1", "reason": f"only {len(df)} bars (<260)"}
@@ -110,9 +131,14 @@ def classify(df: pd.DataFrame, spy: pd.DataFrame, symbol="?", healthy_max_from_h
     if row == "D3" and d52 >= 0:
         warnings.append("A3: close is the 52-week closing high - prefer a pullback entry over buying the breakout bar")
     high_vol = atrp >= 0.03  # ~ top tercile of US stocks' ATR% (2000-2019 median cut-off 2.9%)
+    days_to_earn = trading_days_until(out["as_of"], next_earnings)
+    earn_due = days_to_earn is not None and days_to_earn <= 10
+    if earn_due:
+        warnings.append(f"E1: earnings in {days_to_earn} trading days - short-term crash risk ~2-3x higher "
+                        "(P(>=10% drop in 10d) {:.0%} vs {:.0%} without)".format(EARN_CAL[(sig, True)], EARN_CAL[(sig, False)]))
     if health == "BROKEN" or (high_vol and reg == "RISK_OFF"):
         risk_flag = "HIGH"
-    elif row == "D3" and not high_vol:
+    elif row == "D3" and not high_vol and not earn_due:
         risk_flag = "LOW"
     else:
         risk_flag = "NORMAL"
@@ -131,6 +157,9 @@ def classify(df: pd.DataFrame, spy: pd.DataFrame, symbol="?", healthy_max_from_h
         "risk": {"p_drawdown20_60d_est": p_dd,
                  # observed in the locked 2020-2026 test (includes the COVID crash): harsher, use for conservative views
                  "p_drawdown20_60d_2020_26_observed": {"BULLISH": 0.125, "NO_SIGNAL": 0.155, "BEARISH": 0.192}[sig],
+                 "p_drop10_10d_est": EARN_CAL[(sig, earn_due)],
+                 "earnings_in_next_10d": (None if next_earnings is None else bool(earn_due)),
+                 "next_earnings": next_earnings,
                  "risk_flag": risk_flag, "atr_pct": round(atrp * 100, 2)},
         "confidence": "low" if near else "medium",
         "near_threshold": near,
@@ -152,9 +181,11 @@ def classify(df: pd.DataFrame, spy: pd.DataFrame, symbol="?", healthy_max_from_h
 
 
 if __name__ == "__main__":
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    flag_vals = {sys.argv[i + 1] for i, a in enumerate(sys.argv[:-1]) if a in ("--symbol", "--next-earnings")}
+    args = [a for a in sys.argv[1:] if not a.startswith("--") and a not in flag_vals]
     sym = next((sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--symbol"), "?")
+    nxt = next((sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--next-earnings"), None)
     df, spy = load_tv(args[0]), load_tv(args[1])
     if "--drop-last" in sys.argv:
         df, spy = df.iloc[:-1], spy.iloc[:-1]
-    print(json.dumps(classify(df, spy, sym), indent=1))
+    print(json.dumps(classify(df, spy, sym, next_earnings=nxt), indent=1))

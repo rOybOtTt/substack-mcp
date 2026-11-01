@@ -1,0 +1,14 @@
+period                            test
+cls       flag                        
+BEARISH   earnings_in_next_10d  0.1845
+          no_earnings_next_10d  0.1234
+BULLISH   earnings_in_next_10d  0.1181
+          no_earnings_next_10d  0.0570
+NO_SIGNAL earnings_in_next_10d  0.1541
+          no_earnings_next_10d  0.0893
+/home/user/substack-mcp/ta-rulebook/platform/tagym/earnings.py:47: RuntimeWarning: All-NaN slice encountered
+  d["vol_ratio"] = np.nanmax(np.stack([vr[t, k], vr[t + 1, k]]), axis=0)
+earn_gap_up_vol              test  dir=+1 h=60  N=   3127 exc60= +0.15% med= -1.48% hit= 46.5% t=-1.08 | cal_ann= -0.73% calIR=-0.12 calT=-0.30 vmT=-2.54 | e5=-0.08% e60=+0.15% -> NO_EDGE
+earn_gap_down_vol            test  dir=-1 h=60  N=   3296 exc60= -0.29% med= -1.25% hit= 46.4% t=+0.03 | cal_ann= +0.09% calIR=+0.01 calT=+0.04 vmT=-2.28 | e5=-0.10% e60=-0.29% -> NO_EDGE
+earn_ear_bottom_decile       test  dir=-1 h=60  N=   2670 exc60= +0.15% med= -1.14% hit= 47.3% t=+1.10 | cal_ann= +0.90% calIR=+0.12 calT=+0.36 vmT=-1.29 | e5=-0.10% e60=+0.15% -> NO_EDGE
+earn_surprise_pos10          test  dir=+1 h=60  N=   8844 exc60= +0.32% med= -0.71% hit= 47.9% t=+0.04 | cal_ann= +1.61% calIR=+0.50 calT=+1.43 vmT=-1.60 | e5=-0.10% e60=+0.32% -> NO_EDGE

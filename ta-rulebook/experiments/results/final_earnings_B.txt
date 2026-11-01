@@ -1,0 +1,21 @@
+period                            test   train   valid
+cls       flag                                        
+BEARISH   earnings_in_next_10d  0.1875  0.2102  0.1495
+          no_earnings_next_10d  0.1284  0.1747  0.0801
+BULLISH   earnings_in_next_10d  0.1223  0.0945  0.0845
+          no_earnings_next_10d  0.0578  0.0362  0.0270
+NO_SIGNAL earnings_in_next_10d  0.1638  0.1292  0.1104
+          no_earnings_next_10d  0.0899  0.0825  0.0446
+  d["vol_ratio"] = np.nanmax(np.stack([vr[t, k], vr[t + 1, k]]), axis=0)
+earn_gap_up_vol              train dir=+1 h=60  N=   2015 exc60= -0.07% med= +0.30% hit= 50.9% t=-0.17 | cal_ann= +3.50% calIR=+0.36 calT=+1.47 vmT=-0.18 | e5=+0.22% e60=-0.07% -> NO_EDGE
+earn_gap_down_vol            train dir=-1 h=60  N=   1816 exc60= -0.50% med= -1.24% hit= 45.9% t=-1.25 | cal_ann= -5.48% calIR=-0.51 calT=-1.87 vmT=-1.64 | e5=-0.24% e60=-0.50% -> NO_EDGE
+earn_ear_bottom_decile       train dir=-1 h=60  N=   1177 exc60= -1.04% med= -1.42% hit= 45.3% t=-1.27 | cal_ann= -6.89% calIR=-0.51 calT=-1.87 vmT=-1.31 | e5=-0.17% e60=-1.04% -> NO_EDGE
+earn_surprise_pos10          train dir=+1 h=60  N=   4034 exc60= -0.14% med= -0.35% hit= 48.7% t=-1.15 | cal_ann= +0.32% calIR=+0.04 calT=+0.15 vmT=-0.58 | e5=+0.03% e60=-0.14% -> NO_EDGE
+earn_gap_up_vol              valid dir=+1 h=60  N=   1334 exc60= +0.72% med= +0.29% hit= 50.4% t=+1.07 | cal_ann= +6.14% calIR=+1.21 calT=+2.74 vmT=+1.03 | e5=+0.09% e60=+0.72% -> NO_EDGE
+earn_gap_down_vol            valid dir=-1 h=60  N=   1224 exc60= -0.48% med= -0.97% hit= 45.7% t=-1.47 | cal_ann= -2.55% calIR=-0.42 calT=-0.80 vmT=-1.80 | e5=-0.01% e60=-0.48% -> NO_EDGE
+earn_ear_bottom_decile       valid dir=-1 h=60  N=    744 exc60= -0.29% med= -1.03% hit= 45.8% t=-0.95 | cal_ann= -2.59% calIR=-0.32 calT=-0.61 vmT=-1.49 | e5=-0.17% e60=-0.29% -> NO_EDGE
+earn_surprise_pos10          valid dir=+1 h=60  N=   2561 exc60= +0.10% med= -0.05% hit= 49.6% t=-0.53 | cal_ann= -0.47% calIR=-0.11 calT=-0.21 vmT=-0.74 | e5=-0.09% e60=+0.10% -> NO_EDGE
+earn_gap_up_vol              test  dir=+1 h=60  N=   2417 exc60= -0.09% med= -1.15% hit= 46.9% t=-0.39 | cal_ann= +0.76% calIR=+0.11 calT=+0.30 vmT=-1.12 | e5=-0.04% e60=-0.09% -> NO_EDGE
+earn_gap_down_vol            test  dir=-1 h=60  N=   2378 exc60= +0.45% med= -1.23% hit= 46.8% t=+1.53 | cal_ann= +1.65% calIR=+0.24 calT=+0.59 vmT=-0.96 | e5=-0.04% e60=+0.45% -> NO_EDGE
+earn_ear_bottom_decile       test  dir=-1 h=60  N=   1821 exc60= +0.79% med= -1.46% hit= 46.4% t=+1.15 | cal_ann= +2.13% calIR=+0.26 calT=+0.65 vmT=-1.34 | e5=+0.01% e60=+0.79% -> NO_EDGE
+earn_surprise_pos10          test  dir=+1 h=60  N=   6093 exc60= +0.09% med= -1.15% hit= 46.5% t=-0.19 | cal_ann= -0.15% calIR=-0.04 calT=-0.11 vmT=-1.15 | e5=-0.09% e60=+0.09% -> NO_EDGE

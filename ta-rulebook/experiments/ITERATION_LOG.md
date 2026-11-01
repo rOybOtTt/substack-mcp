@@ -383,3 +383,18 @@ Columns: excess = mean excess return over the rule's horizon h (trading days) vs
 - `yt_rsi10_pullback`: Rayner Teo: close>SMA200 & RSI(10)<30 (first fire in 10d)
 - `yt_rsi10_pullback_h10`: Same, 10-day horizon
 - `yt_rsi10_pullback_rising200`: RSI(10)<30 above a RISING SMA200
+
+## Phase L — v2.2 hardening (Fiscal AI, EODHD, TradingView)
+
+| # | Iteration | Result | Decision |
+|---|---|---|---|
+| 61 | Data sourcing. Fiscal AI: `companies_list` covers 12,011 companies, but only 170 inactive US names, mostly recent M&A, and its earnings history is fiscal-period-end dates from 2015 onward. EODHD: 33,182 delisted US common stocks and a full historical earnings calendar | Fiscal AI unsuitable for survivorship and earnings-date backtests; EODHD used for both | — |
+| 62 | **Survivorship check**: frozen v2.1 classes applied to a random sample of 90 delisted NYSE/NASDAQ stocks (76 usable, 38 ever tradeable, 34 ended ≥80% below peak) | P(dd≥20%/60d): BULLISH 14.3%, NO_SIGNAL 23.9%, BEARISH 37.5% (ordering holds; absolute risk ≈2× survivors); BEARISH 60d return −1.4% vs BULLISH +4.7%; "≥40% below 52w high" +4.7% in survivors vs −3.4% in delisted (P(dd20) 48.6%) | rulebook §3: survivorship-adjusted numbers; deep drawdowns are not bargains |
+| 63 | **Earnings flag** (128k EODHD earnings events 2000-2026, 1,501 stocks): P(≥10% drop in 10 trading days), earnings due vs not, by class, development periods | BULLISH 8.5%/7.3% vs 3.1%/2.6%; NO_SIGNAL 12.0%/11.7% vs 7.6%/4.3%; BEARISH 19.0%/14.8% vs 16.5%/8.3% | candidate E1 |
+| 64 | **Post-earnings drift**: 9 rules (all events, gap up/down ±5% with ≥2× volume, EPS surprise ±10%, surprise and reaction agreeing, reaction deciles), development periods | none at t ≥ 3; gap-down −0.87%/−0.76% (t −1.4/−2.5), gap-up +0.27%/+0.51%; EPS surprise alone ≈ 0 or wrong sign | 4 candidates frozen for the locked test |
+| 65 | **Locked test of 63-64** (holdout tickers in all periods + discovery tickers 2020-26; logged) | E1 replicated in **every** cell (BULLISH 8.5-12.2% vs 2.7-5.8%); drift rules **vanished or reversed** in 2020-26 (gap-down +0.45%, −0.29%; bottom decile +0.79%, +0.15%) | **E1 adopted**; post-earnings drift → NOT-a-signal |
+| 66 | **Crash overlays** (VIX ≥ 30, VIX +50%/5d, SPY −7%/−10% in 20d, 20-day realized vol ≥ 30%, combinations), designed on 2000-2019 only | BULLISH crash odds 6.60% → ≥6.47% at best (only 1-7% of calls removed); on SPY, 5 of 6 overlays worsened Sharpe and drawdown through whipsaw | **all rejected** (pre-set criterion not met); shocks stay a documented limitation |
+| 67 | Engine v2.2: `--next-earnings`, E1 warning, `p_drop10_10d_est`, D3 risk LOW → NORMAL when earnings due, version stamp | verified on live AAPL bars | — |
+| 68 | **Unit tests**: 10 pytest cases (D1-D6, regime, A1, E1, business-day counter, TradingView JSON loader) | 10/10 pass | — |
+| 69 | **Forward paper trading**: 98-stock sector-balanced watchlist; TradingView earnings calendar (98 next dates); first journal 2026-10-30 (23 BULLISH / 42 NO_SIGNAL / 33 BEARISH; 23 with earnings due) | 8 closes cross-checked against TradingView: **0.000%** difference | daily scheduled job + automatic scoreboard |
+| 70 | Claude skill `ta-signal`; RULEBOOK v2.2 (§3 survivorship, §5 E1, §6 rejected candidates, §8 risk rules 5-6, §11 forward validation) | — | v2.2 frozen |

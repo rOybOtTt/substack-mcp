@@ -1,0 +1,99 @@
+as_of,symbol,ticker,sector,rulebook_version,signal,row,regime,health,timing,risk_flag,p_dd20_60d_est,p_drop10_10d_est,earnings_due_10d,close,confidence,warnings
+2026-10-30,NASDAQ:MU,MU,Information Technology,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,884.74,medium,
+2026-10-30,NASDAQ:NVDA,NVDA,Information Technology,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,204.64,low,
+2026-10-30,NASDAQ:SNDK,SNDK,Information Technology,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,1150.89,medium,
+2026-10-30,NASDAQ:AAPL,AAPL,Information Technology,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.096,True,344.63,medium,E1: earnings in 1 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 10% vs 4% without)
+2026-10-30,NASDAQ:TSLA,TSLA,Consumer Discretionary,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,399.81,medium,
+2026-10-30,NASDAQ:META,META,Communication Services,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,614.99,medium,
+2026-10-30,NASDAQ:MSFT,MSFT,Information Technology,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,521.91,medium,
+2026-10-30,NASDAQ:AMD,AMD,Information Technology,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.132,True,504.8,medium,E1: earnings in 2 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 13% vs 7% without)
+2026-10-30,NASDAQ:INTC,INTC,Information Technology,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,65.76,medium,
+2026-10-30,NASDAQ:AMZN,AMZN,Consumer Discretionary,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,240.35,medium,
+2026-10-30,NASDAQ:GOOGL,GOOGL,Communication Services,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,279.84,medium,
+2026-10-30,NASDAQ:AVGO,AVGO,Information Technology,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,326.08,medium,
+2026-10-30,NASDAQ:MRVL,MRVL,Information Technology,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,196.4,medium,
+2026-10-30,NYSE:BE,BE,Industrials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,203.17,medium,
+2026-10-30,NASDAQ:MRNA,MRNA,Health Care,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.096,True,221.72,low,E1: earnings in 5 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 10% vs 4% without)
+2026-10-30,NYSE:LLY,LLY,Health Care,2.2,NO_SIGNAL,D4,RISK_ON,HEALTHY,EXTENDED,NORMAL,0.068,0.071,False,1417.54,medium,
+2026-10-30,NASDAQ:NFLX,NFLX,Communication Services,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,62.08,medium,
+2026-10-30,NASDAQ:WMT,WMT,Consumer Staples,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,EXTENDED,NORMAL,0.111,0.071,False,123.51,medium,
+2026-10-30,NYSE:V,V,Financials,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,413.59,low,
+2026-10-30,NYSE:BRK.B,BRK-B,Financials,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.096,True,542.49,medium,E1: earnings in 1 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 10% vs 4% without)
+2026-10-30,NYSE:XOM,XOM,Energy,2.2,NO_SIGNAL,D4,RISK_ON,HEALTHY,EXTENDED,NORMAL,0.068,0.071,False,187.25,medium,
+2026-10-30,NYSE:JPM,JPM,Financials,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,337.04,medium,
+2026-10-30,NYSE:GEV,GEV,Industrials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,857.87,medium,
+2026-10-30,NASDAQ:HOOD,HOOD,Financials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,84.99,medium,
+2026-10-30,NYSE:CAT,CAT,Industrials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,622.75,medium,
+2026-10-30,NASDAQ:COST,COST,Consumer Staples,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,1012.28,medium,
+2026-10-30,NYSE:BAC,BAC,Financials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,50.01,medium,
+2026-10-30,NYSE:GS,GS,Financials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,894.55,low,
+2026-10-30,NYSE:UNH,UNH,Health Care,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,406.97,medium,
+2026-10-30,NYSE:MA,MA,Financials,2.2,NO_SIGNAL,D4,RISK_ON,HEALTHY,EXTENDED,NORMAL,0.068,0.071,False,638.01,low,
+2026-10-30,NYSE:JNJ,JNJ,Health Care,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,273.2,medium,
+2026-10-30,NYSE:CVX,CVX,Energy,2.2,NO_SIGNAL,D4,RISK_ON,HEALTHY,EXTENDED,NORMAL,0.068,0.071,False,235.52,medium,
+2026-10-30,NYSE:KO,KO,Consumer Staples,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,94.08,medium,
+2026-10-30,NASDAQ:COIN,COIN,Financials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,143.54,medium,
+2026-10-30,NYSE:MRK,MRK,Health Care,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.039,False,149.52,medium,
+2026-10-30,NYSE:HD,HD,Consumer Discretionary,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,329.2,low,
+2026-10-30,NYSE:GE,GE,Industrials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,301.8,medium,
+2026-10-30,NYSE:TMO,TMO,Health Care,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,697.0,medium,
+2026-10-30,NASDAQ:APP,APP,Communication Services,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.178,True,228.5,medium,E1: earnings in 3 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 18% vs 13% without)
+2026-10-30,NYSE:MCD,MCD,Consumer Discretionary,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.178,True,258.12,medium,E1: earnings in 3 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 18% vs 13% without)
+2026-10-30,NYSE:PG,PG,Consumer Staples,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,161.57,medium,
+2026-10-30,NYSE:BA,BA,Industrials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,171.55,medium,
+2026-10-30,NYSE:ABBV,ABBV,Health Care,2.2,NO_SIGNAL,D4,RISK_ON,HEALTHY,EXTENDED,NORMAL,0.068,0.071,False,294.89,medium,
+2026-10-30,NYSE:UBER,UBER,Industrials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.178,True,65.25,medium,E1: earnings in 3 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 18% vs 13% without)
+2026-10-30,NYSE:VRT,VRT,Industrials,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,232.5,medium,
+2026-10-30,NYSE:C,C,Financials,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,122.64,medium,
+2026-10-30,NASDAQ:BKNG,BKNG,Consumer Discretionary,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.178,True,148.13,medium,E1: earnings in 2 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 18% vs 13% without)
+2026-10-30,NYSE:NKE,NKE,Consumer Discretionary,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,38.67,medium,
+2026-10-30,NYSE:VLO,VLO,Energy,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,399.66,medium,
+2026-10-30,NASDAQ:PEP,PEP,Consumer Staples,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,137.34,medium,
+2026-10-30,NASDAQ:AMGN,AMGN,Health Care,2.2,NO_SIGNAL,D4,RISK_ON,HEALTHY,EXTENDED,NORMAL,0.068,0.132,True,466.01,medium,E1: earnings in 2 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 13% vs 7% without)
+2026-10-30,NYSE:TJX,TJX,Consumer Discretionary,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,140.31,medium,
+2026-10-30,NYSE:VZ,VZ,Communication Services,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,44.73,medium,
+2026-10-30,NASDAQ:LIN,LIN,Materials,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,514.24,low,
+2026-10-30,NYSE:MPC,MPC,Energy,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.096,True,444.73,medium,E1: earnings in 2 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 10% vs 4% without)
+2026-10-30,NYSE:NEE,NEE,Utilities,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,83.71,low,
+2026-10-30,NYSE:T,T,Communication Services,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,21.41,medium,
+2026-10-30,NYSE:PFE,PFE,Health Care,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.096,True,30.52,medium,A3: close is the 52-week closing high - prefer a pullback entry over buying the breakout bar | E1: earnings in 2 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 10% vs 4% without)
+2026-10-30,NYSE:COP,COP,Energy,2.2,NO_SIGNAL,D4,RISK_ON,HEALTHY,EXTENDED,NORMAL,0.068,0.132,True,154.03,medium,E1: earnings in 4 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 13% vs 7% without)
+2026-10-30,NYSE:RTX,RTX,Industrials,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,199.8,medium,
+2026-10-30,NYSE:PM,PM,Consumer Staples,2.2,NO_SIGNAL,D4,RISK_ON,HEALTHY,EXTENDED,NORMAL,0.068,0.071,False,208.79,medium,
+2026-10-30,NASDAQ:TMUS,TMUS,Communication Services,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,156.44,medium,
+2026-10-30,NYSE:DIS,DIS,Communication Services,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,110.94,medium,
+2026-10-30,NYSE:FCX,FCX,Materials,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,62.47,medium,
+2026-10-30,NYSE:ETN,ETN,Industrials,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.132,True,369.97,medium,E1: earnings in 2 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 13% vs 7% without)
+2026-10-30,NASDAQ:DASH,DASH,Consumer Discretionary,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,178.99,medium,
+2026-10-30,NYSE:AZO,AZO,Consumer Discretionary,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,3169.82,medium,
+2026-10-30,NYSE:NEM,NEM,Materials,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,106.61,medium,
+2026-10-30,NASDAQ:CEG,CEG,Utilities,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.178,True,262.38,medium,E1: earnings in 6 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 18% vs 13% without)
+2026-10-30,NYSE:PSX,PSX,Energy,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.039,False,282.83,medium,
+2026-10-30,NYSE:VST,VST,Utilities,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.178,True,138.37,medium,E1: earnings in 5 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 18% vs 13% without)
+2026-10-30,NYSE:SLB,SLB,Energy,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,53.74,low,
+2026-10-30,NYSE:TGT,TGT,Consumer Staples,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,154.38,low,
+2026-10-30,NYSE:WELL,WELL,Real Estate,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,234.6,medium,
+2026-10-30,NASDAQ:EQIX,EQIX,Real Estate,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.039,False,1013.7,low,
+2026-10-30,NYSE:MO,MO,Consumer Staples,2.2,NO_SIGNAL,D4,RISK_ON,HEALTHY,EXTENDED,NORMAL,0.068,0.071,False,78.03,low,
+2026-10-30,NYSE:SHW,SHW,Materials,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,332.61,low,
+2026-10-30,NYSE:WMB,WMB,Energy,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.096,True,74.35,medium,E1: earnings in 1 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 10% vs 4% without)
+2026-10-30,NYSE:PCG,PCG,Utilities,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,13.18,medium,
+2026-10-30,NYSE:OXY,OXY,Energy,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.096,True,64.0,medium,E1: earnings in 6 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 10% vs 4% without)
+2026-10-30,NYSE:SO,SO,Utilities,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.132,True,93.71,medium,E1: earnings in 4 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 13% vs 7% without)
+2026-10-30,NYSE:DUK,DUK,Utilities,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.132,True,127.39,low,E1: earnings in 4 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 13% vs 7% without)
+2026-10-30,NYSE:PLD,PLD,Real Estate,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,127.98,medium,
+2026-10-30,NASDAQ:MDLZ,MDLZ,Consumer Staples,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,LOW,0.06,0.039,False,64.94,medium,
+2026-10-30,NYSE:AMT,AMT,Real Estate,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.039,False,187.78,medium,
+2026-10-30,NYSE:CRH,CRH,Materials,2.2,BEARISH,D2,RISK_ON,BROKEN,EXTENDED,HIGH,0.156,0.126,False,90.81,medium,
+2026-10-30,NASDAQ:AEP,AEP,Utilities,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,130.21,medium,
+2026-10-30,NASDAQ:XEL,XEL,Utilities,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,79.82,medium,
+2026-10-30,NYSE:O,O,Real Estate,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.132,True,56.93,low,E1: earnings in 1 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 13% vs 7% without)
+2026-10-30,NYSE:MLM,MLM,Materials,2.2,BEARISH,D2,RISK_ON,BROKEN,EXTENDED,HIGH,0.156,0.178,True,540.41,low,E1: earnings in 3 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 18% vs 13% without)
+2026-10-30,NYSE:ECL,ECL,Materials,2.2,NO_SIGNAL,D4,RISK_ON,HEALTHY,EXTENDED,NORMAL,0.068,0.071,False,302.98,medium,
+2026-10-30,NYSE:DLR,DLR,Real Estate,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,180.7,low,
+2026-10-30,NYSE:VMRK,VMRK,Real Estate,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.132,True,61.9,low,E1: earnings in 3 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 13% vs 7% without)
+2026-10-30,NYSE:NUE,NUE,Materials,2.2,BULLISH,D3,RISK_ON,HEALTHY,NORMAL,NORMAL,0.06,0.039,False,273.87,medium,
+2026-10-30,NASDAQ:EXC,EXC,Utilities,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,EXTENDED,NORMAL,0.111,0.071,False,46.16,medium,
+2026-10-30,NYSE:CF,CF,Materials,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.132,True,123.3,medium,E1: earnings in 3 trading days - short-term crash risk ~2-3x higher (P(>=10% drop in 10d) 13% vs 7% without)
+2026-10-30,NYSE:VTR,VTR,Real Estate,2.2,NO_SIGNAL,D6,RISK_ON,NEUTRAL,NORMAL,NORMAL,0.111,0.071,False,84.8,medium,
+2026-10-30,NYSE:CBRE,CBRE,Real Estate,2.2,BEARISH,D2,RISK_ON,BROKEN,NORMAL,HIGH,0.156,0.126,False,128.85,medium,

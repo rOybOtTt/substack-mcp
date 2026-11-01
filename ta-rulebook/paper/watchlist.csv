@@ -1,0 +1,99 @@
+symbol_tv,ticker,sector
+NASDAQ:MU,MU,Information Technology
+NASDAQ:NVDA,NVDA,Information Technology
+NASDAQ:SNDK,SNDK,Information Technology
+NASDAQ:AAPL,AAPL,Information Technology
+NASDAQ:TSLA,TSLA,Consumer Discretionary
+NASDAQ:META,META,Communication Services
+NASDAQ:MSFT,MSFT,Information Technology
+NASDAQ:AMD,AMD,Information Technology
+NASDAQ:INTC,INTC,Information Technology
+NASDAQ:AMZN,AMZN,Consumer Discretionary
+NASDAQ:GOOGL,GOOGL,Communication Services
+NASDAQ:AVGO,AVGO,Information Technology
+NASDAQ:MRVL,MRVL,Information Technology
+NYSE:BE,BE,Industrials
+NASDAQ:MRNA,MRNA,Health Care
+NYSE:LLY,LLY,Health Care
+NASDAQ:NFLX,NFLX,Communication Services
+NASDAQ:WMT,WMT,Consumer Staples
+NYSE:V,V,Financials
+NYSE:BRK.B,BRK-B,Financials
+NYSE:XOM,XOM,Energy
+NYSE:JPM,JPM,Financials
+NYSE:GEV,GEV,Industrials
+NASDAQ:HOOD,HOOD,Financials
+NYSE:CAT,CAT,Industrials
+NASDAQ:COST,COST,Consumer Staples
+NYSE:BAC,BAC,Financials
+NYSE:GS,GS,Financials
+NYSE:UNH,UNH,Health Care
+NYSE:MA,MA,Financials
+NYSE:JNJ,JNJ,Health Care
+NYSE:CVX,CVX,Energy
+NYSE:KO,KO,Consumer Staples
+NASDAQ:COIN,COIN,Financials
+NYSE:MRK,MRK,Health Care
+NYSE:HD,HD,Consumer Discretionary
+NYSE:GE,GE,Industrials
+NYSE:TMO,TMO,Health Care
+NASDAQ:APP,APP,Communication Services
+NYSE:MCD,MCD,Consumer Discretionary
+NYSE:PG,PG,Consumer Staples
+NYSE:BA,BA,Industrials
+NYSE:ABBV,ABBV,Health Care
+NYSE:UBER,UBER,Industrials
+NYSE:VRT,VRT,Industrials
+NYSE:C,C,Financials
+NASDAQ:BKNG,BKNG,Consumer Discretionary
+NYSE:NKE,NKE,Consumer Discretionary
+NYSE:VLO,VLO,Energy
+NASDAQ:PEP,PEP,Consumer Staples
+NASDAQ:AMGN,AMGN,Health Care
+NYSE:TJX,TJX,Consumer Discretionary
+NYSE:VZ,VZ,Communication Services
+NASDAQ:LIN,LIN,Materials
+NYSE:MPC,MPC,Energy
+NYSE:NEE,NEE,Utilities
+NYSE:T,T,Communication Services
+NYSE:PFE,PFE,Health Care
+NYSE:COP,COP,Energy
+NYSE:RTX,RTX,Industrials
+NYSE:PM,PM,Consumer Staples
+NASDAQ:TMUS,TMUS,Communication Services
+NYSE:DIS,DIS,Communication Services
+NYSE:FCX,FCX,Materials
+NYSE:ETN,ETN,Industrials
+NASDAQ:DASH,DASH,Consumer Discretionary
+NYSE:AZO,AZO,Consumer Discretionary
+NYSE:NEM,NEM,Materials
+NASDAQ:CEG,CEG,Utilities
+NYSE:PSX,PSX,Energy
+NYSE:VST,VST,Utilities
+NYSE:SLB,SLB,Energy
+NYSE:TGT,TGT,Consumer Staples
+NYSE:WELL,WELL,Real Estate
+NASDAQ:EQIX,EQIX,Real Estate
+NYSE:MO,MO,Consumer Staples
+NYSE:SHW,SHW,Materials
+NYSE:WMB,WMB,Energy
+NYSE:PCG,PCG,Utilities
+NYSE:OXY,OXY,Energy
+NYSE:SO,SO,Utilities
+NYSE:DUK,DUK,Utilities
+NYSE:PLD,PLD,Real Estate
+NASDAQ:MDLZ,MDLZ,Consumer Staples
+NYSE:AMT,AMT,Real Estate
+NYSE:CRH,CRH,Materials
+NASDAQ:AEP,AEP,Utilities
+NASDAQ:XEL,XEL,Utilities
+NYSE:O,O,Real Estate
+NYSE:MLM,MLM,Materials
+NYSE:ECL,ECL,Materials
+NYSE:DLR,DLR,Real Estate
+NYSE:VMRK,VMRK,Real Estate
+NYSE:NUE,NUE,Materials
+NASDAQ:EXC,EXC,Utilities
+NYSE:CF,CF,Materials
+NYSE:VTR,VTR,Real Estate
+NYSE:CBRE,CBRE,Real Estate

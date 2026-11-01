@@ -1,4 +1,6 @@
-# Agent quick-start: one-page procedure
+# Agent quick-start: one-page procedure (rulebook v2.2)
+
+In Claude Code this procedure is also packaged as the skill `.claude/skills/ta-signal/SKILL.md`.
 
 Paste this into your agent's instructions, together with `RULEBOOK.md`.
 
@@ -8,18 +10,20 @@ When asked for a technical-analysis view on a stock:
 1. Fetch data (TradingView MCP):
    mcp-tv-get-ohlcv(symbol=<EXCH:TICKER>, interval="1D", count=300, format="columns")
    mcp-tv-get-ohlcv(symbol="AMEX:SPY",    interval="1D", count=300, format="columns")
+   mcp-tv-get-earnings-calendar(symbols=[<EXCH:TICKER>])  -> release_next_date (may be under out_of_window)
    If the market is open, ignore the still-forming last bar.
 
 2. Compute the rulebook verdict.
    - If you can run code: save each response's "bars" object to stock.json / spy.json, then run
-       python -m tagym.live stock.json spy.json --symbol <EXCH:TICKER> [--drop-last]
+       python -m tagym.live stock.json spy.json --symbol <EXCH:TICKER> --next-earnings <YYYY-MM-DD> [--drop-last]
      from ta-rulebook/platform, and use its JSON.
    - Otherwise: compute the features in RULEBOOK §1.2 by hand and apply §2 → §3 → §4 → §5 in order.
 
 3. Report:
    - signal (BULLISH / BEARISH / NO_SIGNAL) and decision row (D1–D6);
    - the three layers (regime, health, timing);
-   - risk: p(≥20% fall in 60d), risk_flag, ATR%;
+   - risk: p(≥20% fall in 60d), p(≥10% drop in 10d), risk_flag, ATR%;
+   - warning E1 if earnings are due within 10 trading days (short-term crash risk ~2-3x);
    - confidence, invalidation level, any A1 warning;
    - anything you noticed that RULEBOOK §6 says is NOT a signal, listed under "ignored_noise".
 

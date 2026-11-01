@@ -1,0 +1,7 @@
+group,period,cls,flag,obs,p_drop10_10d
+A,test,BULLISH,earnings_in_next_10d,11223,0.11806112447652142
+A,test,BULLISH,no_earnings_next_10d,58029,0.0570232125316652
+A,test,NO_SIGNAL,earnings_in_next_10d,17880,0.15413870246085012
+A,test,NO_SIGNAL,no_earnings_next_10d,98382,0.08928462523632372
+A,test,BEARISH,earnings_in_next_10d,13445,0.18452956489401265
+A,test,BEARISH,no_earnings_next_10d,70654,0.12337588813089138
