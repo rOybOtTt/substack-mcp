@@ -93,3 +93,13 @@ Aronson (2006) tested 6,402 rules on the S&P 500 with a data-mining correction a
 2. **It is not, on daily US stocks since 2000, a reliable return predictor.** Popular entry signals, books' setups and YouTube systems don't beat a random stock bought on the same day once statistics are done properly.
 3. **Small, consistent timing effects exist.** Short-term overextension lags and pullbacks inside uptrends slightly beat breakouts. They are smaller than trading costs: use them to choose *when* to act, never *whether*.
 4. **Market-level slow trend filters are real drawdown insurance** (about −1%/yr of return for about 25 points less drawdown). Fast filters are not.
+
+## 6. v2.2 additions (earnings data, delisted stocks, crash overlays)
+
+| Belief | Measured | Verdict |
+|---|---|---|
+| "Buy the dip: stocks far below their high are bargains" (value-flavoured TA, YouTube) | Stocks ≥ 40% below their 52-week high: +4.7% over 60 days among survivors, but **−3.4% among later-delisted stocks**, where 48.6% fell another 20% or more | ❌. The apparent edge was survivorship bias. |
+| Trend health matters (Weinstein Stage 4, Minervini) | On 76 later-delisted stocks: BEARISH-class crash odds 37.5% vs 14.3% for BULLISH, and BEARISH 60-day return −1.4% vs +4.7% | ✅. Stronger once failures are included. |
+| Post-earnings drift / "earnings gap and go" (O'Neil, Ross Cameron, PEAD literature) | 128k earnings events: gap-down drift (−0.8%/60d) held its sign 2000–2019, then vanished or reversed in 2020–26. EPS surprise alone showed no drift | ❌ as a signal. |
+| "Avoid holding through earnings" (common trader advice) | A report within 10 trading days raised short-term crash odds 2–3× in every class and every sample, including the locked test | ✅ as a risk flag (E1). |
+| Volatility spikes / VIX tell you when to get out (YouTube, market-timing blogs) | Six fast triggers (VIX ≥ 30, VIX +50%, SPY −7%/−10%, realized vol ≥ 30%): no meaningful drop in BULLISH-class crash odds, and Sharpe and drawdown got worse on the index | ❌. Shocks arrive before triggers fire. |
