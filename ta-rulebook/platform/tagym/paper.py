@@ -3,6 +3,7 @@
     python -m tagym.paper run   [--earnings ../paper/next_earnings.json]   # today's verdicts
     python -m tagym.paper score                                           # grade matured calls
     python -m tagym.paper xcheck SYMBOL=CLOSE [...]                       # log TradingView cross-check
+    python -m tagym.paper earnings-yf                                     # fallback next-earnings dates
 
 * Verdicts come from tagym.live.classify (the same engine the agent uses).
 * Bars: yfinance (split+dividend adjusted, same as the backtests).
@@ -169,6 +170,26 @@ def score():
     print("\n".join(lines[:30]))
 
 
+def earnings_yf(out=None):
+    """Fallback when the TradingView MCP is not available: next report dates from yfinance
+    (agreed with TradingView on every symbol checked on 2026-11-01)."""
+    import yfinance as yf
+    out = Path(out) if out else PAPER / "next_earnings.json"
+    res = {"_source": f"yfinance calendar {pd.Timestamp.now():%Y-%m-%d}"}
+    today = pd.Timestamp.now().normalize()
+    for _, w in watchlist().iterrows():
+        try:
+            cal = yf.Ticker(w.ticker).calendar
+            ds = cal.get("Earnings Date") if isinstance(cal, dict) else None
+            ds = [pd.Timestamp(d) for d in (ds or []) if pd.Timestamp(d) >= today]
+            if ds:
+                res[w.symbol_tv] = str(min(ds).date())
+        except Exception:
+            continue
+    out.write_text(json.dumps(res, indent=0))
+    print(f"wrote {len(res) - 1} next-earnings dates to {out}")
+
+
 def xcheck(pairs):
     """pairs: ["NASDAQ:AAPL=344.63", ...] closes reported by TradingView for the latest journal date."""
     j = pd.read_csv(JOURNAL)
@@ -194,5 +215,7 @@ if __name__ == "__main__":
         run(ef)
     elif cmd == "score":
         score()
+    elif cmd == "earnings-yf":
+        earnings_yf()
     elif cmd == "xcheck":
         xcheck(sys.argv[2:])
