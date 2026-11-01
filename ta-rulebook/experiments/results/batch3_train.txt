@@ -1,0 +1,40 @@
+liv_range_breakout           train dir=+1 h=60  N=   4716 exc60= -0.24% med= -0.42% hit= 47.9% t=-0.38 | cal_ann= -4.43% calIR=-0.40 calT=-1.38 vmT=+0.52 | e5=+0.08% e60=-0.24% -> NO_EDGE
+liv_range_breakout_nomkt     train dir=+1 h=60  N=   4941 exc60= -0.17% med= -0.36% hit= 48.2% t=-0.42 | cal_ann= -2.58% calIR=-0.19 calT=-0.73 vmT=+0.26 | e5=+0.08% e60=-0.17% -> NO_EDGE
+liv_new_high_upmkt           train dir=+1 h=60  N=   7496 exc60= -0.04% med= -0.43% hit= 48.4% t=+0.21 | cal_ann= -0.74% calIR=-0.11 calT=-0.38 vmT=+0.42 | e5=+0.10% e60=-0.04% -> NO_EDGE
+liv_bargain_upmkt            train dir=+1 h=60  N=   3664 exc60= -0.30% med= -0.93% hit= 47.0% t=-0.58 | cal_ann= +0.23% calIR=+0.03 calT=+0.10 vmT=-0.42 | e5=+0.14% e60=-0.30% -> NO_EDGE
+liv_failed_followthrough     train dir=-1 h=20  N=   4067 exc20= -0.17% med= -0.37% hit= 46.8% t=-0.79 | cal_ann= -5.84% calIR=-0.42 calT=-1.56 vmT=-0.08 | e5=+0.02% e60=-0.34% -> NO_EDGE
+liv_fallen_leader            train dir=-1 h=60  N=   1214 exc60= +0.01% med= -0.46% hit= 48.0% t=-0.99 | cal_ann= +2.56% calIR=+0.16 calT=+0.49 vmT=-1.18 | e5=-0.43% e60=+0.01% -> NO_EDGE
+liv_laggard_strong_group     train dir=-1 h=60  N=   4142 exc60= +0.17% med= +0.08% hit= 50.4% t=+0.78 | cal_ann= +2.90% calIR=+0.36 calT=+1.47 vmT=+1.13 | e5=+0.08% e60=+0.17% -> NO_EDGE
+leader_in_strong_group       train dir=+1 h=21  N=   3902 exc21= -0.29% med= -0.28% hit= 48.4% t=-2.58 | cal_ann= -5.88% calIR=-0.35 calT=-1.29 vmT=-2.57 | e5=-0.09% e60=-1.03% -> NO_EDGE
+liv_climax_top               train dir=-1 h=20  N=    421 exc20= +0.50% med= +0.11% hit= 50.1% t=+1.06 | cal_ann= +6.11% calIR=+0.19 calT=+0.58 vmT=+1.13 | e5=+0.46% e60=+0.42% -> NO_EDGE
+selden_updown_vol_strong     train dir=+1 h=20  N=   5736 exc20= -0.06% med= -0.16% hit= 49.0% t=-0.56 | cal_ann= -1.67% calIR=-0.17 calT=-0.65 vmT=-0.44 | e5=+0.02% e60=-0.02% -> NO_EDGE
+selden_distribution_near_high train dir=-1 h=20  N=   1791 exc20= -0.05% med= -0.27% hit= 47.9% t=-1.11 | cal_ann= -4.39% calIR=-0.25 calT=-0.97 vmT=-0.86 | e5=-0.06% e60=+0.21% -> NO_EDGE
+wyc_dull_range_breakout      train dir=+1 h=20  N=   2128 exc20= +0.04% med= -0.13% hit= 49.3% t=+0.33 | cal_ann= -3.79% calIR=-0.21 calT=-0.82 vmT=+0.32 | e5=+0.10% e60=+0.01% -> NO_EDGE
+wyc_effort_without_result    train dir=-1 h=20  N=     84 exc20= -1.56% med= -1.93% hit= 35.7% t=-1.38 | cal_ann=-15.33% calIR=-0.51 calT=-1.22 vmT=-0.66 | e5=-0.57% e60=-2.49% -> NO_EDGE
+wyc_selling_climax           train dir=+1 h=20  N=    341 exc20= +0.74% med= +0.88% hit= 53.4% t=-0.27 | cal_ann= +9.42% calIR=+0.21 calT=+0.75 vmT=-0.34 | e5=+0.88% e60=+2.37% -> NO_EDGE
+wyc_buying_climax            train dir=-1 h=20  N=    461 exc20= -0.63% med= -1.01% hit= 46.2% t=-0.92 | cal_ann= -5.42% calIR=-0.16 calT=-0.63 vmT=-0.86 | e5=-0.15% e60=-0.81% -> NO_EDGE
+wyc_resilience_on_shock      train dir=+1 h=20  N=   6345 exc20= -0.91% med= -0.87% hit= 45.8% t=-3.19 | cal_ann= -3.80% calIR=-0.35 calT=-1.02 vmT=-3.83 | e5=-0.48% e60=-2.18% -> NO_EDGE
+wyc_weakest_on_shock         train dir=-1 h=20  N=   6147 exc20= +1.11% med= +0.47% hit= 51.5% t=+2.37 | cal_ann=+12.31% calIR=+0.52 calT=+1.38 vmT=+2.71 | e5=+0.68% e60=+2.47% -> NO_EDGE
+donchian20_trending_only     train dir=+1 h=20  N=  15701 exc20= -0.24% med= -0.26% hit= 48.1% t=-2.15 | cal_ann= -4.61% calIR=-0.44 calT=-1.81 vmT=-3.05 | e5=-0.16% e60=-0.36% -> NO_EDGE
+donchian20_chop_only         train dir=+1 h=20  N=  22206 exc20= -0.12% med= -0.18% hit= 48.8% t=-1.91 | cal_ann= -1.84% calIR=-0.28 calT=-1.13 vmT=-2.25 | e5=-0.04% e60=-0.34% -> NO_EDGE
+wyc_streak_5up               train dir=-1 h=5   N=  20073 exc5= -0.13% med= -0.09% hit= 48.4% t=-3.13 | cal_ann=-11.48% calIR=-0.66 calT=-3.11 vmT=-3.04 | e5=-0.13% e60=-0.18% -> SIGNAL
+wyc_streak_5down             train dir=+1 h=5   N=  15941 exc5= +0.09% med= -0.01% hit= 49.9% t=+1.44 | cal_ann= +3.63% calIR=+0.21 calT=+0.78 vmT=+1.39 | e5=+0.09% e60=+0.10% -> NO_EDGE
+wyc_low_volume_retest        train dir=+1 h=20  N=   5002 exc20= -0.04% med= -0.02% hit= 49.8% t=+0.73 | cal_ann= +2.45% calIR=+0.16 calT=+0.61 vmT=+0.87 | e5=+0.02% e60=+0.43% -> NO_EDGE
+wyc_small_giveback_in_correction train dir=+1 h=60  N=   3074 exc60= -0.21% med= -1.30% hit= 46.9% t=-0.98 | cal_ann= -0.92% calIR=-0.09 calT=-0.19 vmT=-3.76 | e5=-0.34% e60=-0.21% -> NO_EDGE
+sch_shakeout_spring          train dir=+1 h=20  N=   1063 exc20= -0.29% med= -0.41% hit= 47.5% t=-1.09 | cal_ann= -7.94% calIR=-0.32 calT=-1.42 vmT=-1.16 | e5=-0.36% e60=+0.20% -> NO_EDGE
+sch_breakaway_gap            train dir=+1 h=20  N=  13196 exc20= -0.05% med= -0.06% hit= 49.4% t=-0.06 | cal_ann= -0.95% calIR=-0.09 calT=-0.38 vmT=-0.12 | e5=-0.01% e60=-0.25% -> NO_EDGE
+sch_exhaustion_gap           train dir=-1 h=20  N=   1550 exc20= +0.25% med= -0.34% hit= 48.0% t=+0.47 | cal_ann= +2.44% calIR=+0.10 calT=+0.38 vmT=+0.94 | e5=-0.16% e60=-0.88% -> NO_EDGE
+sch_key_reversal_top         train dir=-1 h=10  N=   2043 exc10= +0.06% med= -0.09% hit= 49.0% t=+0.50 | cal_ann=+11.30% calIR=+0.44 calT=+1.79 vmT=+0.43 | e5=+0.14% e60=-0.77% -> NO_EDGE
+sch_quiet_pullback_bull      train dir=+1 h=20  N=   4160 exc20= +0.25% med= +0.05% hit= 50.3% t=+1.37 | cal_ann= +2.87% calIR=+0.30 calT=+1.07 vmT=+1.32 | e5=+0.07% e60=+0.22% -> NO_EDGE
+sch_loud_pullback_bull       train dir=-1 h=20  N=   6746 exc20= -0.01% med= -0.31% hit= 48.1% t=-0.09 | cal_ann= +0.22% calIR=+0.03 calT=+0.08 vmT=-0.57 | e5=+0.08% e60=+0.05% -> NO_EDGE
+sch_thrust_followthrough     train dir=+1 h=10  N=    617 exc10= -0.08% med= -0.03% hit= 49.6% t=-0.08 | cal_ann= -3.27% calIR=-0.12 calT=-0.33 vmT=-0.40 | e5=-0.22% e60=-0.42% -> NO_EDGE
+rs_leaders_bull_mkt          train dir=+1 h=21  N=   4476 exc21= +0.33% med= +0.06% hit= 50.3% t=+0.81 | cal_ann= +1.09% calIR=+0.08 calT=+0.21 vmT=+0.65 | e5=-0.01% e60=+0.38% -> NO_EDGE
+rs_leaders_bear_mkt          train dir=+1 h=21  N=   1724 exc21= -1.80% med= -1.66% hit= 43.7% t=-4.31 | cal_ann=-19.38% calIR=-1.30 calT=-2.84 vmT=-3.95 | e5=-0.55% e60=-3.53% -> REVERSED
+rs_laggards_bull_mkt         train dir=-1 h=21  N=   4356 exc21= +0.08% med= +0.06% hit= 50.4% t=+0.39 | cal_ann= -1.32% calIR=-0.13 calT=-0.39 vmT=+0.04 | e5=+0.14% e60=+0.15% -> NO_EDGE
+rs_laggards_bear_mkt         train dir=+1 h=21  N=   1667 exc21= +0.83% med= +1.04% hit= 52.4% t=+0.76 | cal_ann=+11.20% calIR=+0.39 calT=+0.77 vmT=+0.88 | e5=+0.15% e60=+1.48% -> NO_EDGE
+rsi30_bull_mkt               train dir=+1 h=10  N=   5115 exc10= +0.03% med= -0.13% hit= 48.9% t=+1.21 | cal_ann= +5.96% calIR=+0.37 calT=+1.15 vmT=+1.33 | e5=+0.14% e60=-0.08% -> NO_EDGE
+rsi30_bear_mkt               train dir=+1 h=10  N=   2724 exc10= +0.37% med= +0.15% hit= 50.7% t=+0.46 | cal_ann= -0.53% calIR=-0.02 calT=-0.04 vmT=+0.57 | e5=-0.08% e60=+0.97% -> NO_EDGE
+st_loser_bull_mkt            train dir=+1 h=5   N=  19206 exc5= +0.10% med= -0.01% hit= 49.8% t=+2.08 | cal_ann= +3.59% calIR=+0.28 calT=+1.03 vmT=+3.04 | e5=+0.10% e60=-0.09% -> NO_EDGE
+st_loser_bear_mkt            train dir=+1 h=5   N=   7078 exc5= +0.04% med= -0.04% hit= 49.6% t=+0.30 | cal_ann= +9.86% calIR=+0.45 calT=+1.01 vmT=+0.81 | e5=+0.04% e60=+0.78% -> NO_EDGE
+confluence_breakout          train dir=+1 h=60  N=   3569 exc60= -0.13% med= -0.59% hit= 48.1% t=+0.28 | cal_ann= -0.14% calIR=-0.01 calT=-0.05 vmT=+0.35 | e5=-0.13% e60=-0.13% -> NO_EDGE
+confluence_pullback          train dir=+1 h=20  N=   1414 exc20= -0.14% med= -0.31% hit= 47.1% t=-0.06 | cal_ann= -5.74% calIR=-0.34 calT=-1.25 vmT=+0.22 | e5=+0.09% e60=-0.36% -> NO_EDGE

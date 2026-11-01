@@ -1,0 +1,17 @@
+        rule  timing_cagr  buyhold_cagr  timing_sharpe  buyhold_sharpe  timing_maxdd  buyhold_maxdd
+   faber_10m        0.086         0.133          0.699           0.723        -0.249         -0.339
+sma50_gt_200        0.085         0.133          0.573           0.723        -0.339         -0.339
+ regime_both        0.096         0.133          0.823           0.723        -0.141         -0.339
+sma200_daily        0.092         0.133          0.775           0.723        -0.199         -0.339
+              dCAGR  dSharpe  dMaxDD
+rule                                
+faber_10m    -0.032   -0.007   0.137
+regime_both  -0.032    0.041   0.178
+sma200_daily -0.039   -0.080   0.127
+sma50_gt_200 -0.054   -0.241   0.003
+                dd    sh
+rule                    
+faber_10m     0.91  0.45
+regime_both   0.95  0.55
+sma200_daily  0.91  0.45
+sma50_gt_200  0.50  0.18
