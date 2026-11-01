@@ -28,6 +28,7 @@ import pandas as pd
 
 from .live import classify, atr as _atr, trading_days_until, RULEBOOK_VERSION
 from .paper import fetch, watchlist, _completed
+from .alpaca import Alpaca, BrokerError, to_alpaca
 
 ROOT = Path(__file__).resolve().parents[2]
 DEMO = ROOT / "demo"
@@ -77,6 +78,13 @@ def today_bar(df, day):
     return df.loc[df.index.normalize() == day] if df is not None else None
 
 
+def set_spy_base(s, bars, day):
+    if s.get("spy_base") is None and bars.get("SPY") is not None and str(day.date()) >= WEEK[0]:
+        tb = today_bar(bars["SPY"], day)
+        if tb is not None and not tb.empty:  # benchmark = SPY bought at the week's first open
+            s["spy_base"] = {"date": str(day.date()), "open": float(tb.o.iloc[0])}
+
+
 # ------------------------------------------------------------------ fills & stops
 def process_fills_and_stops(s, bars, mode, when, logs, full_day=False):
     """Fill pending market-on-open orders at today's open, then check resting stops against
@@ -121,10 +129,7 @@ def process_fills_and_stops(s, bars, mode, when, logs, full_day=False):
                 del s["positions"][o["symbol"]]
     s["pending"] = keep
     # resting stops
-    if s.get("spy_base") is None and bars.get("SPY") is not None and str(day.date()) >= WEEK[0]:
-        tb = today_bar(bars["SPY"], day)
-        if tb is not None and not tb.empty:  # benchmark = SPY bought at the week's first open
-            s["spy_base"] = {"date": str(day.date()), "open": float(tb.o.iloc[0])}
+    set_spy_base(s, bars, day)
     for sym, p in list(s["positions"].items()):
         tb = today_bar(bars.get(p["ticker"]), day)
         if tb is None or tb.empty or p["entry_date"] > str(day.date()):
@@ -144,6 +149,129 @@ def process_fills_and_stops(s, bars, mode, when, logs, full_day=False):
         log(logs, mode, when, t["symbol"], f"FILL_{t['side']}", t["rule"], f"{t['shares']} @ {t['price']:.2f}")
     return trades
 
+
+
+# ------------------------------------------------------------------ Alpaca paper broker
+def _maps():
+    wl = watchlist()
+    return {to_alpaca(t): sym for t, sym in zip(wl.ticker, wl.symbol_tv)}
+
+
+def broker_submit(s, br, when, logs):
+    """Pre-open: send queued orders to Alpaca as market-on-open (OPG); after 09:28 ET as DAY market orders."""
+    late = when.hour * 60 + when.minute >= 9 * 60 + 28
+    tif = "day" if late else "opg"
+    for o in s["pending"]:
+        if o.get("broker_id"):
+            continue
+        if o["side"] == "SELL":
+            p = s["positions"].get(o["symbol"])
+            if p and p.get("stop_order_id"):  # a resting stop would double-sell
+                br.cancel(p["stop_order_id"])
+                p["stop_order_id"] = None
+        cid = f"{o['rule']}|{o['symbol']}|{o['created']}|{o['side']}|{int(when.timestamp())}"
+        try:
+            r = br.submit(to_alpaca(o["ticker"]), o["shares"], o["side"].lower(), tif=tif, client_order_id=cid)
+            o.update(broker_id=r["id"], submitted=str(when)[:19], tif=tif)
+            log(logs, "preopen", when, o["symbol"], f"SUBMIT_{o['side']}", o["rule"],
+                f"{o['shares']} sh {tif.upper()} -> Alpaca {r['id'][:8]}" + (" (late: after 09:28)" if late else ""))
+        except BrokerError as e:
+            log(logs, "preopen", when, o["symbol"], "SUBMIT_FAILED", o["rule"], str(e)[:140])
+
+
+def broker_sync(s, br, bars, mode, when, logs):
+    """Read Alpaca fills/stops into the state, place missing protective stops, sync cash."""
+    trades = []
+    keep = []
+    for o in s["pending"]:
+        oid = o.get("broker_id")
+        if not oid:
+            keep.append(o)
+            continue
+        r = br.order(oid)
+        st, fq = r["status"], float(r.get("filled_qty") or 0)
+        if st not in ("filled", "canceled", "expired", "rejected", "done_for_day"):
+            keep.append(o)
+            continue
+        if fq > 0:
+            px = float(r["filled_avg_price"])
+            fday = pd.Timestamp(r["filled_at"]).tz_convert("America/New_York").normalize().tz_localize(None)
+            tb = today_bar(bars.get(o["ticker"]), fday)
+            sim_open = float(tb.o.iloc[0]) if tb is not None and not tb.empty else None
+            slip = ((px / sim_open - 1) * 1e4 * (1 if o["side"] == "BUY" else -1)) if sim_open else None
+            t = {"date": str(fday.date()), "symbol": o["symbol"], "side": o["side"], "shares": int(fq), "price": px,
+                 "value": fq * px, "rule": o["rule"], "reason": o["reason"], "prev_close": o.get("ref_close"),
+                 "gap_pct": (px / o["ref_close"] - 1) * 100 if o.get("ref_close") else None,
+                 "source": "alpaca", "sim_open": sim_open, "slippage_bps_vs_open": slip, "order_id": oid}
+            if o["side"] == "BUY":
+                s["positions"][o["symbol"]] = {"ticker": o["ticker"], "shares": int(fq), "entry_date": str(fday.date()),
+                                               "entry_price": px, "stop": o["stop"], "atr_at_entry": o["atr"],
+                                               "trimmed": False, "stop_order_id": None}
+            else:
+                p = s["positions"].get(o["symbol"])
+                if p:
+                    t["pnl"] = fq * (px - p["entry_price"])
+                    p["shares"] -= int(fq)
+                    p["trimmed"] = p["trimmed"] or bool(o.get("trim"))
+                    p["stop_order_id"] = None  # re-placed below for the remaining shares
+                    if p["shares"] <= 0:
+                        del s["positions"][o["symbol"]]
+            trades.append(t)
+            log(logs, mode, when, o["symbol"], f"FILL_{o['side']}", o["rule"], f"{int(fq)} @ {px:.2f} (Alpaca)")
+        if st != "filled":
+            log(logs, mode, when, o["symbol"], f"ORDER_{st.upper()}", o["rule"], f"filled {int(fq)}/{o['shares']}")
+    s["pending"] = keep
+    # protective stops: detect executions, then (re)place missing ones
+    selling = {o["symbol"] for o in s["pending"] if o["side"] == "SELL"}
+    for sym, p in list(s["positions"].items()):
+        if p.get("stop_order_id"):
+            r = br.order(p["stop_order_id"])
+            if r["status"] == "filled":
+                px = float(r["filled_avg_price"])
+                trades.append({"date": str(pd.Timestamp(r["filled_at"]).tz_convert("America/New_York").date()),
+                               "symbol": sym, "side": "SELL", "shares": int(float(r["filled_qty"])), "price": px,
+                               "value": float(r["filled_qty"]) * px, "rule": "STOP", "reason": f"Alpaca stop @ {p['stop']:.2f}",
+                               "pnl": float(r["filled_qty"]) * (px - p["entry_price"]), "source": "alpaca",
+                               "order_id": p["stop_order_id"]})
+                log(logs, mode, when, sym, "STOP_FILLED", "§8.1 stop", f"{r['filled_qty']} @ {px:.2f} (Alpaca)")
+                del s["positions"][sym]
+                continue
+            if r["status"] in ("canceled", "expired", "rejected"):
+                p["stop_order_id"] = None
+        if not p.get("stop_order_id") and sym not in selling:
+            try:
+                r = br.submit(to_alpaca(p["ticker"]), p["shares"], "sell", type_="stop", tif="gtc", stop_price=p["stop"],
+                              client_order_id=f"STOP|{sym}|{int(when.timestamp())}")
+                p["stop_order_id"] = r["id"]
+                log(logs, mode, when, sym, "STOP_PLACED", "§8.1 stop", f"GTC sell stop {p['shares']} @ {p['stop']:.2f}")
+            except BrokerError as e:
+                log(logs, mode, when, sym, "STOP_FAILED", "§8.1 stop", str(e)[:140])
+    # reconcile against the broker's own books
+    brpos = {x["symbol"]: int(float(x["qty"])) for x in br.positions()}
+    a2s = _maps()
+    for asym, q in brpos.items():
+        sym = a2s.get(asym, asym)
+        if sym not in s["positions"]:
+            log(logs, mode, when, sym, "RECONCILE_WARN", "-", f"Alpaca holds {q} sh not in the demo state")
+        elif s["positions"][sym]["shares"] != q:
+            log(logs, mode, when, sym, "RECONCILE_WARN", "-", f"state {s['positions'][sym]['shares']} vs Alpaca {q}")
+    acct = br.account()
+    s["cash"] = float(acct["cash"])
+    s["broker_equity"] = float(acct.get("equity") or acct.get("portfolio_value"))
+    set_spy_base(s, bars, when.tz_localize(None).normalize())
+    append(TRADES, trades)
+    return trades
+
+
+def broker_check():
+    br = Alpaca.from_env()
+    if br is None:
+        print("no ALPACA_API_KEY_ID / ALPACA_API_SECRET_KEY in the environment -> demo runs in simulated mode")
+        return
+    a, c = br.account(), br.clock()
+    print(f"Alpaca PAPER account {a.get('account_number')}: status {a.get('status')}, equity {float(a['equity']):,.2f}, "
+          f"cash {float(a['cash']):,.2f}, positions {len(br.positions())}, open orders {len(br.orders(status='open'))}; "
+          f"market open now: {c.get('is_open')}, next open {c.get('next_open')}")
 
 # ------------------------------------------------------------------ verdicts
 def verdicts(bars, earn, partial):
@@ -271,7 +399,8 @@ def report(s):
     lg = pd.read_csv(LOG) if LOG.exists() else pd.DataFrame()
     L = [f"# Demo week {WEEK[0]} → {WEEK[1]}: rulebook v{RULEBOOK_VERSION} on a simulated $100k account", "",
          "Mechanical rules (see `platform/tagym/demo.py`). Decisions are made on completed daily bars, filled at the next open, 10 bps cost per side.",
-         "**One week is far too short to judge the method.** These numbers test the process (execution, discipline, data), not the edge.", ""]
+         "**One week is far too short to judge the method.** These numbers test the process (execution, discipline, data), not the edge.",
+         f"Book of record: **{'Alpaca paper account' if s.get('broker') == 'alpaca-paper' else 'internal simulation'}**.", ""]
     if len(eq):
         last = eq.iloc[-1]
         r = last.equity / s["initial_capital"] - 1
@@ -294,6 +423,10 @@ def report(s):
             gap = f"{t.gap_pct:+.2f}%" if "gap_pct" in t and pd.notna(t.get("gap_pct")) else ""
             pnl = f"{t.pnl:+,.0f}" if "pnl" in t and pd.notna(t.get("pnl")) else ""
             L.append(f"| {t.date} | {t.symbol} | {t.side} | {int(t.shares)} | {t.price:.2f} | {t.rule} | {gap} | {pnl} |")
+        if "slippage_bps_vs_open" in tr and tr.slippage_bps_vs_open.notna().any():
+            sl = tr.slippage_bps_vs_open.dropna()
+            L += ["", f"Alpaca fills vs the official open price: mean {sl.mean():+.1f} bps, worst {sl.max():+.1f} bps "
+                  f"over {len(sl)} fills (positive = worse than the open; the backtests assumed 10 bps cost per side)."]
         if "gap_pct" in tr:
             g = tr.gap_pct.dropna()
             if len(g):
@@ -324,14 +457,35 @@ def run(mode, earnings_file):
     bars = fetch(tickers, period="2y")
     if when.dayofweek >= 5 and mode != "close":
         print("weekend - nothing to do"); return
+    br = None
+    if s.get("broker") == "alpaca-paper" or (s.get("broker") in (None, "simulated") and not s["positions"]
+                                              and not any(o.get("broker_id") for o in s["pending"])):
+        br = Alpaca.from_env()
+    if br is not None and s.get("broker") != "alpaca-paper":
+        acct = br.account()  # clean start: the Alpaca paper account becomes the book of record
+        s.update(broker="alpaca-paper", initial_capital=float(acct["equity"]), cash=float(acct["cash"]))
+        log(logs, mode, when, "-", "BROKER_ON", "-", f"Alpaca paper account, equity {float(acct['equity']):,.2f}")
+    s.setdefault("broker", "simulated")
+    if s["broker"] == "alpaca-paper" and br is None:
+        br = Alpaca.from_env()
+        if br is None:
+            raise SystemExit("state says alpaca-paper but the ALPACA keys are missing in this session")
     if mode == "preopen":
         mode_preopen(s, bars, earn, when, logs)
+        if br:
+            broker_submit(s, br, when, logs)
     elif mode in ("midday", "preclose"):
-        process_fills_and_stops(s, bars, mode, when, logs)
+        if br:
+            broker_sync(s, br, bars, mode, when, logs)
+        else:
+            process_fills_and_stops(s, bars, mode, when, logs)
         n = record_flips(bars, earn, mode, when)
         log(logs, mode, when, "-", "FLIP_LOG", "-", f"recorded {n} unfinished-bar reads")
     elif mode == "close":
-        process_fills_and_stops(s, bars, mode, when, logs, full_day=True)
+        if br:
+            broker_sync(s, br, bars, mode, when, logs)
+        else:
+            process_fills_and_stops(s, bars, mode, when, logs, full_day=True)
         mode_close(s, bars, earn, when, logs)
     append(LOG, [{**r, "time_ny": str(r["time_ny"])[:19]} for r in logs])
     save_state(s)
@@ -354,5 +508,8 @@ def auto_mode(now=None):
 
 if __name__ == "__main__":
     m = sys.argv[1]
+    if m == "broker-check":
+        broker_check()
+        sys.exit()
     ef = next((sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--earnings"), str(ROOT / "paper" / "next_earnings.json"))
     run(auto_mode() if m == "auto" else m, ef)
