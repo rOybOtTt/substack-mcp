@@ -12,7 +12,7 @@
 | `experiments/ITERATION_LOG.md` | Every feedback-loop iteration: the hypothesis, the test, the result, and the decision. Includes all 246 rule-level tests. |
 | `experiments/results/` | Raw results: `ledger.jsonl` (every rule test), CSVs for timing, risk, RL, ML, exits, YouTube systems, the fine-tuning grid, and the final locked test. |
 | `experiments/test_access_log.md` | Audit trail of every access to the locked out-of-sample data. |
-| `paper/` | **Forward paper trading**: `watchlist.csv` (98 stocks), `journal.csv` (daily verdicts), `SCOREBOARD.md` (realized vs expected crash rates), `integrity_log.csv` (TradingView cross-checks). |
+| `paper/` | **Forward paper trading**, run by the scheduled task "TA rulebook daily paper-trading" (weekdays 18:23 New York). To save its results, the task needs repository roybottt/substack-mcp selected with push access, and ideally the TradingView connector (otherwise it falls back to yfinance for earnings dates); set both in the claude.ai routines settings. Contents: `watchlist.csv` (98 stocks), `journal.csv` (daily verdicts), `SCOREBOARD.md` (realized vs expected crash rates), `integrity_log.csv` (TradingView cross-checks). |
 | `../.claude/skills/ta-signal/SKILL.md` | Claude skill: the agent procedure (TradingView calls → engine → report). |
 | `experiments/live_journal_2026-11-01.md` | The rulebook applied to live TradingView data, as forward predictions to be scored later. |
 | `blind_tests/` | Anonymised blind cases, the agents' answers, scores, and the agents' feedback on rulebook ambiguities. |
