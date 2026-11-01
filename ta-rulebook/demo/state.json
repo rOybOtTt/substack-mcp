@@ -1,0 +1,182 @@
+{
+ "initial_capital": 100000.0,
+ "cash": 100000.0,
+ "positions": {},
+ "pending": [
+  {
+   "symbol": "NYSE:PSX",
+   "ticker": "PSX",
+   "side": "BUY",
+   "shares": 20,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +57.2",
+   "stop": 258.03899173596227,
+   "atr": 9.916397934521349,
+   "ref_close": 282.8299865722656
+  },
+  {
+   "symbol": "NYSE:TMO",
+   "ticker": "TMO",
+   "side": "BUY",
+   "shares": 10,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +43.4",
+   "stop": 647.7864175522329,
+   "atr": 19.685432979106825,
+   "ref_close": 697.0
+  },
+  {
+   "symbol": "NYSE:MRK",
+   "ticker": "MRK",
+   "side": "BUY",
+   "shares": 43,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +29.7",
+   "stop": 138.01676566098328,
+   "atr": 4.601295444591065,
+   "ref_close": 149.52000427246094
+  },
+  {
+   "symbol": "NYSE:V",
+   "ticker": "V",
+   "side": "BUY",
+   "shares": 19,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +21.2",
+   "stop": 395.527897322436,
+   "atr": 7.224839606181849,
+   "ref_close": 413.5899963378906
+  },
+  {
+   "symbol": "NASDAQ:MSFT",
+   "ticker": "MSFT",
+   "side": "BUY",
+   "shares": 15,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +21.0",
+   "stop": 492.2145952347951,
+   "atr": 11.87815116389445,
+   "ref_close": 521.9099731445312
+  },
+  {
+   "symbol": "NYSE:TGT",
+   "ticker": "TGT",
+   "side": "BUY",
+   "shares": 48,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +16.4",
+   "stop": 144.01510958913576,
+   "atr": 4.1459581174707,
+   "ref_close": 154.3800048828125
+  },
+  {
+   "symbol": "NYSE:NUE",
+   "ticker": "NUE",
+   "side": "BUY",
+   "shares": 24,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +16.3",
+   "stop": 253.04553566778927,
+   "atr": 8.329783779759298,
+   "ref_close": 273.8699951171875
+  },
+  {
+   "symbol": "NYSE:JNJ",
+   "ticker": "JNJ",
+   "side": "BUY",
+   "shares": 29,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +16.1",
+   "stop": 256.42952377781654,
+   "atr": 6.708195371685887,
+   "ref_close": 273.20001220703125
+  },
+  {
+   "symbol": "NYSE:KO",
+   "ticker": "KO",
+   "side": "BUY",
+   "shares": 85,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +15.8",
+   "stop": 90.0208848276731,
+   "atr": 1.623646801352635,
+   "ref_close": 94.08000183105469
+  },
+  {
+   "symbol": "NYSE:UNH",
+   "ticker": "UNH",
+   "side": "BUY",
+   "shares": 18,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +6.3",
+   "stop": 379.5688152134889,
+   "atr": 10.96047440288568,
+   "ref_close": 406.9700012207031
+  },
+  {
+   "symbol": "NYSE:PG",
+   "ticker": "PG",
+   "side": "BUY",
+   "shares": 49,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +5.9",
+   "stop": 154.0202886730866,
+   "atr": 3.0198874604528565,
+   "ref_close": 161.57000732421875
+  },
+  {
+   "symbol": "NYSE:JPM",
+   "ticker": "JPM",
+   "side": "BUY",
+   "shares": 23,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +3.5",
+   "stop": 321.1950646587531,
+   "atr": 6.337977554467516,
+   "ref_close": 337.0400085449219
+  },
+  {
+   "symbol": "NYSE:WELL",
+   "ticker": "WELL",
+   "side": "BUY",
+   "shares": 32,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +3.5",
+   "stop": 219.13188373938576,
+   "atr": 6.187248945651945,
+   "ref_close": 234.60000610351562
+  },
+  {
+   "symbol": "NASDAQ:MDLZ",
+   "ticker": "MDLZ",
+   "side": "BUY",
+   "shares": 73,
+   "created": "2026-10-30",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +2.3",
+   "stop": 61.46163854773099,
+   "atr": 1.3913455574701028,
+   "ref_close": 64.94000244140625
+  }
+ ],
+ "spy_base": null,
+ "week": [
+  "2026-11-02",
+  "2026-11-06"
+ ],
+ "rulebook_version": "2.2",
+ "last_close_run": "2026-10-30"
+}

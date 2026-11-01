@@ -1,0 +1,24 @@
+time_ny,mode,symbol,action,rule,detail
+2026-11-01 09:01:21,close,NASDAQ:AAPL,SKIP_ENTRY,E1,BULLISH but earnings within 10 trading days
+2026-11-01 09:01:21,close,NASDAQ:MRNA,SKIP_ENTRY,E1,BULLISH but earnings within 10 trading days
+2026-11-01 09:01:21,close,NYSE:BRK.B,SKIP_ENTRY,E1,BULLISH but earnings within 10 trading days
+2026-11-01 09:01:21,close,NYSE:MPC,SKIP_ENTRY,E1,BULLISH but earnings within 10 trading days
+2026-11-01 09:01:21,close,NYSE:PFE,SKIP_ENTRY,E1,BULLISH but earnings within 10 trading days
+2026-11-01 09:01:21,close,NYSE:WMB,SKIP_ENTRY,E1,BULLISH but earnings within 10 trading days
+2026-11-01 09:01:21,close,NYSE:OXY,SKIP_ENTRY,E1,BULLISH but earnings within 10 trading days
+2026-11-01 09:01:21,close,NYSE:PSX,QUEUE_BUY,D3,"20 sh, stop 258.04 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:TMO,QUEUE_BUY,D3,"10 sh, stop 647.79 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:MRK,QUEUE_BUY,D3,"43 sh, stop 138.02 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:V,QUEUE_BUY,D3,"19 sh, stop 395.53 (2.5xATR)"
+2026-11-01 09:01:21,close,NASDAQ:MSFT,QUEUE_BUY,D3,"15 sh, stop 492.21 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:TGT,QUEUE_BUY,D3,"48 sh, stop 144.02 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:NUE,QUEUE_BUY,D3,"24 sh, stop 253.05 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:JNJ,QUEUE_BUY,D3,"29 sh, stop 256.43 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:KO,QUEUE_BUY,D3,"85 sh, stop 90.02 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:UNH,QUEUE_BUY,D3,"18 sh, stop 379.57 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:PG,QUEUE_BUY,D3,"49 sh, stop 154.02 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:JPM,QUEUE_BUY,D3,"23 sh, stop 321.20 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:WELL,QUEUE_BUY,D3,"32 sh, stop 219.13 (2.5xATR)"
+2026-11-01 09:01:21,close,NASDAQ:MDLZ,QUEUE_BUY,D3,"73 sh, stop 61.46 (2.5xATR)"
+2026-11-01 09:01:21,close,NYSE:AMT,SKIP_ENTRY,cash,no budget left
+2026-11-01 09:01:21,close,NASDAQ:EQIX,SKIP_ENTRY,max_positions,no free slot
