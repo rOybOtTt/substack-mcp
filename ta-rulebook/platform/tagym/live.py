@@ -87,6 +87,8 @@ def classify(df: pd.DataFrame, spy: pd.DataFrame, symbol="?", healthy_max_from_h
     warnings = []
     if not reg_detail["spy_above_10m_sma"] and rs6 - spy6 > 0.25:
         warnings.append("A1: strong relative-strength leader while the index is below its 10-month SMA - momentum-crash risk; never BULLISH")
+    if healthy and extended and reg != "RISK_ON":
+        warnings.append("D4 in an unhealthy market: healthy but extended AND regime is not RISK_ON")
     if health == "BROKEN":
         row, sig = "D2", "BEARISH"
     elif healthy and reg == "RISK_ON" and not extended:
@@ -105,6 +107,8 @@ def classify(df: pd.DataFrame, spy: pd.DataFrame, symbol="?", healthy_max_from_h
            ("D5", "MIXED"): 0.098, ("D5", "RISK_OFF"): 0.123,
            ("D6", "RISK_ON"): 0.111, ("D6", "MIXED"): 0.145, ("D6", "RISK_OFF"): 0.167}
     p_dd = CAL.get((row, reg), 0.12)
+    if row == "D3" and d52 >= 0:
+        warnings.append("A3: close is the 52-week closing high - prefer a pullback entry over buying the breakout bar")
     high_vol = atrp >= 0.03  # ~ top tercile of US stocks' ATR% (2000-2019 median cut-off 2.9%)
     if health == "BROKEN" or (high_vol and reg == "RISK_OFF"):
         risk_flag = "HIGH"

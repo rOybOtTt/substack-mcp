@@ -114,6 +114,18 @@ Two kinds of iterations are logged:
 | 57 | An agent ran the full workflow through the TradingView MCP (9 symbols, 270 daily bars each) → `live.py` → verdicts; NVDA indicators cross-checked against `mcp-tv-get-technicals-rating` | RSI14 35.056, SMA50 221.749, SMA200 204.385 — **0.000% difference** from TradingView; signals as of 2026-10-30: AAPL/MSFT/JPM/UNH BULLISH (D3), XOM healthy-but-extended (D4), NVDA (low confidence, at SMA200) & TSLA NO_SIGNAL, INTC BEARISH (D2) | forward predictions logged in `live_journal_2026-11-01.md`, to be scored ~2026-11-30 and ~2027-01-28 |
 | 58 | Re-ran the saved live bars through the final v2.1 engine | identical signals | journal valid for v2.1 |
 
+## Phase K — Final blind exam and freeze
+
+| # | Iteration | Result | Decision |
+|---|---|---|---|
+| 59 | **Blind round 3 (final exam)**: fresh agent + RULEBOOK v2.1.1 + 50 cases from **never-seen holdout tickers in the locked 2020-2026 period** | agent = engine on **49/50** (the miss: a value printed as −10.0 that was truly just below −10%); BULLISH n=17: 5.9% had a ≥20% drawdown in 60d, excess +0.4%; NO_SIGNAL n=23: 17.4%, −1.2%; **BEARISH n=10: 40.0%, excess −4.9%**; risk-flagged 40% vs 12.5% | v2.1.2 wording: rounded inputs on a cut-off → near_threshold/low confidence; near_threshold scope; band edges (≤); A3 warning at a 52w closing high on D3; D4 in a bad market mentions it. Engine mirrors the two warnings |
+| 60 | Freeze v2.1.2; publish answer keys of all blind rounds (`blind_tests/answer_keys/`) | — | final |
+
+### Totals
+* **60 meta-iterations** of the build → test → learn → revise loop (platform calibration, RL ×2, ML, timing, risk, exits, 18-setting fine-tuning grid, YouTube systems, 3 blind agent rounds, locked test, live TradingView run).
+* **246 rule-level hypothesis tests** in development (123 rules × 2 periods) + **80 locked out-of-sample tests** (20 key rules × 4 ticker/period cells) + 18 grid settings × 2 periods + 8 YouTube systems × 2 periods (trade simulation).
+* Locked data accessed only after the rules were frozen; every access logged in `test_access_log.md`.
+
 ---
 
 ## Appendix — all 246 rule-level tests (123 rules × train/valid, discovery tickers)

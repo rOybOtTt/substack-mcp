@@ -1,6 +1,11 @@
 # The Technical-Analysis Signal Rulebook (for agents)
 
-**Version 2.1.1.** Revised after two blind agent tests. In round 1 the agent matched the deterministic engine on 39 of 40 cases and logged 17 ambiguities, all fixed in v2.1. In round 2, agent and engine agreed on 40 of 40, and only wording in secondary fields needed fixing.
+**Version 2.1.2 (final).** Revised after three blind agent tests:
+- **Round 1:** the agent matched the deterministic engine on 39 of 40 cases and logged 17 ambiguities, all fixed in v2.1.
+- **Round 2:** 40 of 40.
+- **Round 3, the final exam** on never-seen holdout tickers from 2020–2026: 49 of 50. The one miss came from a rounded input.
+
+In round 3, the agent's BEARISH calls had a 40% chance of a ≥ 20% fall within 60 days and lagged the market by 4.9%. Its BULLISH calls had 5.9% and +0.4%.
 
 It is built from:
 - 5 classic books read in full, plus Schabacker's trading chapters;
@@ -69,7 +74,13 @@ C, H, L and V are daily close, high, low and volume. t is the last completed bar
 | `RS6` | 6-month return minus SPY's 6-month return (126 bars). "Top-decile RS": if an RS percentile is supplied, top-decile ⇔ percentile ≥ 90 (it overrides). Otherwise top-decile ⇔ RS6 > +25 pts. |
 | SPY month-end test | Last **completed** month-end close > mean of the last 10 completed month-end closes. A month counts as completed from the first trading day of the next month, or on the calendar month-end itself if that is a trading day. This is the convention used in every backtest; it can lag by one day around month-ends. |
 
-All thresholds are **inclusive as written**.
+All thresholds are **inclusive as written**. "Within ±x" means |value − cut-off| ≤ x.
+
+**Rounded inputs.** Sometimes you are given pre-computed, rounded values instead of bars (for example `-10.0`, `-0.0` or `%B = 1.0`).
+- Read `-0.0` as *below* zero.
+- Apply the comparison exactly as written to the printed value.
+- If a printed value sits exactly on a cut-off, also put it in `near_threshold` and set confidence to `low`.
+- Whenever bars are available, compute at full precision instead, preferably with `live.py`. In blind tests, the only agent–engine disagreements came from 1-decimal rounding.
 
 ---
 
@@ -151,7 +162,7 @@ Apply the rows in order; the first match wins.
 | D1 | < 260 bars, or C < $5, or $vol20 < $5M (skip a test whose input is unavailable) | `NO_SIGNAL` | "Insufficient data or untradeable; TA statistics don't apply." |
 | D2 | health = BROKEN | **`BEARISH`** (risk signal) | "Technically broken. Crash risk is about 16–21% vs about 6% for healthy names. Avoid new longs, reduce size, tighten risk. This is not by itself a short-sale recommendation." |
 | D3 | HEALTHY **and** RISK_ON **and** not EXTENDED | **`BULLISH`** (low-risk trend) | "Healthy uptrend in a healthy market: the lowest crash-risk class. Expected outperformance is small; the edge is risk, not return." If the timing label is PULLBACK, add "favourable entry zone". |
-| D4 | HEALTHY **and** EXTENDED | `NO_SIGNAL` | "The trend is fine, but buying after a spike has lagged. Wait for a pullback." |
+| D4 | HEALTHY **and** EXTENDED | `NO_SIGNAL` | "The trend is fine, but buying after a spike has lagged. Wait for a pullback." If regime ≠ RISK_ON, also say "and the market is unhealthy" and check A1. |
 | D5 | HEALTHY **and** regime ≠ RISK_ON | `NO_SIGNAL` | "Healthy stock in an unhealthy market." Check rule A1. |
 | D6 | Everything else (NEUTRAL) | `NO_SIGNAL` | "No technical edge." |
 
@@ -197,7 +208,7 @@ Every rule here was coded exactly and tested on about 900 stocks over 2000–201
 
 - **A1.** Top-decile 6-month RS stocks bought while SPY is below its 10-month SMA underperformed by **−1.8% per month** (t = −4.3, 2000–14) and by −0.9% in 2015–19. Momentum crashes happen after bear markets.
 - **A2.** Stocks that held up best on SPY −2% days lagged afterwards (−0.9% over 20 days, t = −3.2). The hardest-hit stocks rebounded. Don't read crash-day resilience as strength.
-- **A3.** Don't buy the breakout bar itself. It did worse than random entries with the same exits.
+- **A3.** Don't buy the breakout bar itself. It did worse than random entries with the same exits. If today's close is the 52-week closing high (`pct_from_52w_high` = 0) on a D3 row, attach an A3 warning ("prefer a pullback entry"). The output stays unchanged.
 - **A4 (downgraded after the locked test).** "Leader of the leading group" was −0.3% and −0.8% next month in development, but −0.3%, −0.2% and +0.4% out-of-sample. Result: no edge, so never treat it as a reason to buy.
 
 **Locked out-of-sample confirmation (holdout tickers and 2020–2026):**
@@ -254,7 +265,7 @@ Every rule here was coded exactly and tested on about 900 stocks over 2000–201
 - |SMA200_slope_1m| < 0.1%;
 - RSI14 within ±1 of 70.
 
-List those inputs in `near_threshold`.
+`near_threshold` lists **only** these four inputs, plus any rounded value printed exactly on a cut-off. Near-misses on other cut-offs may go under `warnings`; they never change confidence.
 
 ---
 

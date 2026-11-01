@@ -5,7 +5,7 @@ This file lines up three bodies of belief with one body of evidence:
 - **Classics:** books read in full. Dow and Nelson 1903, Hamilton 1922, Lefèvre/Livermore 1923, Selden 1912, Wyckoff 1910, plus Schabacker 1930, Ch. XIX–XXVII.
 - **Modern canon:** Murphy, Edwards & Magee, Bulkowski, Nison, Weinstein, O'Neil, Minervini, Elder, Wilder, Bollinger, Aronson and Connors.
 - **YouTube:** the 300 most-viewed technical-analysis videos (519M views) and their top 16 creators.
-- **The evidence:** TA Gym backtests on about 1,500 US stocks (2000–2019 discovery and validation), 22 ETFs and the S&P 500 since 1928, cross-checked against 25 academic studies. The locked 2020–2026 / holdout-ticker results are in Section 5.
+- **The evidence:** TA Gym backtests on about 1,500 US stocks (2000–2019 discovery and validation), 22 ETFs and the S&P 500 since 1928, cross-checked against 25 academic studies. The locked 2020–2026 and holdout-ticker results are in `experiments/ITERATION_LOG.md` (Phase I) and in RULEBOOK §3 and §7.
 
 Verdict key:
 
@@ -86,7 +86,10 @@ Aronson (2006) tested 6,402 rules on the S&P 500 with a data-mining correction a
 
 ## 5. Bottom line used to write the rulebook
 
-1. **Technical analysis is a risk instrument.** Trend health and distance from the 52-week high sort stocks into crash-risk classes 3–4× apart, robustly across periods, volatility levels and holdout tickers.
+1. **Technical analysis is a risk instrument.** Trend health and distance from the 52-week high sort stocks into crash-risk classes.
+   - The classes were 2.6–4× apart in 2000–2019, for both development and holdout tickers and within every volatility level.
+   - In the locked 2020–2026 test they were about 1.5–2× apart. The COVID crash hit "healthy" stocks while the regime still read risk-on.
+   - In the final blind exam, an agent's BEARISH calls fell ≥ 20% within 60 days 40% of the time, against 5.9% for its BULLISH calls.
 2. **It is not, on daily US stocks since 2000, a reliable return predictor.** Popular entry signals, books' setups and YouTube systems don't beat a random stock bought on the same day once statistics are done properly.
 3. **Small, consistent timing effects exist.** Short-term overextension lags and pullbacks inside uptrends slightly beat breakouts. They are smaller than trading costs: use them to choose *when* to act, never *whether*.
 4. **Market-level slow trend filters are real drawdown insurance** (about −1%/yr of return for about 25 points less drawdown). Fast filters are not.
