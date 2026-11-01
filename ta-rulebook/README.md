@@ -13,6 +13,9 @@
 | `experiments/results/` | Raw results: `ledger.jsonl` (every rule test), CSVs for timing, risk, RL, ML, exits, YouTube systems, the fine-tuning grid, and the final locked test. |
 | `experiments/test_access_log.md` | Audit trail of every access to the locked out-of-sample data. |
 | `paper/` | **Forward paper trading**, run by the scheduled task "TA rulebook daily paper-trading" (weekdays 18:23 New York). To save its results, the task needs repository roybottt/substack-mcp selected with push access, and ideally the TradingView connector (otherwise it falls back to yfinance for earnings dates); set both in the claude.ai routines settings. Contents: `watchlist.csv` (98 stocks), `journal.csv` (daily verdicts), `SCOREBOARD.md` (realized vs expected crash rates), `integrity_log.csv` (TradingView cross-checks). |
+| `demo/` | **Demo week, Nov 2–6 2026.** A $100k simulated long-only account run mechanically by the rulebook (`platform/tagym/demo.py`).
+Each weekday runs at 08:23 (pre-open), 12:23 (mid-day), 15:23 (pre-close) and 18:23 (after close), New York time.
+Contents: `DEMO_REPORT.md`, `trades.csv`, `equity.csv` (vs SPY), `flips.csv` (unfinished-bar reads vs the evening verdict) and `decision_log.csv` (every action with its rule id). |
 | `../.claude/skills/ta-signal/SKILL.md` | Claude skill: the agent procedure (TradingView calls → engine → report). |
 | `experiments/live_journal_2026-11-01.md` | The rulebook applied to live TradingView data, as forward predictions to be scored later. |
 | `blind_tests/` | Anonymised blind cases, the agents' answers, scores, and the agents' feedback on rulebook ambiguities. |
