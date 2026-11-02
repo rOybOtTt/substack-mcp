@@ -254,7 +254,7 @@ def close_all(sess, one, state):
 # ------------------------------------------------------------------ session loop
 def start_session(state, now):
     h = now.hour
-    if now.minute >= 46 or h < 9 or h > 15 or (h == 9 and now.minute < 30):
+    if now.minute >= 46 or h < 9 or h > 15 or (h == 9 and now.minute < 15):
         return None
     sess = {"id": f"{now.date()} {h:02d}:35", "date": str(now.date()), "hour": h, "started": str(now)[:19],
             "decisions": [], "orders": [], "positions": [], "taken": []}
