@@ -15,7 +15,8 @@
 | `paper/` | **Forward paper trading**, run by the scheduled task "TA rulebook daily paper-trading" (weekdays 18:23 New York). To save its results, the task needs repository roybottt/substack-mcp selected with push access, and ideally the TradingView connector (otherwise it falls back to yfinance for earnings dates); set both in the claude.ai routines settings. Contents: `watchlist.csv` (98 stocks), `journal.csv` (daily verdicts), `SCOREBOARD.md` (realized vs expected crash rates), `integrity_log.csv` (TradingView cross-checks). |
 | `demo/` | **Demo week, Nov 2–6 2026.** A $100k simulated long-only account run mechanically by the rulebook (`platform/tagym/demo.py`).
 Each weekday runs at 08:23 (pre-open), 12:23 (mid-day), 15:23 (pre-close) and 18:23 (after close), New York time.
-Contents: `DEMO_REPORT.md`, `trades.csv`, `equity.csv` (vs SPY), `flips.csv` (unfinished-bar reads vs the evening verdict) and `decision_log.csv` (every action with its rule id). |
+Contents: `DEMO_REPORT.md`, `trades.csv`, `equity.csv` (vs SPY), `flips.csv` (unfinished-bar reads vs the evening verdict), `decision_log.csv` (every action with its rule id), `marks.csv` (mark-to-market at every run) and `dashboard/` (JSON rows for the tracker dashboard). |
+| Tracker dashboard | A private claude.ai dashboard ("TA Demo Tracker") drawn from `demo/dashboard/*.json`: equity vs SPY at every run, positions and queued orders, fills and slippage, intraday flip rate, the latest verdicts and their calibration, and the decision log. Each scheduled run re-exports the JSON (`python -m tagym.dashboard`) and refreshes the dashboard's files. |
 | `../.claude/skills/ta-signal/SKILL.md` | Claude skill: the agent procedure (TradingView calls → engine → report). |
 | `experiments/live_journal_2026-11-01.md` | The rulebook applied to live TradingView data, as forward predictions to be scored later. |
 | `blind_tests/` | Anonymised blind cases, the agents' answers, scores, and the agents' feedback on rulebook ambiguities. |
@@ -44,6 +45,8 @@ Contents: `DEMO_REPORT.md`, `trades.csv`, `equity.csv` (vs SPY), `flips.csv` (un
 | `delisted.py` | survivorship check on stocks that were later delisted (EODHD) |
 | `overlay.py` | fast crash-overlay candidates (rejected) |
 | `paper.py` | daily paper-trading journal, TradingView cross-check log, automatic scoring |
+| `demo.py`, `alpaca.py` | demo-week portfolio (simulated or Alpaca paper account) |
+| `dashboard.py` | exports the demo and paper results as JSON rows for the tracker dashboard |
 | `tests/` | pytest unit tests for the agent engine (`python -m pytest -q tests`) |
 
 Reproduce:
