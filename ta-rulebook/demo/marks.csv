@@ -1,3 +1,4 @@
 time_ny,date,mode,broker,equity,spy_benchmark,cash,invested,positions,pending_orders
 2026-10-30 16:00:00,2026-10-30,close,simulated,100000.0,100000.0,100000.0,0.0,0,14
 2026-11-02 08:27:29,2026-11-02,preopen,simulated,100000.0,100000.0,100000.0,0.0,0,14
+2026-11-02 12:32:11,2026-11-02,midday,simulated,100125.52,99907.83,23.99,100101.54,14,0
