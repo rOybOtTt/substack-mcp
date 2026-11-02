@@ -98,3 +98,4 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 | 2026-11-02 12:31 | midday | NYSE:WELL | FILL_BUY | D3 | 32 @ 234.66 |
 | 2026-11-02 12:31 | midday | NASDAQ:MDLZ | FILL_BUY | D3 | 69 @ 65.30 |
 | 2026-11-02 12:31 | midday | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
+| 2026-11-02 15:24 | preclose | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
