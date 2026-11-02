@@ -1,14 +1,5 @@
 {
- "equity": 100080.58,
- "session": {
-  "id": "2026-11-02 14:35",
-  "date": "2026-11-02",
-  "hour": 14,
-  "started": "2026-11-02 14:10:58",
-  "decisions": [],
-  "orders": [],
-  "positions": [],
-  "taken": []
- },
- "sessions_done": 1
+ "equity": 100067.67,
+ "session": null,
+ "sessions_done": 2
 }

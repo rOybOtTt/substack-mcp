@@ -4,24 +4,25 @@ Every pre-registered rule from `tagym/intraday_bt.py` is traded on paper in each
 one $1,000 unit per trade, 2.5 bps cost per side, flat at xx:55. None of the rules passed the 60-day backtest,
 so this measures forward returns and execution; it is not expected to make money.
 
-Sessions: 1 (2026-11-02 → 2026-11-02), trades: 105, P&L +80.58 on $1,000 units, equity 100,000.00.
+Sessions: 2 (2026-11-02 → 2026-11-02), trades: 235, P&L +67.67 on $1,000 units, equity 100,067.67.
 
 | Session | Trades | Unfilled | Mean gross (bps) | Mean net (bps) | P&L | Started late (s) |
 |---|---|---|---|---|---|---|
 | 2026-11-02 13:35 | 105 | 1 | 12.68 | 7.68 | +80.58 | 20.0 |
+| 2026-11-02 14:35 | 130 | 0 | 4.01 | -0.99 | -12.91 | 20.0 |
 
 ## By rule: forward vs backtest
 
 | Rule | Trades | Fwd gross | Fwd net | Hit rate | Backtest gross | Backtest net | Shortfall vs backtest price |
 |---|---|---|---|---|---|---|---|
-| C0_spy_long | 1 | -9.76 | -14.76 | 0% | -0.10 | -5.10 | +0.72 |
-| R1_vwap_trend | 36 | +20.73 | +15.73 | 86% | +0.01 | -4.99 | +0.37 |
-| R2_reversal | 1 | -5.40 | -10.40 | 0% | +0.57 | -4.43 | -8.04 |
-| R3_orb | 3 | +4.19 | -0.81 | 33% | -1.02 | -6.02 | +1.78 |
-| R5_xs_momentum | 10 | +24.34 | +19.34 | 70% | +1.18 | -3.82 | -3.83 |
-| R6_periodicity | 38 | +11.17 | +6.17 | 58% | +0.79 | -4.21 | -0.03 |
-| R8_rsi | 8 | -7.34 | -12.34 | 0% | -0.20 | -5.20 | -0.93 |
-| R9_ema_cross | 8 | -2.67 | -7.67 | 50% | +1.10 | -3.90 | -2.36 |
+| C0_spy_long | 2 | -8.14 | -13.14 | 0% | -0.10 | -5.10 | -0.56 |
+| R1_vwap_trend | 86 | +14.26 | +9.26 | 67% | +0.01 | -4.99 | +0.75 |
+| R2_reversal | 2 | -2.39 | -7.38 | 0% | +0.57 | -4.43 | +1.66 |
+| R3_orb | 8 | +2.26 | -2.74 | 38% | -1.02 | -6.02 | +0.70 |
+| R5_xs_momentum | 20 | +21.57 | +16.57 | 65% | +1.18 | -3.82 | +2.01 |
+| R6_periodicity | 76 | +4.79 | -0.21 | 53% | +0.79 | -4.21 | +0.23 |
+| R8_rsi | 24 | -7.91 | -12.91 | 25% | -0.20 | -5.20 | -2.44 |
+| R9_ema_cross | 17 | +1.39 | -3.61 | 41% | +1.10 | -3.90 | -1.35 |
 
 Shortfall = return at the backtest's assumed entry (the 5-minute bar's open) minus the return at the live fill (the next 1-minute bar after the decision). Positive = the live delay cost money.
 
