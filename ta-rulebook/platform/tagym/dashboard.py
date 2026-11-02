@@ -1,6 +1,7 @@
 """Export the demo-week and paper-trading results as JSON row files for the tracker dashboard.
 
     python -m tagym.dashboard [--mode auto|preopen|midday|preclose|close] [--no-prices]
+    python -m tagym.dashboard --journal-only     # after the demo week: refresh journal.json only
 
 Writes ta-rulebook/demo/dashboard/{equity,book,trades,journal,activity,flips}.json (arrays of row
 objects) and appends one mark-to-market row per run to demo/marks.csv, so the dashboard's equity
@@ -123,9 +124,15 @@ def journal_rows():
     return _rows(j, cols)
 
 
-def export(mode=None, prices=True, when=None):
+def export(mode=None, prices=True, when=None, journal_only=False):
     when = when or d.ny_now()
     mode = mode or d.auto_mode(when)
+    if journal_only:  # after the demo week: only the paper-trading journal keeps changing
+        OUT.mkdir(parents=True, exist_ok=True)
+        rows = journal_rows()
+        (OUT / "journal.json").write_text(json.dumps(rows, allow_nan=False, default=str))
+        print(f"dashboard export (journal only): journal {len(rows)} -> {OUT}")
+        return {"journal": rows}
     s = d.load_state()
     trades = _read(d.TRADES)
     tick = [p["ticker"] for p in s["positions"].values()] + [o["ticker"] for o in s["pending"]] + ["SPY"]
@@ -161,4 +168,4 @@ def export(mode=None, prices=True, when=None):
 if __name__ == "__main__":
     a = sys.argv[1:]
     md = next((a[i + 1] for i, x in enumerate(a) if x == "--mode"), "auto")
-    export(None if md == "auto" else md, prices="--no-prices" not in a)
+    export(None if md == "auto" else md, prices="--no-prices" not in a, journal_only="--journal-only" in a)

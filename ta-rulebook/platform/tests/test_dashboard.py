@@ -50,3 +50,10 @@ def test_export_marks_book_and_json(tmp_path, monkeypatch):
         json.loads((tmp_path / "dashboard" / f"{name}.json").read_text())
     db.export("midday", when=when + pd.Timedelta(minutes=5))  # a re-run of the same slot replaces its mark
     assert len(pd.read_csv(tmp_path / "marks.csv")) == 2
+
+
+def test_journal_only_leaves_demo_files_alone(tmp_path, monkeypatch):
+    setup(tmp_path, monkeypatch, state())
+    files = db.export(journal_only=True, when=pd.Timestamp("2026-11-09 18:23", tz=NY))
+    assert list(files) == ["journal"] and not (tmp_path / "marks.csv").exists()
+    assert sorted(p.name for p in (tmp_path / "dashboard").iterdir()) == ["journal.json"]
