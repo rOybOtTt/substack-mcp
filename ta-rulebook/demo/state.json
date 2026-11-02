@@ -178,5 +178,6 @@
   "2026-11-06"
  ],
  "rulebook_version": "2.2",
- "last_close_run": "2026-10-30"
+ "last_close_run": "2026-10-30",
+ "broker": "simulated"
 }

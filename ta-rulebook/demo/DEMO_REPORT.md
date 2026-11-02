@@ -2,6 +2,7 @@
 
 Mechanical rules (see `platform/tagym/demo.py`). Decisions are made on completed daily bars, filled at the next open, 10 bps cost per side.
 **One week is far too short to judge the method.** These numbers test the process (execution, discipline, data), not the edge.
+Book of record: **internal simulation**.
 
 **Equity 100,000** (+0.00%) vs SPY benchmark 100,000 (+0.00%). Cash 100,000, 0 positions, 14 orders queued for the next open.
 
@@ -60,3 +61,4 @@ Mechanical rules (see `platform/tagym/demo.py`). Decisions are made on completed
 | 2026-11-01 09:01 | close | NASDAQ:MDLZ | QUEUE_BUY | D3 | 73 sh, stop 61.46 (2.5xATR) |
 | 2026-11-01 09:01 | close | NYSE:AMT | SKIP_ENTRY | cash | no budget left |
 | 2026-11-01 09:01 | close | NASDAQ:EQIX | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-02 08:27 | preopen | - | SUMMARY | - | 14 orders queued for the open, 0 positions |

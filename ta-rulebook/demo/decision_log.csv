@@ -22,3 +22,4 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-01 09:01:21,close,NASDAQ:MDLZ,QUEUE_BUY,D3,"73 sh, stop 61.46 (2.5xATR)"
 2026-11-01 09:01:21,close,NYSE:AMT,SKIP_ENTRY,cash,no budget left
 2026-11-01 09:01:21,close,NASDAQ:EQIX,SKIP_ENTRY,max_positions,no free slot
+2026-11-02 08:27:17,preopen,-,SUMMARY,-,"14 orders queued for the open, 0 positions"
