@@ -24,7 +24,10 @@ class Alpaca:
     def __init__(self, key, secret, base=PAPER_URL):
         if "paper-api" not in base:
             raise BrokerError("refusing to trade: ALPACA_BASE_URL is not the paper-trading endpoint")
-        self.key, self.secret, self.base = key, secret, base.rstrip("/")
+        base = base.rstrip("/")
+        if base.endswith("/v2"):  # accept the endpoint as Alpaca's dashboard shows it (".../v2")
+            base = base[:-3]
+        self.key, self.secret, self.base = key, secret, base
 
     @classmethod
     def from_env(cls):
