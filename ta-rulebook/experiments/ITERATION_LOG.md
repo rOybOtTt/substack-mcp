@@ -398,3 +398,15 @@ Columns: excess = mean excess return over the rule's horizon h (trading days) vs
 | 68 | **Unit tests**: 10 pytest cases (D1-D6, regime, A1, E1, business-day counter, TradingView JSON loader) | 10/10 pass | — |
 | 69 | **Forward paper trading**: 98-stock sector-balanced watchlist; TradingView earnings calendar (98 next dates); first journal 2026-10-30 (23 BULLISH / 42 NO_SIGNAL / 33 BEARISH; 23 with earnings due) | 8 closes cross-checked against TradingView: **0.000%** difference | daily scheduled job + automatic scoreboard |
 | 70 | Claude skill `ta-signal`; RULEBOOK v2.2 (§3 survivorship, §5 E1, §6 rejected candidates, §8 risk rules 5-6, §11 forward validation) | — | v2.2 frozen |
+
+## Phase M — Intraday: hourly 20-minute windows (Nov 2 2026)
+
+Question: can the user's agent trade short horizons (10-20 minutes) inside a 20-minute window each market hour?
+
+| # | Hypothesis | Test | Result | Decision |
+|---|---|---|---|---|
+| 71 | Ten intraday rules, pre-registered before any result: VWAP trend (R1), 2.5-sigma reversal vs SPY (R2), opening-range breakout with relative volume (R3), market intraday momentum 15:35-15:55 (R4, Gao et al. 2018), cross-sectional momentum since the open (R5), intraday periodicity (R6, Heston-Korajczyk-Sadka), SPY lead-lag catch-up (R7), RSI(14) 25/75 on 5-minute bars (R8), EMA 9/21 cross (R9), control always-long SPY (C0) | `tagym/intraday_bt.py`: 100 symbols, 60 days of 5-minute bars (Aug 10 to Nov 2 2026), windows xx:35-xx:55 for hours 9-15, entries at xx:35/40/45, exit at the xx:55 open, 2.5 bps per side, date-clustered t. Verdict bar: PASS = net t >= 2.6 and both halves positive | **0 of 10 pass; all REJECT.** Gross edges between -1.1 and +1.2 bps per trade against 5 bps round-trip cost. Best gross t: EMA cross 1.59, periodicity 1.27, cross-sectional momentum 1.11. Even at 1 bp per side every rule is negative net. R4 also fails on 2 years of hourly SPY/QQQ (-0.6 bps gross, 1,440 trades). R7 fired on only 2 days (untestable) | Intraday TA in 20-minute windows goes on the NOT-a-signal list (final wording after the live day) |
+| 72 | The live trader reproduces the backtest | Replayed the 12:35 window of Nov 2 through the live code path | 126 of 126 trades identical (rule, symbol, side) | Live and backtest share `bar_signals`; parity confirmed |
+| 73 | Asymmetry inside R2 | Split by side | Buying sharp relative drops +3.2 bps gross (567 trades); shorting sharp spikes -3.1 bps | Below costs either way; noted, not traded as a separate rule (it was not pre-registered) |
+
+Live forward test: from the 13:35 window of Nov 2 every rule trades on paper each hour ($1,000 units). See `intraday/REPORT.md`; conclusions follow after a full trading day.
