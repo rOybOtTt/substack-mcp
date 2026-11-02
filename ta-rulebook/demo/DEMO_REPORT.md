@@ -4,11 +4,12 @@ Mechanical rules (see `platform/tagym/demo.py`). Decisions are made on completed
 **One week is far too short to judge the method.** These numbers test the process (execution, discipline, data), not the edge.
 Book of record: **internal simulation**.
 
-**Equity 100,000** (+0.00%) vs SPY benchmark 100,000 (+0.00%). Cash 100,000, 0 positions, 14 orders queued for the next open.
+**Equity 99,964** (-0.04%) vs SPY benchmark 99,032 (-0.97%). Cash 24, 14 positions, 0 orders queued for the next open.
 
 | Date | Equity | SPY benchmark | Cash | Positions |
 |---|---|---|---|---|
 | 2026-10-30 | 100,000 | 100,000 | 100,000 | 0 |
+| 2026-11-02 | 99,964 | 99,032 | 24 | 14 |
 
 ## Open positions
 
@@ -55,20 +56,17 @@ Book of record: **internal simulation**.
 
 Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtests charged 0.10% per side and did not assume a favourable gap).
 
+## How often an unfinished-bar read disagreed with the evening verdict
+
+| Run | Reads | Disagreed | Rate |
+|---|---|---|---|
+| midday | 98 | 5 | 5.1% |
+| preclose | 98 | 5 | 5.1% |
+
 ## Decision log (latest 40)
 
 | Time (NY) | Run | Symbol | Action | Rule | Detail |
 |---|---|---|---|---|---|
-| 2026-11-01 09:01 | close | NASDAQ:AAPL | SKIP_ENTRY | E1 | BULLISH but earnings within 10 trading days |
-| 2026-11-01 09:01 | close | NASDAQ:MRNA | SKIP_ENTRY | E1 | BULLISH but earnings within 10 trading days |
-| 2026-11-01 09:01 | close | NYSE:BRK.B | SKIP_ENTRY | E1 | BULLISH but earnings within 10 trading days |
-| 2026-11-01 09:01 | close | NYSE:MPC | SKIP_ENTRY | E1 | BULLISH but earnings within 10 trading days |
-| 2026-11-01 09:01 | close | NYSE:PFE | SKIP_ENTRY | E1 | BULLISH but earnings within 10 trading days |
-| 2026-11-01 09:01 | close | NYSE:WMB | SKIP_ENTRY | E1 | BULLISH but earnings within 10 trading days |
-| 2026-11-01 09:01 | close | NYSE:OXY | SKIP_ENTRY | E1 | BULLISH but earnings within 10 trading days |
-| 2026-11-01 09:01 | close | NYSE:PSX | QUEUE_BUY | D3 | 20 sh, stop 258.04 (2.5xATR) |
-| 2026-11-01 09:01 | close | NYSE:TMO | QUEUE_BUY | D3 | 10 sh, stop 647.79 (2.5xATR) |
-| 2026-11-01 09:01 | close | NYSE:MRK | QUEUE_BUY | D3 | 43 sh, stop 138.02 (2.5xATR) |
 | 2026-11-01 09:01 | close | NYSE:V | QUEUE_BUY | D3 | 19 sh, stop 395.53 (2.5xATR) |
 | 2026-11-01 09:01 | close | NASDAQ:MSFT | QUEUE_BUY | D3 | 15 sh, stop 492.21 (2.5xATR) |
 | 2026-11-01 09:01 | close | NYSE:TGT | QUEUE_BUY | D3 | 48 sh, stop 144.02 (2.5xATR) |
@@ -99,3 +97,13 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 | 2026-11-02 12:31 | midday | NASDAQ:MDLZ | FILL_BUY | D3 | 69 @ 65.30 |
 | 2026-11-02 12:31 | midday | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
 | 2026-11-02 15:24 | preclose | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
+| 2026-11-02 18:25 | close | NYSE:ABBV | SKIP_ENTRY | cash | no budget left |
+| 2026-11-02 18:25 | close | NYSE:PM | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-02 18:25 | close | NASDAQ:AAPL | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-02 18:25 | close | NYSE:CVX | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-02 18:25 | close | NYSE:PFE | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-02 18:25 | close | NYSE:COP | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-02 18:25 | close | NYSE:XOM | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-02 18:25 | close | NYSE:MO | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-02 18:25 | close | NYSE:AMT | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-02 18:25 | close | NYSE:OXY | SKIP_ENTRY | max_positions | no free slot |

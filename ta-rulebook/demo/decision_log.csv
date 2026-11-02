@@ -39,3 +39,13 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-02 12:31:59,midday,NASDAQ:MDLZ,FILL_BUY,D3,69 @ 65.30
 2026-11-02 12:31:59,midday,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
 2026-11-02 15:24:30,preclose,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
+2026-11-02 18:25:15,close,NYSE:ABBV,SKIP_ENTRY,cash,no budget left
+2026-11-02 18:25:15,close,NYSE:PM,SKIP_ENTRY,max_positions,no free slot
+2026-11-02 18:25:15,close,NASDAQ:AAPL,SKIP_ENTRY,max_positions,no free slot
+2026-11-02 18:25:15,close,NYSE:CVX,SKIP_ENTRY,max_positions,no free slot
+2026-11-02 18:25:15,close,NYSE:PFE,SKIP_ENTRY,max_positions,no free slot
+2026-11-02 18:25:15,close,NYSE:COP,SKIP_ENTRY,max_positions,no free slot
+2026-11-02 18:25:15,close,NYSE:XOM,SKIP_ENTRY,max_positions,no free slot
+2026-11-02 18:25:15,close,NYSE:MO,SKIP_ENTRY,max_positions,no free slot
+2026-11-02 18:25:15,close,NYSE:AMT,SKIP_ENTRY,max_positions,no free slot
+2026-11-02 18:25:15,close,NYSE:OXY,SKIP_ENTRY,max_positions,no free slot
