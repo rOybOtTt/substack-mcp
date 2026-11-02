@@ -145,6 +145,8 @@ def process_fills_and_stops(s, bars, mode, when, logs, full_day=False):
             log(logs, mode, when, sym, "STOP_FILLED", "§8.1 stop", f"{p['shares']} @ {px:.2f}")
             del s["positions"][sym]
     append(TRADES, trades)
+    if trades:
+        s["fills_started"] = True
     for t in trades:
         log(logs, mode, when, t["symbol"], f"FILL_{t['side']}", t["rule"], f"{t['shares']} @ {t['price']:.2f}")
     return trades
@@ -458,7 +460,8 @@ def run(mode, earnings_file):
     if when.dayofweek >= 5 and mode != "close":
         print("weekend - nothing to do"); return
     br = None
-    if s.get("broker") == "alpaca-paper" or (s.get("broker") in (None, "simulated") and not s["positions"]
+    if s.get("broker") == "alpaca-paper" or (mode == "preopen" and s.get("broker") in (None, "simulated")
+                                              and not s["positions"] and not s.get("fills_started")
                                               and not any(o.get("broker_id") for o in s["pending"])):
         br = Alpaca.from_env()
     if br is not None and s.get("broker") != "alpaca-paper":
