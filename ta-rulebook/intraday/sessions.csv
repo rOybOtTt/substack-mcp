@@ -1,0 +1,2 @@
+session,date,hour,started,ended,decisions,trades,unfilled,gross_bps,net_bps,pnl,equity,first_decision_late_s,status
+2026-11-02 13:35,2026-11-02,13,2026-11-02 13:15:08,2026-11-02 14:11:02,3,105,1,12.68,7.68,80.58,100080.58,20.0,done

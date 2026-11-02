@@ -270,8 +270,11 @@ def run_session(max_seconds=540):
         print("weekend - no session"); return "SESSION DONE"
     sess = state.get("session")
     if sess and sess["date"] != str(now.date()) or sess and now.hour > sess["hour"] and now.minute >= 5:
-        if sess.get("positions") or sess.get("orders"):  # an interrupted window: close it with what we have
+        if sess.get("positions") or sess.get("orders"):  # an interrupted window: close it at its xx:55 prices
             close_all(sess, bars1(sorted({p["symbol"] for p in sess["positions"]}) or ["SPY"]), state)
+            state["sessions_done"] = state.get("sessions_done", 0) + 1
+            report()
+            print(f"closed interrupted window {sess['id']}")
         state["session"] = sess = None
     if sess is None:
         sess = start_session(state, now)
