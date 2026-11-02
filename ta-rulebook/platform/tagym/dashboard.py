@@ -2,6 +2,7 @@
 
     python -m tagym.dashboard [--mode auto|preopen|midday|preclose|close] [--no-prices]
     python -m tagym.dashboard --journal-only     # after the demo week: refresh journal.json only
+    python -m tagym.dashboard --intraday         # intraday forward test -> intraday/dashboard/*.json
 
 Writes ta-rulebook/demo/dashboard/{equity,book,trades,journal,activity,flips}.json (arrays of row
 objects) and appends one mark-to-market row per run to demo/marks.csv, so the dashboard's equity
@@ -165,7 +166,58 @@ def export(mode=None, prices=True, when=None, journal_only=False):
     return files
 
 
+INTRADAY = d.ROOT / "intraday"
+ITRADE_ROWS = 1500
+
+
+def export_intraday():
+    """Intraday forward test -> intraday/dashboard/{isessions,irules,itrades}.json."""
+    from .intraday_bt import RULES
+    out = INTRADAY / "dashboard"
+    out.mkdir(parents=True, exist_ok=True)
+    se = _read(INTRADAY / "sessions.csv")
+    tr = _read(INTRADAY / "trades.csv")
+    bt = _read(d.ROOT / "experiments" / "results" / "intraday_backtest.csv")
+    if len(se):
+        se = se.copy()
+        se["cum_pnl"] = se.pnl.cumsum().round(2)
+    rules = []
+    btx = bt.set_index("rule") if len(bt) else pd.DataFrame()
+    for rule, desc in RULES.items():
+        g = tr[tr.rule == rule] if len(tr) else tr
+        b = btx.loc[rule] if rule in btx.index else None
+        rules.append({"rule": rule, "description": desc, "fwd_trades": int(len(g)),
+                      "fwd_gross_bps": round(float(g.gross_bps.mean()), 2) if len(g) else None,
+                      "fwd_net_bps": round(float(g.net_bps.mean()), 2) if len(g) else None,
+                      "fwd_hit_rate": round(float((g.net_bps > 0).mean()), 4) if len(g) else None,
+                      "fwd_shortfall_bps": round(float(g.shortfall_bps.mean()), 2) if len(g) and g.shortfall_bps.notna().any() else None,
+                      "fwd_pnl": round(float(g.pnl.sum()), 2) if len(g) else 0.0,
+                      "bt_trades": int(b.trades) if b is not None else None,
+                      "bt_gross_bps": round(float(b.gross_bps), 2) if b is not None else None,
+                      "bt_net_bps": round(float(b.net_bps), 2) if b is not None else None,
+                      "bt_t_gross": round(float(b.t_gross), 2) if b is not None and pd.notna(b.t_gross) else None,
+                      "bt_verdict": b.verdict if b is not None else None})
+    if len(tr):
+        tr = tr.reset_index(drop=True)
+        tr.insert(0, "n", range(1, len(tr) + 1))
+        tr = tr.iloc[::-1].head(ITRADE_ROWS)
+    files = {
+        "isessions": _rows(se, ["session", "date", "hour", "trades", "unfilled", "gross_bps", "net_bps", "pnl", "cum_pnl",
+                                "equity", "first_decision_late_s"]),
+        "irules": rules,
+        "itrades": _rows(tr, ["n", "session", "rule", "symbol", "side", "entry_time", "entry_px", "exit_px", "gross_bps",
+                              "net_bps", "shortfall_bps", "pnl"]),
+    }
+    for name, rows in files.items():
+        (out / f"{name}.json").write_text(json.dumps(rows, allow_nan=False, default=str))
+    print("intraday dashboard export: " + ", ".join(f"{k} {len(v)}" for k, v in files.items()) + f" -> {out}")
+    return files
+
+
 if __name__ == "__main__":
     a = sys.argv[1:]
+    if "--intraday" in a:
+        export_intraday()
+        sys.exit()
     md = next((a[i + 1] for i, x in enumerate(a) if x == "--mode"), "auto")
     export(None if md == "auto" else md, prices="--no-prices" not in a, journal_only="--journal-only" in a)
