@@ -50,3 +50,4 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-02 18:25:15,close,NYSE:AMT,SKIP_ENTRY,max_positions,no free slot
 2026-11-02 18:25:15,close,NYSE:OXY,SKIP_ENTRY,max_positions,no free slot
 2026-11-03 12:26:03,midday,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
+2026-11-03 15:26:05,preclose,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
