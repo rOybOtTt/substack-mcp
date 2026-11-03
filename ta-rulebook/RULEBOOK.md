@@ -1,5 +1,7 @@
 # The Technical-Analysis Signal Rulebook (for agents)
 
+**Version 2.3** (2026-11-03). Adds §12: intraday trading in 20-minute windows was tested (10 pre-registered rules, 60 days of 5-minute bars, then 8 live paper windows) and **no rule beats costs**. Intraday requests get risk context only, never an intraday trade signal. The daily-bar rules (§1–§11) are unchanged.
+
 **Version 2.2.** v2.1.2 plus three evidence-tested additions:
 - an **earnings-risk flag (E1)**;
 - a **survivorship check** on stocks that later delisted;
@@ -236,6 +238,7 @@ Every rule here was coded exactly and tested on about 900 stocks over 2000–201
 | YouTube "claimed" systems | MACD + 200 EMA (claimed 86%), Stoch + RSI + MACD, ICT fair-value gap, ICT liquidity sweep, 50-MA pullback, 200-day breakout, RSI(10) pullback | Real win rates 37–71%. No significant event-study edge. |
 | Dow Theory | Industrials confirmed by Transports | Fragile; use as context only. |
 | Post-earnings drift (v2.2) | Earnings-day gap ±5% on ≥ 2× volume; top/bottom-decile earnings reaction; EPS surprise ≥ +10% / ≤ −10%; surprise and reaction agreeing (128k earnings events, EODHD) | No rule reached t ≥ 3. The gap-down drift (−0.8%/60d, same sign in 2000–14 and 2015–19) **vanished or reversed in 2020–26** (+0.45%, −0.29%). EPS surprise alone showed no drift. |
+| Intraday TA, 10–20 minute holds (v2.3) | VWAP trend, 2.5σ reversal, opening-range breakout, last-half-hour market momentum, momentum since the open, intraday periodicity, SPY lead-lag, RSI 25/75 and EMA 9/21 on 5-minute bars (§12) | 0 of 10 pass. Gross edge −1.1 to +1.2 bps per trade against ≈ 5 bps round-trip cost (60 days, ≈ 48,000 trades). 8 live windows (1,007 trades): −2.7 bps net per trade. |
 | Fast crash overlays (v2.2) | VIX ≥ 30; VIX +50% in 5 days; SPY −7% / −10% in 20 days; 20-day realized vol ≥ 30%; combinations (designed on 2000–19 only) | Cut BULLISH crash odds by at most 0.17 pts. On the index they **worsened** Sharpe and drawdown (whipsaw). Shocks arrive before any trigger can fire. |
 
 ---
@@ -331,3 +334,29 @@ The rulebook is now scored forward on live data.
 - If a class shows `calibrated? = NO` for several consecutive weeks, re-run the evidence pipeline before trusting the numbers.
 
 The first verdicts (2026-10-30) were 23 BULLISH, 42 NO_SIGNAL and 33 BEARISH. The 10-day scores mature in mid-November 2026, the 60-day scores in late January 2027.
+
+---
+
+## 12. Intraday (v2.3): no tested edge in 20-minute windows
+
+**Rule for the agent.** If asked for an intraday entry, a scalp, or a trade lasting minutes to hours: say that no intraday rule passed testing after costs, do not issue an intraday BULLISH/BEARISH call, and give only the daily-bar verdict and risk context (§5, §8). Popular intraday indicators (VWAP, opening-range breakouts, RSI or EMA crosses on 1–15-minute bars, "smart money" concepts) go under `ignored_noise`.
+
+**Backtest** (`platform/tagym/intraday_bt.py`, iterations #71–#73):
+- 98 large caps + SPY/QQQ, 60 days of 5-minute bars (Aug 10 – Nov 2 2026); one window per hour, xx:35–xx:55; decisions at xx:35/40/45 on completed bars; exit at the xx:55 open; 2.5 bps per side.
+- 0 of 10 pre-registered rules pass (PASS needed net t ≥ 2.6 and both halves positive). Best gross: EMA cross +1.1 bps (t 1.6), cross-sectional momentum +1.2 (t 1.1), periodicity +0.8 (t 1.3). Everything is negative even at 1 bp per side. The last-half-hour market momentum rule also fails on 2 years of hourly SPY/QQQ (−0.6 bps gross).
+
+**Live paper test** (`platform/tagym/intraday.py`, `intraday/REPORT.md`): 8 windows, Mon Nov 2 13:35 → Tue Nov 3 15:35, 1,007 trades on $1,000 units.
+
+| Measure | Result |
+|---|---|
+| Mean per trade | +2.3 bps gross, **−2.7 bps net**; P&L −$268 on 1,007 trades of $1,000 each |
+| Windows positive / negative | 2 / 6; t of window means −1.3 |
+| Live vs backtest | Every rule except R6 within noise of its backtest. R6 (periodicity) +5.7 bps gross live vs +0.8 in the backtest: one day of correlated, balanced long/short trades; **not** evidence of an edge (needs ≥ 40 days forward before it is reconsidered). |
+| Decision → fill delay | 40 s mean (max 160 s) with free 1-minute data; decisions ran 20 s after each bar, as designed |
+| Cost of acting a minute late | +0.3 bps mean (median 0) vs the backtest's price, but ±5.4 bps per trade: noise of the same size as the hoped-for edge |
+| Operations | 2 of 10 scheduled windows missed (Nov 3 09:35, 10:35: worker restart); 1 of 1,008 orders unfilled; no stale-data events |
+
+**What the live day adds.** It does not confirm or overturn the backtest; one day is ≈ 8 independent observations. It shows that execution is not the problem: free data arrive on time and the delay costs ≈ 0 on average. The problem is the edge itself: at 10–20 minute horizons the rules' gross returns are smaller than a 5 bps round trip, which matches the daily-bar finding that TA describes risk, not return.
+
+**Reopen only if** a rule shows net t ≥ 2.6 over ≥ 40 forward days, or costs fall below ≈ 1 bp per side *and* a rule's gross edge exceeds them in both halves of a new sample.
+

@@ -409,4 +409,8 @@ Question: can the user's agent trade short horizons (10-20 minutes) inside a 20-
 | 72 | The live trader reproduces the backtest | Replayed the 12:35 window of Nov 2 through the live code path | 126 of 126 trades identical (rule, symbol, side) | Live and backtest share `bar_signals`; parity confirmed |
 | 73 | Asymmetry inside R2 | Split by side | Buying sharp relative drops +3.2 bps gross (567 trades); shorting sharp spikes -3.1 bps | Below costs either way; noted, not traded as a separate rule (it was not pre-registered) |
 
-Live forward test: from the 13:35 window of Nov 2 every rule trades on paper each hour ($1,000 units). See `intraday/REPORT.md`; conclusions follow after a full trading day.
+| 74 | Live paper forward test, all 10 rules | `tagym/intraday.py`, 8 windows (Nov 2 13:35 → Nov 3 15:35), 1,007 trades, $1,000 units, 2.5 bps/side, simulated fills at the next 1-minute bar | +2.3 bps gross, **−2.7 net** per trade, −$268; 2 of 8 windows positive (t −1.3). Rules within noise of the backtest except R6 periodicity (+5.7 gross on one correlated day) | Intraday stays NOT-a-signal (RULEBOOK §12, v2.3). R6 kept on the forward watch list only |
+| 75 | Execution with free data | Decision-to-fill delay; live fill vs the backtest's price | 40 s mean delay; shortfall +0.3 bps mean (median 0, ±5.4 per trade); 1 unfilled of 1,008; no stale bars | Execution is not the bottleneck; the edge is |
+| 76 | Operations | Scheduled windows run vs planned | 8 of 10 ran; Nov 3 09:35 and 10:35 missed (worker restart); one window needed a resume (closed correctly at its xx:55 prices) | Resume logic kept; missed windows reported, not back-filled |
+
+**Conclusion of Phase M.** Intraday TA on liquid US large caps in 20-minute windows has no edge after realistic costs. One live day measures execution, not edge, and it agrees with the backtest. Rulebook → v2.3 (§12).

@@ -34,3 +34,4 @@ Follow `ta-rulebook/RULEBOOK.md` (v2.2). This skill is the procedure; the rulebo
 - Never call BULLISH a stock that is a top relative-strength name while SPY is below its 10-month SMA (A1).
 - Never say "safe": market-wide shocks (for example COVID in 2020) hit the BULLISH class too.
 - Confidence is `low` or `medium`, never `high`. Never quote YouTube win rates as facts.
+- Intraday requests (scalps, day trades, holds of minutes to hours): say no intraday rule passed testing after costs (RULEBOOK §12), give no intraday BULLISH/BEARISH call, and answer with the daily verdict and risk context. Put VWAP, opening-range, intraday RSI/EMA and SMC/ICT ideas under `ignored_noise`.

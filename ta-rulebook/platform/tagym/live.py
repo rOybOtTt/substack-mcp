@@ -52,7 +52,7 @@ def regime(spy: pd.DataFrame):
     return lab, {"spy_above_10m_sma": ten, "spy_sma50_gt_sma200": cross}
 
 
-RULEBOOK_VERSION = "2.2"
+RULEBOOK_VERSION = "2.3"
 
 # P(>=10% drop within 10 trading days), mean of 6 samples (dev + holdout + 2020-26 test)
 EARN_CAL = {("BULLISH", True): 0.096, ("BULLISH", False): 0.039,

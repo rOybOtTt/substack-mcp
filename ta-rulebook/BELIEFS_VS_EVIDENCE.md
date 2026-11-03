@@ -103,3 +103,18 @@ Aronson (2006) tested 6,402 rules on the S&P 500 with a data-mining correction a
 | Post-earnings drift / "earnings gap and go" (O'Neil, Ross Cameron, PEAD literature) | 128k earnings events: gap-down drift (−0.8%/60d) held its sign 2000–2019, then vanished or reversed in 2020–26. EPS surprise alone showed no drift | ❌ as a signal. |
 | "Avoid holding through earnings" (common trader advice) | A report within 10 trading days raised short-term crash odds 2–3× in every class and every sample, including the locked test | ✅ as a risk flag (E1). |
 | Volatility spikes / VIX tell you when to get out (YouTube, market-timing blogs) | Six fast triggers (VIX ≥ 30, VIX +50%, SPY −7%/−10%, realized vol ≥ 30%): no meaningful drop in BULLISH-class crash odds, and Sharpe and drawdown got worse on the index | ❌. Shocks arrive before triggers fire. |
+
+## 7. v2.3: intraday beliefs vs measurement
+
+| Belief (source) | What was measured |
+|---|---|
+| "Trade with VWAP: above it is bullish, below bearish" (day-trading YouTube; institutional-execution lore) | R1: +0.0 bps gross in 60 days (16,338 trades); −3.9 bps net live (365 trades) |
+| Opening-range breakout on high relative volume makes money (Crabel; Zarattini–Barbon–Aziz 2024 on "stocks in play") | R3 on large caps, 10–20 minute holds: −1.0 bps gross (backtest), 0.0 live. The published version holds to the close on screened small/mid caps: not what was tested here |
+| RSI below 30 / above 70 on 5-minute charts marks scalp reversals (most-viewed scalping videos) | R8 (25/75): −0.2 bps gross backtest, −2.5 live |
+| EMA 9/21 crosses on intraday charts | R9: +1.1 bps gross (t 1.6), below costs; +1.4 live |
+| The first half hour predicts the last half hour (Gao, Han, Li & Zhou 2018) | R4: −1.1 bps gross (60 days), −0.6 on 2 years of hourly SPY/QQQ; the published effect has decayed or never survived costs at retail size |
+| Same-time-of-day returns repeat (Heston, Korajczyk & Sadka 2010) | R6: +0.8 bps gross backtest (t 1.3), +5.7 on one live day; real in the literature but a few bps, below a 5 bps round trip |
+| Buying sharp drops provides liquidity and is paid | R2 longs +3.2 bps gross, shorts −3.1: an asymmetry worth watching, still below costs |
+
+Bottom line: the claimed intraday win rates do not survive realistic costs on liquid US large caps. Intraday TA, like daily TA, is at best risk description.
+

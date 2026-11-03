@@ -1,4 +1,4 @@
-# Agent quick-start: one-page procedure (rulebook v2.2)
+# Agent quick-start: one-page procedure (rulebook v2.3)
 
 In Claude Code this procedure is also packaged as the skill `.claude/skills/ta-signal/SKILL.md`.
 
@@ -31,7 +31,9 @@ When asked for a technical-analysis view on a stock:
    - upgrade a signal because of a candlestick, chart pattern, indicator cross, Fibonacci level,
      support/resistance, divergence, volume spike, ICT/SMC concept, or TradingView Buy/Sell rating;
    - call a top-RS stock BULLISH while SPY is below its 10-month SMA;
-   - state confidence "high" or quote YouTube win rates as facts.
+   - state confidence "high" or quote YouTube win rates as facts;
+   - give an intraday (minutes-to-hours) trade signal: no intraday rule beat costs (RULEBOOK §12).
+     Give the daily verdict and risk context instead.
 
 5. Remember what the labels mean:
    - BULLISH = lowest crash-risk class (≈6% chance of a ≥20% fall in 60d).

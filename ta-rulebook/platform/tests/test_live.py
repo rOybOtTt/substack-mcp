@@ -40,7 +40,7 @@ def calm_end(c, days=25, seed=7):
 
 
 def test_version():
-    assert RULEBOOK_VERSION == "2.2"
+    assert RULEBOOK_VERSION == "2.3"
 
 
 def test_d1_short_history():
