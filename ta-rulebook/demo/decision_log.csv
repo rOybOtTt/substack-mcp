@@ -51,3 +51,19 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-02 18:25:15,close,NYSE:OXY,SKIP_ENTRY,max_positions,no free slot
 2026-11-03 12:26:03,midday,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
 2026-11-03 15:26:05,preclose,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
+2026-11-03 18:24:58,close,NASDAQ:MRNA,SKIP_ENTRY,cash,no budget left
+2026-11-03 18:24:58,close,NASDAQ:AMGN,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:ABBV,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:MA,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:PM,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:CVX,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:ECL,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:COP,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:PFE,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NASDAQ:AAPL,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:XOM,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:MO,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:AMT,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:OXY,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NYSE:WMB,SKIP_ENTRY,max_positions,no free slot
+2026-11-03 18:24:58,close,NASDAQ:EQIX,SKIP_ENTRY,max_positions,no free slot

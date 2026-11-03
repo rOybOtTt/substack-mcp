@@ -1,15 +1,16 @@
-# Demo week 2026-11-02 → 2026-11-06: rulebook v2.2 on a simulated $100k account
+# Demo week 2026-11-02 → 2026-11-06: rulebook v2.3 on a simulated $100k account
 
 Mechanical rules (see `platform/tagym/demo.py`). Decisions are made on completed daily bars, filled at the next open, 10 bps cost per side.
 **One week is far too short to judge the method.** These numbers test the process (execution, discipline, data), not the edge.
 Book of record: **internal simulation**.
 
-**Equity 99,964** (-0.04%) vs SPY benchmark 99,032 (-0.97%). Cash 24, 14 positions, 0 orders queued for the next open.
+**Equity 99,428** (-0.57%) vs SPY benchmark 99,328 (-0.67%). Cash 24, 14 positions, 0 orders queued for the next open.
 
 | Date | Equity | SPY benchmark | Cash | Positions |
 |---|---|---|---|---|
 | 2026-10-30 | 100,000 | 100,000 | 100,000 | 0 |
 | 2026-11-02 | 99,964 | 99,032 | 24 | 14 |
+| 2026-11-03 | 99,428 | 99,328 | 24 | 14 |
 
 ## Open positions
 
@@ -60,29 +61,13 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 
 | Run | Reads | Disagreed | Rate |
 |---|---|---|---|
-| midday | 98 | 5 | 5.1% |
-| preclose | 98 | 5 | 5.1% |
+| midday | 196 | 7 | 3.6% |
+| preclose | 196 | 7 | 3.6% |
 
 ## Decision log (latest 40)
 
 | Time (NY) | Run | Symbol | Action | Rule | Detail |
 |---|---|---|---|---|---|
-| 2026-11-01 09:01 | close | NYSE:TGT | QUEUE_BUY | D3 | 48 sh, stop 144.02 (2.5xATR) |
-| 2026-11-01 09:01 | close | NYSE:NUE | QUEUE_BUY | D3 | 24 sh, stop 253.05 (2.5xATR) |
-| 2026-11-01 09:01 | close | NYSE:JNJ | QUEUE_BUY | D3 | 29 sh, stop 256.43 (2.5xATR) |
-| 2026-11-01 09:01 | close | NYSE:KO | QUEUE_BUY | D3 | 85 sh, stop 90.02 (2.5xATR) |
-| 2026-11-01 09:01 | close | NYSE:UNH | QUEUE_BUY | D3 | 18 sh, stop 379.57 (2.5xATR) |
-| 2026-11-01 09:01 | close | NYSE:PG | QUEUE_BUY | D3 | 49 sh, stop 154.02 (2.5xATR) |
-| 2026-11-01 09:01 | close | NYSE:JPM | QUEUE_BUY | D3 | 23 sh, stop 321.20 (2.5xATR) |
-| 2026-11-01 09:01 | close | NYSE:WELL | QUEUE_BUY | D3 | 32 sh, stop 219.13 (2.5xATR) |
-| 2026-11-01 09:01 | close | NASDAQ:MDLZ | QUEUE_BUY | D3 | 73 sh, stop 61.46 (2.5xATR) |
-| 2026-11-01 09:01 | close | NYSE:AMT | SKIP_ENTRY | cash | no budget left |
-| 2026-11-01 09:01 | close | NASDAQ:EQIX | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-02 08:27 | preopen | - | SUMMARY | - | 14 orders queued for the open, 0 positions |
-| 2026-11-02 12:31 | midday | NYSE:PSX | FILL_BUY | D3 | 20 @ 280.33 |
-| 2026-11-02 12:31 | midday | NYSE:TMO | FILL_BUY | D3 | 10 @ 699.86 |
-| 2026-11-02 12:31 | midday | NYSE:MRK | FILL_BUY | D3 | 43 @ 148.82 |
-| 2026-11-02 12:31 | midday | NYSE:V | FILL_BUY | D3 | 19 @ 415.51 |
 | 2026-11-02 12:31 | midday | NASDAQ:MSFT | FILL_BUY | D3 | 15 @ 524.10 |
 | 2026-11-02 12:31 | midday | NYSE:TGT | FILL_BUY | D3 | 48 @ 155.13 |
 | 2026-11-02 12:31 | midday | NYSE:NUE | FILL_BUY | D3 | 24 @ 277.15 |
@@ -107,3 +92,19 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 | 2026-11-02 18:25 | close | NYSE:OXY | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-03 12:26 | midday | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
 | 2026-11-03 15:26 | preclose | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
+| 2026-11-03 18:24 | close | NASDAQ:MRNA | SKIP_ENTRY | cash | no budget left |
+| 2026-11-03 18:24 | close | NASDAQ:AMGN | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:ABBV | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:MA | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:PM | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:CVX | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:ECL | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:COP | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:PFE | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NASDAQ:AAPL | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:XOM | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:MO | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:AMT | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:OXY | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NYSE:WMB | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 18:24 | close | NASDAQ:EQIX | SKIP_ENTRY | max_positions | no free slot |
