@@ -67,7 +67,6 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 
 | Time (NY) | Run | Symbol | Action | Rule | Detail |
 |---|---|---|---|---|---|
-| 2026-11-01 09:01 | close | NYSE:V | QUEUE_BUY | D3 | 19 sh, stop 395.53 (2.5xATR) |
 | 2026-11-01 09:01 | close | NASDAQ:MSFT | QUEUE_BUY | D3 | 15 sh, stop 492.21 (2.5xATR) |
 | 2026-11-01 09:01 | close | NYSE:TGT | QUEUE_BUY | D3 | 48 sh, stop 144.02 (2.5xATR) |
 | 2026-11-01 09:01 | close | NYSE:NUE | QUEUE_BUY | D3 | 24 sh, stop 253.05 (2.5xATR) |
@@ -107,3 +106,4 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 | 2026-11-02 18:25 | close | NYSE:MO | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-02 18:25 | close | NYSE:AMT | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-02 18:25 | close | NYSE:OXY | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-03 12:26 | midday | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
