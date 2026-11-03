@@ -4,7 +4,7 @@ Every pre-registered rule from `tagym/intraday_bt.py` is traded on paper in each
 one $1,000 unit per trade, 2.5 bps cost per side, flat at xx:55. None of the rules passed the 60-day backtest,
 so this measures forward returns and execution; it is not expected to make money.
 
-Sessions: 5 (2026-11-02 → 2026-11-03), trades: 631, P&L -117.30 on $1,000 units, equity 99,882.70.
+Sessions: 6 (2026-11-02 → 2026-11-03), trades: 748, P&L -219.79 on $1,000 units, equity 99,780.21.
 
 | Session | Trades | Unfilled | Mean gross (bps) | Mean net (bps) | P&L | Started late (s) |
 |---|---|---|---|---|---|---|
@@ -13,21 +13,22 @@ Sessions: 5 (2026-11-02 → 2026-11-03), trades: 631, P&L -117.30 on $1,000 unit
 | 2026-11-02 15:35 | 190 | 0 | 0.14 | -4.86 | -92.31 | 20.0 |
 | 2026-11-03 11:35 | 99 | 0 | 2.06 | -2.94 | -29.11 | 20.0 |
 | 2026-11-03 12:35 | 107 | 0 | -0.94 | -5.94 | -63.55 | 20.0 |
+| 2026-11-03 13:35 | 117 | 0 | -3.75 | -8.75 | -102.49 | 20.0 |
 
 ## By rule: forward vs backtest
 
 | Rule | Trades | Fwd gross | Fwd net | Hit rate | Backtest gross | Backtest net | Shortfall vs backtest price |
 |---|---|---|---|---|---|---|---|
-| C0_spy_long | 5 | -1.19 | -6.19 | 20% | -0.10 | -5.10 | +0.14 |
-| R1_vwap_trend | 212 | +2.68 | -2.32 | 49% | +0.01 | -4.99 | +1.37 |
-| R2_reversal | 26 | +5.54 | +0.54 | 54% | +0.57 | -4.43 | -1.50 |
-| R3_orb | 20 | +3.81 | -1.19 | 55% | -1.02 | -6.02 | +0.95 |
+| C0_spy_long | 6 | -2.44 | -7.43 | 17% | -0.10 | -5.10 | -0.48 |
+| R1_vwap_trend | 260 | +0.42 | -4.58 | 43% | +0.01 | -4.99 | +0.88 |
+| R2_reversal | 27 | +5.04 | +0.04 | 52% | +0.57 | -4.43 | -1.44 |
+| R3_orb | 24 | +0.71 | -4.29 | 46% | -1.02 | -6.02 | +0.44 |
 | R4_mkt_momentum | 2 | +0.88 | -4.12 | 0% | -1.10 | -6.10 | -3.80 |
-| R5_xs_momentum | 50 | +1.30 | -3.70 | 50% | +1.18 | -3.82 | +2.82 |
-| R6_periodicity | 190 | +7.42 | +2.42 | 51% | +0.79 | -4.21 | +0.21 |
+| R5_xs_momentum | 60 | +1.73 | -3.27 | 45% | +1.18 | -3.82 | +1.64 |
+| R6_periodicity | 228 | +6.20 | +1.20 | 50% | +0.79 | -4.21 | +0.54 |
 | R7_lead_lag | 54 | -0.88 | -5.88 | 41% | +23.31 | +18.31 | -2.21 |
-| R8_rsi | 28 | -6.83 | -11.83 | 29% | -0.20 | -5.20 | -2.81 |
-| R9_ema_cross | 44 | -0.84 | -5.84 | 36% | +1.10 | -3.90 | -1.51 |
+| R8_rsi | 29 | -6.38 | -11.38 | 31% | -0.20 | -5.20 | -2.55 |
+| R9_ema_cross | 58 | +0.15 | -4.85 | 40% | +1.10 | -3.90 | -1.50 |
 
 Shortfall = return at the backtest's assumed entry (the 5-minute bar's open) minus the return at the live fill (the next 1-minute bar after the decision). Positive = the live delay cost money.
 
