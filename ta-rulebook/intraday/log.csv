@@ -31,3 +31,6 @@ time_ny,session,event,detail
 2026-11-03 13:56:24,2026-11-03 13:35,CLOSE,"117 trades closed, 0 unfilled, P&L -102.49 (unit $1000/trade)"
 2026-11-03 14:30:27,2026-11-03 14:35,START,window 14:35-14:55
 2026-11-03 14:35:31,2026-11-03 14:35,DECIDE,"14:35 -> 95 orders (rules: C0_spy_long 1, R1_vwap_trend 41, R3_orb 1, R5_xs_momentum 10, R6_periodicity 38, R9_ema_cross 4)"
+2026-11-03 14:40:31,2026-11-03 14:35,DECIDE,"14:40 -> 12 orders (rules: R1_vwap_trend 4, R3_orb 1, R8_rsi 1, R9_ema_cross 6)"
+2026-11-03 14:45:30,2026-11-03 14:35,DECIDE,"14:45 -> 12 orders (rules: R1_vwap_trend 3, R3_orb 3, R9_ema_cross 6)"
+2026-11-03 14:56:24,2026-11-03 14:35,CLOSE,"119 trades closed, 0 unfilled, P&L +14.28 (unit $1000/trade)"
