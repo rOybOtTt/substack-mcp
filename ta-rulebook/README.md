@@ -17,6 +17,7 @@
 Each weekday runs at 08:23 (pre-open), 12:23 (mid-day), 15:23 (pre-close) and 18:23 (after close), New York time.
 Contents: `DEMO_REPORT.md`, `trades.csv`, `equity.csv` (vs SPY), `flips.csv` (unfinished-bar reads vs the evening verdict), `decision_log.csv` (every action with its rule id), `marks.csv` (mark-to-market at every run) and `dashboard/` (JSON rows for the tracker dashboard). |
 | Tracker dashboard | A private claude.ai dashboard ("TA Demo Tracker") drawn from `demo/dashboard/*.json`: equity vs SPY at every run, positions and queued orders, fills and slippage, intraday flip rate, the latest verdicts and their calibration, and the decision log. Each scheduled run re-exports the JSON (`python -m tagym.dashboard`) and refreshes the dashboard's files. |
+| `PLAN_30D.md` | **30-day improvement program (Nov 4 – Dec 4 2026)**, pre-registered before any forward data: what is frozen, the verdict bars, the weekly review routine and the gates for editing the rulebook. |
 | `intraday/` | **Hourly intraday forward test** (from Nov 2 2026), run by the scheduled task "TA intraday hourly window" (weekdays 09:30-15:30 New York, one 20-minute window per hour: decisions at xx:35/40/45, flat at xx:55, simulated fills, $1,000 units, 2.5 bps per side). Contents: `trades.csv`, `sessions.csv`, `log.csv`, `REPORT.md` (each rule live vs backtest) and `dashboard/` (JSON for the Intraday tab of the tracker). |
 | `../.claude/skills/ta-signal/SKILL.md` | Claude skill: the agent procedure (TradingView calls → engine → report). |
 | `experiments/live_journal_2026-11-01.md` | The rulebook applied to live TradingView data, as forward predictions to be scored later. |
@@ -49,6 +50,7 @@ Contents: `DEMO_REPORT.md`, `trades.csv`, `equity.csv` (vs SPY), `flips.csv` (un
 | `demo.py`, `alpaca.py` | demo-week portfolio (simulated or Alpaca paper account) |
 | `dashboard.py` | exports the demo and paper results as JSON rows for the tracker dashboard |
 | `intraday_bt.py` | intraday backtest: 10 pre-registered rules in xx:35-xx:55 windows on 60 days of 5-minute bars |
+| `intraday_fwd.py` | nightly replay of every intraday window on that day's 5-minute bars; forward ledger, verdict bars, `intraday/FORWARD_REPORT.md` |
 | `intraday.py` | the hourly 20-minute paper trader; uses the backtest's own signal code (`bar_signals`) |
 | `tests/` | pytest unit tests for the agent engine (`python -m pytest -q tests`) |
 

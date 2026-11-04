@@ -65,3 +65,18 @@ def test_no_session_outside_windows(tmp_io, monkeypatch):
     monkeypatch.setattr(I, "now_ny", lambda: pd.Timestamp("2026-11-02 13:50"))
     assert I.run_session(5) == "SESSION DONE"
     assert I.load_state()["session"] is None
+
+
+def test_forward_verdict_bars():
+    import tagym.intraday_fwd as fw
+    days = pd.bdate_range("2026-11-04", periods=45)
+
+    def ev(gross_by_day):
+        return pd.DataFrame({"rule": "RX", "sym": "AAA", "day": days[:len(gross_by_day)], "hour": 10, "minute": 35,
+                             "side": 1, "gross_bps": gross_by_day})
+    rng = np.random.default_rng(0)
+    assert fw.summarize(ev(list(rng.normal(30, 3, 10)))).verdict.iloc[0] == "TOO EARLY"        # < 20 days never passes
+    assert fw.summarize(ev(list(rng.normal(30, 3, 25)))).verdict.iloc[0] == "CANDIDATE"        # strong, but < 40 days
+    assert fw.summarize(ev(list(rng.normal(30, 3, 45)))).verdict.iloc[0] == "PASS"
+    assert fw.summarize(ev(list(rng.normal(0, 5, 45)))).verdict.iloc[0] == "NO EDGE"
+    assert fw.summarize(ev(list(rng.normal(3, 5, 45)))).verdict.iloc[0] in ("NO EDGE", "CANDIDATE")  # +3 gross < 5 cost

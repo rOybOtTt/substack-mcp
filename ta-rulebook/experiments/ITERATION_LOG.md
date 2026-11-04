@@ -406,7 +406,7 @@ Question: can the user's agent trade short horizons (10-20 minutes) inside a 20-
 | # | Hypothesis | Test | Result | Decision |
 |---|---|---|---|---|
 | 71 | Ten intraday rules, pre-registered before any result: VWAP trend (R1), 2.5-sigma reversal vs SPY (R2), opening-range breakout with relative volume (R3), market intraday momentum 15:35-15:55 (R4, Gao et al. 2018), cross-sectional momentum since the open (R5), intraday periodicity (R6, Heston-Korajczyk-Sadka), SPY lead-lag catch-up (R7), RSI(14) 25/75 on 5-minute bars (R8), EMA 9/21 cross (R9), control always-long SPY (C0) | `tagym/intraday_bt.py`: 100 symbols, 60 days of 5-minute bars (Aug 10 to Nov 2 2026), windows xx:35-xx:55 for hours 9-15, entries at xx:35/40/45, exit at the xx:55 open, 2.5 bps per side, date-clustered t. Verdict bar: PASS = net t >= 2.6 and both halves positive | **0 of 10 pass; all REJECT.** Gross edges between -1.1 and +1.2 bps per trade against 5 bps round-trip cost. Best gross t: EMA cross 1.59, periodicity 1.27, cross-sectional momentum 1.11. Even at 1 bp per side every rule is negative net. R4 also fails on 2 years of hourly SPY/QQQ (-0.6 bps gross, 1,440 trades). R7 fired on only 2 days (untestable) | Intraday TA in 20-minute windows goes on the NOT-a-signal list (final wording after the live day) |
-| 72 | The live trader reproduces the backtest | Replayed the 12:35 window of Nov 2 through the live code path | 126 of 126 trades identical (rule, symbol, side) | Live and backtest share `bar_signals`; parity confirmed |
+| 72 | The live trader reproduces the backtest | Replayed the 12:35 window of Nov 2 through the live code path | 126 of 126 trades identical (rule, symbol, side) | Live and backtest share `bar_signals`. **Weaker than it looked:** this replay used final data, not the provisional data a live run sees; see #77 |
 | 73 | Asymmetry inside R2 | Split by side | Buying sharp relative drops +3.2 bps gross (567 trades); shorting sharp spikes -3.1 bps | Below costs either way; noted, not traded as a separate rule (it was not pre-registered) |
 
 | 74 | Live paper forward test, all 10 rules | `tagym/intraday.py`, 8 windows (Nov 2 13:35 → Nov 3 15:35), 1,007 trades, $1,000 units, 2.5 bps/side, simulated fills at the next 1-minute bar | +2.3 bps gross, **−2.7 net** per trade, −$268; 2 of 8 windows positive (t −1.3). Rules within noise of the backtest except R6 periodicity (+5.7 gross on one correlated day) | Intraday stays NOT-a-signal (RULEBOOK §12, v2.3). R6 kept on the forward watch list only |
@@ -414,3 +414,13 @@ Question: can the user's agent trade short horizons (10-20 minutes) inside a 20-
 | 76 | Operations | Scheduled windows run vs planned | 8 of 10 ran; Nov 3 09:35 and 10:35 missed (worker restart); one window needed a resume (closed correctly at its xx:55 prices) | Resume logic kept; missed windows reported, not back-filled |
 
 **Conclusion of Phase M.** Intraday TA on liquid US large caps in 20-minute windows has no edge after realistic costs. One live day measures execution, not edge, and it agrees with the backtest. Rulebook → v2.3 (§12).
+
+## Phase N — 30-day program (2026-11-04 → 2026-12-04)
+
+Pre-registered in `PLAN_30D.md` before any forward data. Daily rules frozen at v2.2 logic; intraday rules frozen at v2.3 plus one forward-only hypothesis (R2L). Weekly reviews add one row each.
+
+| # | Hypothesis | Test | Result | Decision |
+|---|---|---|---|---|
+| 77 | A nightly replay on 5-minute bars measures the same thing as a live window (and cannot miss one) | `tagym/intraday_fwd.py` replayed the 8 live windows of Nov 2–3 and compared with the 1,007 live trades | Direction agreed on 100% of matched trades. Exact trade sets: price-only rules (R2, R5, R6, R8, R9) matched 93–100%; **volume-based rules R1 (VWAP) 49% and R3 (opening range) 34%**: Yahoo's volume for the newest bar is provisional 20 s after it closes. Mean gross per trade over the same windows: replay +2.7 bps, live +2.3 bps (R1 identical at +1.07) | Replay adopted as the forward-test engine. Correction to #72: same code ≠ same inputs. R1 and R3 forward numbers use final volume, so they are an optimistic read of real-time performance |
+| 78 | Program start | `PLAN_30D.md` | Verdict bars fixed: < 20 days TOO EARLY; ≥ 20 days CANDIDATE needs gross t ≥ 2 and net > 0; ≥ 40 days PASS needs net t ≥ 3 and both halves positive. 22 trading days fit before Dec 4, so no PASS is possible in the window | Reject-or-shortlist only; any CANDIDATE runs on to 40 days before a rulebook change |
+

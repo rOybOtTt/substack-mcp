@@ -171,43 +171,76 @@ ITRADE_ROWS = 1500
 
 
 def export_intraday():
-    """Intraday forward test -> intraday/dashboard/{isessions,irules,itrades}.json."""
-    from .intraday_bt import RULES
+    """Intraday results -> intraday/dashboard/{isessions,irules,itrades}.json.
+
+    Union of the 8 live paper windows (Nov 2-3) and the nightly replay ledger (from Nov 4)."""
+    from .intraday_bt import RULES, COST_BPS
+    from .intraday_fwd import LEDGER, RULES_FWD, FWD_START, summarize as fsum
     out = INTRADAY / "dashboard"
     out.mkdir(parents=True, exist_ok=True)
-    se = _read(INTRADAY / "sessions.csv")
-    tr = _read(INTRADAY / "trades.csv")
+    live = _read(INTRADAY / "trades.csv")
+    lsess = _read(INTRADAY / "sessions.csv")
+    fwd = pd.read_csv(LEDGER, parse_dates=["day"]) if LEDGER.exists() else pd.DataFrame()
     bt = _read(d.ROOT / "experiments" / "results" / "intraday_backtest.csv")
-    if len(se):
-        se = se.copy()
-        se["cum_pnl"] = se.pnl.cumsum().round(2)
-    rules = []
-    btx = bt.set_index("rule") if len(bt) else pd.DataFrame()
-    for rule, desc in RULES.items():
-        g = tr[tr.rule == rule] if len(tr) else tr
-        b = btx.loc[rule] if rule in btx.index else None
-        rules.append({"rule": rule, "description": desc, "fwd_trades": int(len(g)),
-                      "fwd_gross_bps": round(float(g.gross_bps.mean()), 2) if len(g) else None,
-                      "fwd_net_bps": round(float(g.net_bps.mean()), 2) if len(g) else None,
-                      "fwd_hit_rate": round(float((g.net_bps > 0).mean()), 4) if len(g) else None,
-                      "fwd_shortfall_bps": round(float(g.shortfall_bps.mean()), 2) if len(g) and g.shortfall_bps.notna().any() else None,
-                      "fwd_pnl": round(float(g.pnl.sum()), 2) if len(g) else 0.0,
-                      "bt_trades": int(b.trades) if b is not None else None,
-                      "bt_gross_bps": round(float(b.gross_bps), 2) if b is not None else None,
-                      "bt_net_bps": round(float(b.net_bps), 2) if b is not None else None,
-                      "bt_t_gross": round(float(b.t_gross), 2) if b is not None and pd.notna(b.t_gross) else None,
-                      "bt_verdict": b.verdict if b is not None else None})
+    parts = []
+    if len(live):
+        parts.append(pd.DataFrame({"session": live.session, "rule": live.rule, "symbol": live.symbol, "side": live.side,
+                                   "entry_time": live.entry_time, "entry_px": live.entry_px, "exit_px": live.exit_px,
+                                   "gross_bps": live.gross_bps, "shortfall_bps": live.shortfall_bps,
+                                   "day": pd.to_datetime(live.date), "source": "live"}))
+    if len(fwd):
+        f = fwd[fwd.day >= pd.Timestamp(FWD_START)]
+        if len(f):
+            parts.append(pd.DataFrame({"session": f.day.dt.strftime("%Y-%m-%d") + " " + f.hour.astype(int).map("{:02d}".format) + ":35",
+                                       "rule": f.rule, "symbol": f.sym, "side": f.side,
+                                       "entry_time": f.day.dt.strftime("%Y-%m-%d") + " " + f.hour.astype(int).map("{:02d}".format)
+                                       + ":" + f.minute.astype(int).map("{:02d}".format),
+                                       "entry_px": None, "exit_px": None, "gross_bps": f.gross_bps, "shortfall_bps": None,
+                                       "day": f.day, "source": "replay"}))
+    tr = pd.concat(parts, ignore_index=True) if parts else pd.DataFrame(columns=["session", "rule", "gross_bps", "day"])
+    sess_rows, rule_rows, trade_rows = [], [], []
     if len(tr):
-        tr = tr.reset_index(drop=True)
-        tr.insert(0, "n", range(1, len(tr) + 1))
-        tr = tr.iloc[::-1].head(ITRADE_ROWS)
-    files = {
-        "isessions": _rows(se, ["session", "date", "hour", "trades", "unfilled", "gross_bps", "net_bps", "pnl", "cum_pnl",
-                                "equity", "first_decision_late_s"]),
-        "irules": rules,
-        "itrades": _rows(tr, ["n", "session", "rule", "symbol", "side", "entry_time", "entry_px", "exit_px", "gross_bps",
-                              "net_bps", "shortfall_bps", "pnl"]),
-    }
+        tr["net_bps"] = tr.gross_bps - 2 * COST_BPS
+        tr["pnl"] = 1000.0 * tr.net_bps / 1e4
+        g = tr.groupby("session", sort=True).agg(date=("day", "first"), trades=("net_bps", "size"), gross_bps=("gross_bps", "mean"),
+                                                  net_bps=("net_bps", "mean"), pnl=("pnl", "sum")).reset_index()
+        g["hour"] = g.session.str[11:13].astype(int)
+        g["date"] = g.date.dt.strftime("%Y-%m-%d")
+        g["cum_pnl"] = g.pnl.cumsum().round(2)
+        g["equity"] = (100000.0 + g.cum_pnl).round(2)
+        if len(lsess):
+            g = g.merge(lsess[["session", "unfilled", "first_decision_late_s"]], on="session", how="left")
+        else:
+            g["unfilled"] = None
+            g["first_decision_late_s"] = None
+        sess_rows = _rows(g, ["session", "date", "hour", "trades", "unfilled", "gross_bps", "net_bps", "pnl", "cum_pnl", "equity",
+                              "first_decision_late_s"])
+        fs = fsum(tr.rename(columns={"symbol": "sym"})[["rule", "sym", "day", "gross_bps"]]).set_index("rule")
+        btx = bt.set_index("rule") if len(bt) else pd.DataFrame()
+        for rule, desc in RULES_FWD.items():
+            x = tr[tr.rule == rule]
+            b = btx.loc[rule] if rule in btx.index else None
+            r = fs.loc[rule] if rule in fs.index else None
+            rule_rows.append({"rule": rule, "description": desc, "fwd_trades": int(len(x)),
+                              "fwd_days": int(r.days) if r is not None else 0,
+                              "fwd_gross_bps": round(float(x.gross_bps.mean()), 2) if len(x) else None,
+                              "fwd_net_bps": round(float(x.net_bps.mean()), 2) if len(x) else None,
+                              "fwd_t_net": round(float(r.t_net), 2) if r is not None and pd.notna(r.t_net) else None,
+                              "fwd_hit_rate": round(float((x.net_bps > 0).mean()), 4) if len(x) else None,
+                              "fwd_shortfall_bps": round(float(x.shortfall_bps.astype(float).mean()), 2) if len(x) and x.shortfall_bps.notna().any() else None,
+                              "fwd_pnl": round(float(x.pnl.sum()), 2) if len(x) else 0.0,
+                              "fwd_verdict": r.verdict if r is not None else "TOO EARLY",
+                              "bt_trades": int(b.trades) if b is not None else None,
+                              "bt_gross_bps": round(float(b.gross_bps), 2) if b is not None else None,
+                              "bt_net_bps": round(float(b.net_bps), 2) if b is not None else None,
+                              "bt_t_gross": round(float(b.t_gross), 2) if b is not None and pd.notna(b.t_gross) else None,
+                              "bt_verdict": b.verdict if b is not None else None})
+        t2 = tr.sort_values(["session"], kind="stable").reset_index(drop=True)
+        t2.insert(0, "n", range(1, len(t2) + 1))
+        t2 = t2.iloc[::-1].head(ITRADE_ROWS)
+        trade_rows = _rows(t2, ["n", "session", "rule", "symbol", "side", "entry_time", "entry_px", "exit_px", "gross_bps",
+                                "net_bps", "shortfall_bps", "pnl", "source"])
+    files = {"isessions": sess_rows, "irules": rule_rows, "itrades": trade_rows}
     for name, rows in files.items():
         (out / f"{name}.json").write_text(json.dumps(rows, allow_nan=False, default=str))
     print("intraday dashboard export: " + ", ".join(f"{k} {len(v)}" for k, v in files.items()) + f" -> {out}")

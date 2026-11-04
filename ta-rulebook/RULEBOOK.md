@@ -352,11 +352,14 @@ The first verdicts (2026-10-30) were 23 BULLISH, 42 NO_SIGNAL and 33 BEARISH. Th
 | Mean per trade | +2.3 bps gross, **−2.7 bps net**; P&L −$268 on 1,007 trades of $1,000 each |
 | Windows positive / negative | 2 / 6; t of window means −1.3 |
 | Live vs backtest | Every rule except R6 within noise of its backtest. R6 (periodicity) +5.7 bps gross live vs +0.8 in the backtest: one day of correlated, balanced long/short trades; **not** evidence of an edge (needs ≥ 40 days forward before it is reconsidered). |
+| Live vs nightly replay | Direction identical on every matched trade; exact trade lists match 93–100% for price-only rules but only 49% (VWAP) and 34% (opening range) for the two volume-based rules, because the newest bar's volume is still provisional 20 s after it closes. Mean gross per trade agrees (+2.7 replay vs +2.3 live). |
 | Decision → fill delay | 40 s mean (max 160 s) with free 1-minute data; decisions ran 20 s after each bar, as designed |
 | Cost of acting a minute late | +0.3 bps mean (median 0) vs the backtest's price, but ±5.4 bps per trade: noise of the same size as the hoped-for edge |
 | Operations | 2 of 10 scheduled windows missed (Nov 3 09:35, 10:35: worker restart); 1 of 1,008 orders unfilled; no stale-data events |
 
 **What the live day adds.** It does not confirm or overturn the backtest; one day is ≈ 8 independent observations. It shows that execution is not the problem: free data arrive on time and the delay costs ≈ 0 on average. The problem is the edge itself: at 10–20 minute horizons the rules' gross returns are smaller than a 5 bps round trip, which matches the daily-bar finding that TA describes risk, not return.
 
-**Reopen only if** a rule shows net t ≥ 2.6 over ≥ 40 forward days, or costs fall below ≈ 1 bp per side *and* a rule's gross edge exceeds them in both halves of a new sample.
+**Forward program (2026-11-04 → 2026-12-04).** Fixed in `PLAN_30D.md` before any data: the 10 rules (plus R2L, the long side of R2) are replayed every evening on that day's 5-minute bars. Fewer than 20 days is TOO EARLY; PASS needs 40 days and net t ≥ 3 with both halves positive. Results: `intraday/FORWARD_REPORT.md`. This section changes only if a rule passes.
+
+**Reopen only if** a rule shows net t ≥ 3 over ≥ 40 forward days, or costs fall below ≈ 1 bp per side *and* a rule's gross edge exceeds them in both halves of a new sample.
 

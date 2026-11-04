@@ -137,7 +137,7 @@ def bar_signals(sym, t, b, sb, pb):
     return sig
 
 
-def events(F, spyF):
+def events(F, spyF, min_day=None):
     """Build all pre-registered events. Returns DataFrame(rule, sym, day, hour, side, ret_gross_bps)."""
     rows = []
     spy_o = spyF.set_index(["day", "tod"])
@@ -147,6 +147,8 @@ def events(F, spyF):
         o = fi.o
         days = fi.index.get_level_values(0).unique()
         for d in days:
+            if min_day is not None and d < min_day:
+                continue
             for h in HOURS:
                 exit_key = (d, h * 60 + 55)
                 if exit_key not in o.index:
@@ -171,10 +173,10 @@ def events(F, spyF):
                     if sym == "SPY" and m == 35:
                         rows.append(("C0_spy_long", sym, d, h, m, 1, (px_exit / px - 1) * 1e4))
     ev = pd.DataFrame(rows, columns=["rule", "sym", "day", "hour", "minute", "side", "gross_bps"])
-    return pd.concat([ev, cross_sectional(F, spyF), mkt_momentum(F)], ignore_index=True)
+    return pd.concat([ev, cross_sectional(F, spyF, min_day), mkt_momentum(F, min_day)], ignore_index=True)
 
 
-def cross_sectional(F, spyF):
+def cross_sectional(F, spyF, min_day=None):
     """R5 and R6 at xx:35 across the universe."""
     stocks = {s: f.set_index(["day", "tod"]) for s, f in F.items() if s not in ("SPY", "QQQ")}
     spy = spyF.set_index(["day", "tod"])
@@ -189,6 +191,8 @@ def cross_sectional(F, spyF):
     rows = []
     days = spy.index.get_level_values(0).unique()
     for d in days:
+        if min_day is not None and d < min_day:
+            continue
         for h in HOURS:
             t = h * 60 + 35
             if (d, t - 5) not in spy.index:
@@ -220,13 +224,15 @@ def cross_sectional(F, spyF):
     return pd.DataFrame(rows, columns=["rule", "sym", "day", "hour", "minute", "side", "gross_bps"])
 
 
-def mkt_momentum(F):
+def mkt_momentum(F, min_day=None):
     rows = []
     for s in ("SPY", "QQQ"):
         if s not in F:
             continue
         fi = F[s].set_index(["day", "tod"])
         for d in fi.index.get_level_values(0).unique():
+            if min_day is not None and d < min_day:
+                continue
             k10, a, b = (d, 595), (d, 15 * 60 + 35), (d, 15 * 60 + 55)
             if not all(k in fi.index for k in (k10, a, b)):
                 continue
