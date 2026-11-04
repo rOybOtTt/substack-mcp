@@ -86,3 +86,10 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-04 12:24:43,midday,NYSE:PSX,FILL_SELL,STOP,20 @ 258.04
 2026-11-04 12:24:43,midday,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
 2026-11-04 15:24:44,preclose,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
+2026-11-04 18:24:54,close,NYSE:ABBV,QUEUE_BUY,D3,"17 sh, stop 277.38 (2.5xATR)"
+2026-11-04 18:24:54,close,NASDAQ:AAPL,SKIP_ENTRY,cash,no budget left
+2026-11-04 18:24:54,close,NYSE:PFE,SKIP_ENTRY,max_positions,no free slot
+2026-11-04 18:24:54,close,NYSE:CVX,SKIP_ENTRY,max_positions,no free slot
+2026-11-04 18:24:54,close,NYSE:XOM,SKIP_ENTRY,max_positions,no free slot
+2026-11-04 18:24:54,close,NYSE:MO,SKIP_ENTRY,max_positions,no free slot
+2026-11-04 18:24:54,close,NASDAQ:AMZN,SKIP_ENTRY,max_positions,no free slot

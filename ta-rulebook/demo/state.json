@@ -120,7 +120,20 @@
    "trimmed": false
   }
  },
- "pending": [],
+ "pending": [
+  {
+   "symbol": "NYSE:ABBV",
+   "ticker": "ABBV",
+   "side": "BUY",
+   "shares": 17,
+   "created": "2026-11-04",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +40.7",
+   "stop": 277.38411125426705,
+   "atr": 6.978350127199439,
+   "ref_close": 294.8299865722656
+  }
+ ],
  "spy_base": {
   "date": "2026-11-02",
   "open": 759.4500122070312
@@ -130,7 +143,7 @@
   "2026-11-06"
  ],
  "rulebook_version": "2.2",
- "last_close_run": "2026-11-03",
+ "last_close_run": "2026-11-04",
  "broker": "simulated",
  "fills_started": true
 }

@@ -4,13 +4,14 @@ Mechanical rules (see `platform/tagym/demo.py`). Decisions are made on completed
 **One week is far too short to judge the method.** These numbers test the process (execution, discipline, data), not the edge.
 Book of record: **internal simulation**.
 
-**Equity 99,428** (-0.57%) vs SPY benchmark 99,328 (-0.67%). Cash 24, 14 positions, 0 orders queued for the next open.
+**Equity 102,004** (+2.00%) vs SPY benchmark 100,969 (+0.97%). Cash 5,180, 13 positions, 1 orders queued for the next open.
 
 | Date | Equity | SPY benchmark | Cash | Positions |
 |---|---|---|---|---|
 | 2026-10-30 | 100,000 | 100,000 | 100,000 | 0 |
 | 2026-11-02 | 99,964 | 99,032 | 24 | 14 |
 | 2026-11-03 | 99,428 | 99,328 | 24 | 14 |
+| 2026-11-04 | 102,004 | 100,969 | 5,180 | 13 |
 
 ## Open positions
 
@@ -34,6 +35,7 @@ Book of record: **internal simulation**.
 
 | Symbol | Side | Shares | Rule | Reason |
 |---|---|---|---|---|
+| NYSE:ABBV | BUY | 17 | D3 | BULLISH, RS6 +40.7 |
 
 ## Fills
 
@@ -61,20 +63,13 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 
 | Run | Reads | Disagreed | Rate |
 |---|---|---|---|
-| midday | 196 | 7 | 3.6% |
-| preclose | 196 | 7 | 3.6% |
+| midday | 294 | 16 | 5.4% |
+| preclose | 294 | 13 | 4.4% |
 
 ## Decision log (latest 40)
 
 | Time (NY) | Run | Symbol | Action | Rule | Detail |
 |---|---|---|---|---|---|
-| 2026-11-02 18:25 | close | NYSE:MO | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-02 18:25 | close | NYSE:AMT | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-02 18:25 | close | NYSE:OXY | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 12:26 | midday | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
-| 2026-11-03 15:26 | preclose | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
-| 2026-11-03 18:24 | close | NASDAQ:MRNA | SKIP_ENTRY | cash | no budget left |
-| 2026-11-03 18:24 | close | NASDAQ:AMGN | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-03 18:24 | close | NYSE:ABBV | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-03 18:24 | close | NYSE:MA | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-03 18:24 | close | NYSE:PM | SKIP_ENTRY | max_positions | no free slot |
@@ -108,3 +103,10 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 | 2026-11-04 12:24 | midday | NYSE:PSX | FILL_SELL | STOP | 20 @ 258.04 |
 | 2026-11-04 12:24 | midday | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
 | 2026-11-04 15:24 | preclose | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
+| 2026-11-04 18:24 | close | NYSE:ABBV | QUEUE_BUY | D3 | 17 sh, stop 277.38 (2.5xATR) |
+| 2026-11-04 18:24 | close | NASDAQ:AAPL | SKIP_ENTRY | cash | no budget left |
+| 2026-11-04 18:24 | close | NYSE:PFE | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-04 18:24 | close | NYSE:CVX | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-04 18:24 | close | NYSE:XOM | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-04 18:24 | close | NYSE:MO | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-04 18:24 | close | NASDAQ:AMZN | SKIP_ENTRY | max_positions | no free slot |
