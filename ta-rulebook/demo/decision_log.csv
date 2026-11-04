@@ -82,3 +82,6 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-04 08:24:35,preopen,NYSE:WELL,HOLD_CHECK,§8.1,stop 219.13
 2026-11-04 08:24:35,preopen,NASDAQ:MDLZ,HOLD_CHECK,§8.1,stop 61.46
 2026-11-04 08:24:35,preopen,-,SUMMARY,-,"0 orders queued for the open, 14 positions"
+2026-11-04 12:24:43,midday,NYSE:PSX,STOP_FILLED,§8.1 stop,20 @ 258.04
+2026-11-04 12:24:43,midday,NYSE:PSX,FILL_SELL,STOP,20 @ 258.04
+2026-11-04 12:24:43,midday,-,FLIP_LOG,-,recorded 98 unfinished-bar reads

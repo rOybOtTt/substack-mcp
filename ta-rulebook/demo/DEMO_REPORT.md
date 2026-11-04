@@ -24,7 +24,6 @@ Book of record: **internal simulation**.
 | NYSE:MRK | 43 | 2026-11-02 | 148.82 | 138.02 | False |
 | NYSE:NUE | 24 | 2026-11-02 | 277.15 | 253.05 | False |
 | NYSE:PG | 49 | 2026-11-02 | 162.24 | 154.02 | False |
-| NYSE:PSX | 20 | 2026-11-02 | 280.33 | 258.04 | False |
 | NYSE:TGT | 48 | 2026-11-02 | 155.13 | 144.02 | False |
 | NYSE:TMO | 10 | 2026-11-02 | 699.86 | 647.79 | False |
 | NYSE:UNH | 18 | 2026-11-02 | 406.00 | 379.57 | False |
@@ -54,6 +53,7 @@ Book of record: **internal simulation**.
 | 2026-11-02 | NYSE:JPM | BUY | 23 | 340.94 | D3 | +1.16% |  |
 | 2026-11-02 | NYSE:WELL | BUY | 32 | 234.66 | D3 | +0.03% |  |
 | 2026-11-02 | NASDAQ:MDLZ | BUY | 69 | 65.30 | D3 | +0.55% |  |
+| 2026-11-04 | NYSE:PSX | SELL | 20 | 258.04 | STOP |  |  |
 
 Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtests charged 0.10% per side and did not assume a favourable gap).
 
@@ -68,9 +68,6 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 
 | Time (NY) | Run | Symbol | Action | Rule | Detail |
 |---|---|---|---|---|---|
-| 2026-11-02 18:25 | close | NYSE:CVX | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-02 18:25 | close | NYSE:PFE | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-02 18:25 | close | NYSE:COP | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-02 18:25 | close | NYSE:XOM | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-02 18:25 | close | NYSE:MO | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-02 18:25 | close | NYSE:AMT | SKIP_ENTRY | max_positions | no free slot |
@@ -108,3 +105,6 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 | 2026-11-04 08:24 | preopen | NYSE:WELL | HOLD_CHECK | §8.1 | stop 219.13 |
 | 2026-11-04 08:24 | preopen | NASDAQ:MDLZ | HOLD_CHECK | §8.1 | stop 61.46 |
 | 2026-11-04 08:24 | preopen | - | SUMMARY | - | 0 orders queued for the open, 14 positions |
+| 2026-11-04 12:24 | midday | NYSE:PSX | STOP_FILLED | §8.1 stop | 20 @ 258.04 |
+| 2026-11-04 12:24 | midday | NYSE:PSX | FILL_SELL | STOP | 20 @ 258.04 |
+| 2026-11-04 12:24 | midday | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |

@@ -1,16 +1,7 @@
 {
  "initial_capital": 100000.0,
- "cash": 23.988671936054743,
+ "cash": 5179.607726820581,
  "positions": {
-  "NYSE:PSX": {
-   "ticker": "PSX",
-   "shares": 20,
-   "entry_date": "2026-11-02",
-   "entry_price": 280.3299865722656,
-   "stop": 258.03899173596227,
-   "atr_at_entry": 9.916397934521349,
-   "trimmed": false
-  },
   "NYSE:TMO": {
    "ticker": "TMO",
    "shares": 10,
