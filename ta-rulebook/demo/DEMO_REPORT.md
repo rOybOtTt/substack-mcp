@@ -68,7 +68,6 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 
 | Time (NY) | Run | Symbol | Action | Rule | Detail |
 |---|---|---|---|---|---|
-| 2026-11-02 18:25 | close | NYSE:XOM | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-02 18:25 | close | NYSE:MO | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-02 18:25 | close | NYSE:AMT | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-02 18:25 | close | NYSE:OXY | SKIP_ENTRY | max_positions | no free slot |
@@ -108,3 +107,4 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 | 2026-11-04 12:24 | midday | NYSE:PSX | STOP_FILLED | §8.1 stop | 20 @ 258.04 |
 | 2026-11-04 12:24 | midday | NYSE:PSX | FILL_SELL | STOP | 20 @ 258.04 |
 | 2026-11-04 12:24 | midday | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |
+| 2026-11-04 15:24 | preclose | - | FLIP_LOG | - | recorded 98 unfinished-bar reads |

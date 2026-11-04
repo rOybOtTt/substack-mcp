@@ -85,3 +85,4 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-04 12:24:43,midday,NYSE:PSX,STOP_FILLED,§8.1 stop,20 @ 258.04
 2026-11-04 12:24:43,midday,NYSE:PSX,FILL_SELL,STOP,20 @ 258.04
 2026-11-04 12:24:43,midday,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
+2026-11-04 15:24:44,preclose,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
