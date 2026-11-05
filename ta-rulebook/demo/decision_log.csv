@@ -111,3 +111,35 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-05 12:25:24,midday,NYSE:ABBV,FILL_BUY,D3,17 @ 298.73
 2026-11-05 12:25:24,midday,NYSE:NUE,FILL_SELL,STOP,24 @ 253.05
 2026-11-05 12:25:24,midday,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
+2026-11-05 18:24:32,close,NASDAQ:MRNA,QUEUE_BUY,D3,"9 sh, stop 191.02 (2.5xATR)"
+2026-11-05 18:24:32,close,NASDAQ:AMGN,QUEUE_BUY,D3,"8 sh, stop 428.87 (2.5xATR)"
+2026-11-05 18:24:32,close,NYSE:LLY,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:24:32,close,NYSE:MA,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:24:32,close,NASDAQ:AAPL,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:24:32,close,NYSE:ECL,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:24:32,close,NYSE:CVX,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:24:32,close,NYSE:PM,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:24:32,close,NYSE:PFE,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:24:32,close,NYSE:MO,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:24:32,close,NYSE:VZ,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:24:32,close,NASDAQ:AMZN,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:08,close,NYSE:LLY,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:08,close,NYSE:MA,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:08,close,NASDAQ:AAPL,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:08,close,NYSE:ECL,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:08,close,NYSE:CVX,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:08,close,NYSE:PM,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:08,close,NYSE:PFE,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:08,close,NYSE:MO,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:08,close,NYSE:VZ,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:08,close,NASDAQ:AMZN,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:17,close,NYSE:LLY,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:17,close,NYSE:MA,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:17,close,NASDAQ:AAPL,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:17,close,NYSE:ECL,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:17,close,NYSE:CVX,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:17,close,NYSE:PM,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:17,close,NYSE:PFE,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:17,close,NYSE:MO,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:17,close,NYSE:VZ,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 18:25:17,close,NASDAQ:AMZN,SKIP_ENTRY,max_positions,no free slot

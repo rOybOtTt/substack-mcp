@@ -120,7 +120,32 @@
    "trimmed": false
   }
  },
- "pending": [],
+ "pending": [
+  {
+   "symbol": "NASDAQ:MRNA",
+   "ticker": "MRNA",
+   "side": "BUY",
+   "shares": 9,
+   "created": "2026-11-05",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +396.7",
+   "stop": 191.01888090744936,
+   "atr": 20.176450322567135,
+   "ref_close": 241.4600067138672
+  },
+  {
+   "symbol": "NASDAQ:AMGN",
+   "ticker": "AMGN",
+   "side": "BUY",
+   "shares": 8,
+   "created": "2026-11-05",
+   "rule": "D3",
+   "reason": "BULLISH, RS6 +41.0",
+   "stop": 428.8684875332174,
+   "atr": 12.564604498431798,
+   "ref_close": 460.2799987792969
+  }
+ ],
  "spy_base": {
   "date": "2026-11-02",
   "open": 759.4500122070312
@@ -130,7 +155,7 @@
   "2026-11-06"
  ],
  "rulebook_version": "2.2",
- "last_close_run": "2026-11-04",
+ "last_close_run": "2026-11-05",
  "broker": "simulated",
  "fills_started": true
 }
