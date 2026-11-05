@@ -70,20 +70,6 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 
 | Time (NY) | Run | Symbol | Action | Rule | Detail |
 |---|---|---|---|---|---|
-| 2026-11-03 18:24 | close | NYSE:ABBV | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:MA | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:PM | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:CVX | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:ECL | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:COP | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:PFE | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NASDAQ:AAPL | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:XOM | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:MO | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:AMT | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:OXY | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NYSE:WMB | SKIP_ENTRY | max_positions | no free slot |
-| 2026-11-03 18:24 | close | NASDAQ:EQIX | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-04 08:24 | preopen | NYSE:PSX | HOLD_CHECK | §8.1 | stop 258.04 |
 | 2026-11-04 08:24 | preopen | NYSE:TMO | HOLD_CHECK | §8.1 | stop 647.79 |
 | 2026-11-04 08:24 | preopen | NYSE:MRK | HOLD_CHECK | §8.1 | stop 138.02 |
@@ -110,3 +96,17 @@ Execution: 14 market-on-open fills, mean |gap| vs prior close 0.52% (the backtes
 | 2026-11-04 18:24 | close | NYSE:XOM | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-04 18:24 | close | NYSE:MO | SKIP_ENTRY | max_positions | no free slot |
 | 2026-11-04 18:24 | close | NASDAQ:AMZN | SKIP_ENTRY | max_positions | no free slot |
+| 2026-11-05 08:26 | preopen | NYSE:TMO | HOLD_CHECK | §8.1 | stop 647.79 |
+| 2026-11-05 08:26 | preopen | NYSE:MRK | HOLD_CHECK | §8.1 | stop 138.02 |
+| 2026-11-05 08:26 | preopen | NYSE:V | HOLD_CHECK | §8.1 | stop 395.53 |
+| 2026-11-05 08:26 | preopen | NASDAQ:MSFT | HOLD_CHECK | §8.1 | stop 492.21 |
+| 2026-11-05 08:26 | preopen | NYSE:TGT | HOLD_CHECK | §8.1 | stop 144.02 |
+| 2026-11-05 08:26 | preopen | NYSE:NUE | HOLD_CHECK | §8.1 | stop 253.05 |
+| 2026-11-05 08:26 | preopen | NYSE:JNJ | HOLD_CHECK | §8.1 | stop 256.43 |
+| 2026-11-05 08:26 | preopen | NYSE:KO | HOLD_CHECK | §8.1 | stop 90.02 |
+| 2026-11-05 08:26 | preopen | NYSE:UNH | HOLD_CHECK | §8.1 | stop 379.57 |
+| 2026-11-05 08:26 | preopen | NYSE:PG | HOLD_CHECK | §8.1 | stop 154.02 |
+| 2026-11-05 08:26 | preopen | NYSE:JPM | HOLD_CHECK | §8.1 | stop 321.20 |
+| 2026-11-05 08:26 | preopen | NYSE:WELL | HOLD_CHECK | §8.1 | stop 219.13 |
+| 2026-11-05 08:26 | preopen | NASDAQ:MDLZ | HOLD_CHECK | §8.1 | stop 61.46 |
+| 2026-11-05 08:26 | preopen | - | SUMMARY | - | 1 orders queued for the open, 13 positions |

@@ -93,3 +93,17 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-04 18:24:54,close,NYSE:XOM,SKIP_ENTRY,max_positions,no free slot
 2026-11-04 18:24:54,close,NYSE:MO,SKIP_ENTRY,max_positions,no free slot
 2026-11-04 18:24:54,close,NASDAQ:AMZN,SKIP_ENTRY,max_positions,no free slot
+2026-11-05 08:26:06,preopen,NYSE:TMO,HOLD_CHECK,§8.1,stop 647.79
+2026-11-05 08:26:06,preopen,NYSE:MRK,HOLD_CHECK,§8.1,stop 138.02
+2026-11-05 08:26:06,preopen,NYSE:V,HOLD_CHECK,§8.1,stop 395.53
+2026-11-05 08:26:06,preopen,NASDAQ:MSFT,HOLD_CHECK,§8.1,stop 492.21
+2026-11-05 08:26:06,preopen,NYSE:TGT,HOLD_CHECK,§8.1,stop 144.02
+2026-11-05 08:26:06,preopen,NYSE:NUE,HOLD_CHECK,§8.1,stop 253.05
+2026-11-05 08:26:06,preopen,NYSE:JNJ,HOLD_CHECK,§8.1,stop 256.43
+2026-11-05 08:26:06,preopen,NYSE:KO,HOLD_CHECK,§8.1,stop 90.02
+2026-11-05 08:26:06,preopen,NYSE:UNH,HOLD_CHECK,§8.1,stop 379.57
+2026-11-05 08:26:06,preopen,NYSE:PG,HOLD_CHECK,§8.1,stop 154.02
+2026-11-05 08:26:06,preopen,NYSE:JPM,HOLD_CHECK,§8.1,stop 321.20
+2026-11-05 08:26:06,preopen,NYSE:WELL,HOLD_CHECK,§8.1,stop 219.13
+2026-11-05 08:26:06,preopen,NASDAQ:MDLZ,HOLD_CHECK,§8.1,stop 61.46
+2026-11-05 08:26:06,preopen,-,SUMMARY,-,"1 orders queued for the open, 13 positions"
