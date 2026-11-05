@@ -107,3 +107,7 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-05 08:26:06,preopen,NYSE:WELL,HOLD_CHECK,§8.1,stop 219.13
 2026-11-05 08:26:06,preopen,NASDAQ:MDLZ,HOLD_CHECK,§8.1,stop 61.46
 2026-11-05 08:26:06,preopen,-,SUMMARY,-,"1 orders queued for the open, 13 positions"
+2026-11-05 12:25:24,midday,NYSE:NUE,STOP_FILLED,§8.1 stop,24 @ 253.05
+2026-11-05 12:25:24,midday,NYSE:ABBV,FILL_BUY,D3,17 @ 298.73
+2026-11-05 12:25:24,midday,NYSE:NUE,FILL_SELL,STOP,24 @ 253.05
+2026-11-05 12:25:24,midday,-,FLIP_LOG,-,recorded 98 unfinished-bar reads

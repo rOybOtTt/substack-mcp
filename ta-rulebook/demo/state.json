@@ -1,6 +1,6 @@
 {
  "initial_capital": 100000.0,
- "cash": 5179.607726820581,
+ "cash": 6163.054244263957,
  "positions": {
   "NYSE:TMO": {
    "ticker": "TMO",
@@ -45,15 +45,6 @@
    "entry_price": 155.1300048828125,
    "stop": 144.01510958913576,
    "atr_at_entry": 4.1459581174707,
-   "trimmed": false
-  },
-  "NYSE:NUE": {
-   "ticker": "NUE",
-   "shares": 24,
-   "entry_date": "2026-11-02",
-   "entry_price": 277.1499938964844,
-   "stop": 253.04553566778927,
-   "atr_at_entry": 8.329783779759298,
    "trimmed": false
   },
   "NYSE:JNJ": {
@@ -118,22 +109,18 @@
    "stop": 61.46163854773099,
    "atr_at_entry": 1.3913455574701028,
    "trimmed": false
+  },
+  "NYSE:ABBV": {
+   "ticker": "ABBV",
+   "shares": 17,
+   "entry_date": "2026-11-05",
+   "entry_price": 298.7349853515625,
+   "stop": 277.38411125426705,
+   "atr_at_entry": 6.978350127199439,
+   "trimmed": false
   }
  },
- "pending": [
-  {
-   "symbol": "NYSE:ABBV",
-   "ticker": "ABBV",
-   "side": "BUY",
-   "shares": 17,
-   "created": "2026-11-04",
-   "rule": "D3",
-   "reason": "BULLISH, RS6 +40.7",
-   "stop": 277.38411125426705,
-   "atr": 6.978350127199439,
-   "ref_close": 294.8299865722656
-  }
- ],
+ "pending": [],
  "spy_base": {
   "date": "2026-11-02",
   "open": 759.4500122070312
