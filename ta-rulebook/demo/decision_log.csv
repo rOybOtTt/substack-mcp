@@ -147,3 +147,36 @@ time_ny,mode,symbol,action,rule,detail
 2026-11-06 12:24:21,midday,NASDAQ:AMGN,FILL_BUY,D3,8 @ 447.44
 2026-11-06 12:24:21,midday,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
 2026-11-06 12:24:39,midday,-,FLIP_LOG,-,recorded 98 unfinished-bar reads
+2026-11-06 18:25:51,close,NYSE:LLY,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:25:51,close,NYSE:MA,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:25:51,close,NYSE:CVX,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:25:51,close,NYSE:ECL,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:25:51,close,NASDAQ:AAPL,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:25:51,close,NYSE:PM,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:25:51,close,NYSE:PFE,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:25:51,close,NYSE:MO,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:25:51,close,NYSE:AMT,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:25:51,close,NASDAQ:EQIX,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:25:51,close,NASDAQ:AMZN,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NYSE:LLY,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NYSE:MA,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NYSE:CVX,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NYSE:ECL,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NASDAQ:AAPL,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NYSE:PM,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NYSE:PFE,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NYSE:MO,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NYSE:AMT,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NASDAQ:EQIX,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:18,close,NASDAQ:AMZN,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NYSE:LLY,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NYSE:MA,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NYSE:CVX,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NYSE:ECL,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NASDAQ:AAPL,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NYSE:PM,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NYSE:PFE,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NYSE:MO,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NYSE:AMT,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NASDAQ:EQIX,SKIP_ENTRY,max_positions,no free slot
+2026-11-06 18:26:24,close,NASDAQ:AMZN,SKIP_ENTRY,max_positions,no free slot
