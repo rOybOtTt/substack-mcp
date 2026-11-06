@@ -1,6 +1,6 @@
 {
  "initial_capital": 100000.0,
- "cash": 6163.054244263957,
+ "cash": 367.52446821720514,
  "positions": {
   "NYSE:TMO": {
    "ticker": "TMO",
@@ -118,34 +118,27 @@
    "stop": 277.38411125426705,
    "atr_at_entry": 6.978350127199439,
    "trimmed": false
+  },
+  "NASDAQ:MRNA": {
+   "ticker": "MRNA",
+   "shares": 9,
+   "entry_date": "2026-11-06",
+   "entry_price": 245.5800018310547,
+   "stop": 191.01888090744936,
+   "atr_at_entry": 20.176450322567135,
+   "trimmed": false
+  },
+  "NASDAQ:AMGN": {
+   "ticker": "AMGN",
+   "shares": 8,
+   "entry_date": "2026-11-06",
+   "entry_price": 447.44000244140625,
+   "stop": 428.8684875332174,
+   "atr_at_entry": 12.564604498431798,
+   "trimmed": false
   }
  },
- "pending": [
-  {
-   "symbol": "NASDAQ:MRNA",
-   "ticker": "MRNA",
-   "side": "BUY",
-   "shares": 9,
-   "created": "2026-11-05",
-   "rule": "D3",
-   "reason": "BULLISH, RS6 +396.7",
-   "stop": 191.01888090744936,
-   "atr": 20.176450322567135,
-   "ref_close": 241.4600067138672
-  },
-  {
-   "symbol": "NASDAQ:AMGN",
-   "ticker": "AMGN",
-   "side": "BUY",
-   "shares": 8,
-   "created": "2026-11-05",
-   "rule": "D3",
-   "reason": "BULLISH, RS6 +41.0",
-   "stop": 428.8684875332174,
-   "atr": 12.564604498431798,
-   "ref_close": 460.2799987792969
-  }
- ],
+ "pending": [],
  "spy_base": {
   "date": "2026-11-02",
   "open": 759.4500122070312
