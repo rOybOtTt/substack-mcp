@@ -129,3 +129,14 @@ def test_trim_cancels_resting_stop_before_selling(tmp_demo):
                          "rule": "§8.5", "reason": "earnings trim", "trim": True, "ref_close": 102.0})
     d.broker_submit(s, br, pd.Timestamp("2026-11-03 08:23", tz=NY), logs)  # would raise 403 if the stop still rested
     assert not any(x["action"] == "SUBMIT_FAILED" for x in logs)
+
+
+def test_append_never_shifts_columns(tmp_demo):
+    """A sale (has pnl) after buys (no pnl) must not corrupt the CSV (regression: demo trades.csv, Nov 4)."""
+    d.append(d.TRADES, [{"date": "2026-11-02", "symbol": "A", "side": "BUY", "shares": 1, "price": 10.0, "prev_close": 9.9, "gap_pct": 1.0}])
+    d.append(d.TRADES, [{"date": "2026-11-04", "symbol": "A", "side": "SELL", "shares": 1, "price": 9.0, "pnl": -1.0}])
+    d.append(d.TRADES, [{"date": "2026-11-05", "symbol": "B", "side": "BUY", "shares": 2, "price": 5.0, "prev_close": 5.1, "gap_pct": -2.0},
+                        {"date": "2026-11-05", "symbol": "B", "side": "SELL", "shares": 2, "price": 4.0, "pnl": -2.0}])
+    t = pd.read_csv(d.TRADES)
+    assert len(t) == 4 and list(t.symbol) == ["A", "A", "B", "B"]
+    assert t.pnl.dropna().tolist() == [-1.0, -2.0] and t.gap_pct.dropna().tolist() == [1.0, -2.0]

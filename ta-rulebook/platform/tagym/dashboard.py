@@ -75,7 +75,17 @@ def mark(s, prices, mode, when):
                            "pending_orders": int(e.pending_orders)} for e in eq.itertuples()])
     if len(m):
         m = m[~((m.date.astype(str) == row["date"]) & (m["mode"] == mode))]
-    m = pd.concat([m, pd.DataFrame([row])], ignore_index=True).sort_values("time_ny")
+    m = pd.concat([m, pd.DataFrame([row])], ignore_index=True)
+    eq = _read(d.EQUITY)  # official after-close equity of days whose run did not leave a mark (a failed export)
+    if len(eq):
+        have = set(m[m["mode"] == "close"].date.astype(str))
+        miss = [{"time_ny": f"{e.date} 16:00:00", "date": e.date, "mode": "close", "broker": s.get("broker", "simulated"),
+                 "equity": e.equity, "spy_benchmark": e.spy_benchmark, "cash": e.cash, "invested": round(e.equity - e.cash, 2),
+                 "positions": int(e.positions), "pending_orders": int(e.pending_orders)}
+                for e in eq.itertuples() if str(e.date) not in have]
+        if miss:
+            m = pd.concat([m, pd.DataFrame(miss)], ignore_index=True)
+    m = m.sort_values("time_ny")
     d.DEMO.mkdir(exist_ok=True)
     m.to_csv(MARKS, index=False)
     return m
@@ -215,10 +225,12 @@ def export_intraday():
             g["first_decision_late_s"] = None
         sess_rows = _rows(g, ["session", "date", "hour", "trades", "unfilled", "gross_bps", "net_bps", "pnl", "cum_pnl", "equity",
                               "first_decision_late_s"])
-        fs = fsum(tr.rename(columns={"symbol": "sym"})[["rule", "sym", "day", "gross_bps"]]).set_index("rule")
+        rp = tr[tr.source == "replay"]  # the pre-registered forward period (Nov 4 on); live Nov 2-3 are shown elsewhere
+        fs = fsum(rp.rename(columns={"symbol": "sym"})[["rule", "sym", "day", "gross_bps"]]).set_index("rule") if len(rp) else pd.DataFrame()
         btx = bt.set_index("rule") if len(bt) else pd.DataFrame()
         for rule, desc in RULES_FWD.items():
-            x = tr[tr.rule == rule]
+            x = tr[(tr.rule == rule) & (tr.source == "replay")]
+            xl = tr[(tr.rule == rule) & (tr.source == "live")]
             b = btx.loc[rule] if rule in btx.index else None
             r = fs.loc[rule] if rule in fs.index else None
             rule_rows.append({"rule": rule, "description": desc, "fwd_trades": int(len(x)),
@@ -227,7 +239,7 @@ def export_intraday():
                               "fwd_net_bps": round(float(x.net_bps.mean()), 2) if len(x) else None,
                               "fwd_t_net": round(float(r.t_net), 2) if r is not None and pd.notna(r.t_net) else None,
                               "fwd_hit_rate": round(float((x.net_bps > 0).mean()), 4) if len(x) else None,
-                              "fwd_shortfall_bps": round(float(x.shortfall_bps.astype(float).mean()), 2) if len(x) and x.shortfall_bps.notna().any() else None,
+                              "fwd_shortfall_bps": round(float(xl.shortfall_bps.astype(float).mean()), 2) if len(xl) and xl.shortfall_bps.notna().any() else None,
                               "fwd_pnl": round(float(x.pnl.sum()), 2) if len(x) else 0.0,
                               "fwd_verdict": r.verdict if r is not None else "TOO EARLY",
                               "bt_trades": int(b.trades) if b is not None else None,

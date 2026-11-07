@@ -63,11 +63,21 @@ def save_state(s):
 
 
 def append(path, rows):
+    """Append rows to a CSV. If the new rows bring columns the file's header lacks (a stop-loss sale has a P&L,
+    a first buy does not), the whole file is rewritten with the union of columns, so a row can never be shifted."""
     if not rows:
         return
     DEMO.mkdir(exist_ok=True)
     df = pd.DataFrame(rows)
-    df.to_csv(path, mode="a", header=not path.exists(), index=False)
+    if not path.exists() or path.stat().st_size == 0:
+        df.to_csv(path, index=False)
+        return
+    old = pd.read_csv(path)
+    cols = list(old.columns) + [c for c in df.columns if c not in old.columns]
+    if len(cols) == len(old.columns):
+        df.reindex(columns=cols).to_csv(path, mode="a", header=False, index=False)
+    else:
+        pd.concat([old, df], ignore_index=True).reindex(columns=cols).to_csv(path, index=False)
 
 
 def log(rows, mode, when, symbol, action, rule, detail):
