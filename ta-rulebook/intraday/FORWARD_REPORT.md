@@ -1,4 +1,4 @@
-# Intraday forward test (replay) - 6 trading days (2026-11-04 to 2026-11-11)
+# Intraday forward test (replay) - 7 trading days (2026-11-04 to 2026-11-12)
 
 Rules frozen at RULEBOOK v2.3 plus the forward-only hypothesis R2L. $1,000 per trade, 2.5 bps per side, windows xx:35-xx:55
 (hours 9-15). Verdict bars (PLAN_30D.md): CANDIDATE = >= 20 days, gross t >= 2 and net mean > 0; PASS = >= 40 days, net t >= 3
@@ -6,17 +6,17 @@ and both halves positive. Fewer than 20 days is TOO EARLY, whatever the numbers 
 
 | Rule | Days | Trades | Gross bps | Net bps | t gross | t net | Hit rate | P&L | 60-day backtest net | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|
-| R1_vwap_trend | 6 | 1,861 | +10.57 | +5.57 | +3.31 | +1.65 | 48% | +1,037 | -4.99 | TOO EARLY |
-| R3_orb | 6 | 151 | +17.43 | +12.43 | +1.60 | +1.03 | 54% | +188 | -6.02 | TOO EARLY |
-| R7_lead_lag | 5 | 468 | +4.80 | -0.20 | +0.86 | -0.62 | 45% | -9 | +18.31 | TOO EARLY |
-| R9_ema_cross | 6 | 446 | +1.92 | -3.08 | +0.59 | -0.55 | 46% | -137 | -3.90 | TOO EARLY |
-| R5_xs_momentum | 6 | 420 | +1.66 | -3.34 | +0.27 | -0.54 | 44% | -140 | -3.82 | TOO EARLY |
-| R6_periodicity | 6 | 1,596 | +0.46 | -4.54 | +0.09 | -0.93 | 47% | -725 | -4.21 | TOO EARLY |
-| C0_spy_long | 6 | 42 | -1.46 | -6.46 | -0.23 | -1.01 | 38% | -27 | -5.10 | TOO EARLY |
-| R2L_reversal_long | 6 | 101 | -3.50 | -8.50 | -0.45 | -0.67 | 42% | -86 | n/a | TOO EARLY |
-| R8_rsi | 6 | 603 | -16.99 | -21.99 | -0.49 | -0.76 | 43% | -1,326 | -5.20 | TOO EARLY |
-| R2_reversal | 6 | 231 | -5.55 | -10.55 | -0.72 | -1.15 | 38% | -244 | -4.43 | TOO EARLY |
-| R4_mkt_momentum | 6 | 12 | -16.42 | -21.42 | -2.45 | -3.19 | 17% | -26 | -6.10 | TOO EARLY |
+| R1_vwap_trend | 7 | 2,206 | +9.27 | +4.27 | +3.19 | +1.39 | 48% | +941 | -4.99 | TOO EARLY |
+| R3_orb | 7 | 166 | +16.77 | +11.77 | +1.81 | +1.13 | 54% | +195 | -6.02 | TOO EARLY |
+| R7_lead_lag | 6 | 527 | +4.19 | -0.81 | +0.82 | -0.95 | 44% | -43 | +18.31 | TOO EARLY |
+| R5_xs_momentum | 7 | 490 | +3.78 | -1.22 | +0.67 | -0.21 | 46% | -60 | -3.82 | TOO EARLY |
+| R9_ema_cross | 7 | 511 | +1.71 | -3.29 | +0.60 | -0.74 | 44% | -168 | -3.90 | TOO EARLY |
+| C0_spy_long | 7 | 49 | -0.56 | -5.56 | -0.10 | -1.02 | 37% | -27 | -5.10 | TOO EARLY |
+| R8_rsi | 7 | 692 | -10.71 | -15.71 | -0.19 | -0.49 | 45% | -1,087 | -5.20 | TOO EARLY |
+| R6_periodicity | 7 | 1,862 | -0.87 | -5.87 | -0.20 | -1.36 | 46% | -1,093 | -4.21 | TOO EARLY |
+| R2L_reversal_long | 7 | 102 | -3.52 | -8.52 | -0.50 | -0.76 | 41% | -87 | n/a | TOO EARLY |
+| R2_reversal | 7 | 239 | -5.22 | -10.22 | -0.66 | -1.16 | 38% | -244 | -4.43 | TOO EARLY |
+| R4_mkt_momentum | 7 | 14 | -15.35 | -20.35 | -2.66 | -3.53 | 14% | -28 | -6.10 | TOO EARLY |
 
 ## By day
 
@@ -28,6 +28,7 @@ and both halves positive. Fewer than 20 days is TOO EARLY, whatever the numbers 
 | 2026-11-09 | 1000 | -8.80 | -880 |
 | 2026-11-10 | 790 | +0.88 | +70 |
 | 2026-11-11 | 843 | -4.08 | -344 |
+| 2026-11-12 | 927 | -2.21 | -205 |
 
 ## Rules
 
