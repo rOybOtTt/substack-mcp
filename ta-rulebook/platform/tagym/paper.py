@@ -29,6 +29,7 @@ PAPER = ROOT / "paper"
 JOURNAL = PAPER / "journal.csv"
 SCORE = PAPER / "SCOREBOARD.md"
 XCHECK = PAPER / "integrity_log.csv"
+MIN_CAL_DATES = 20  # distinct call dates before a calibration verdict counts as more than provisional
 
 
 def watchlist():
@@ -129,22 +130,26 @@ def score():
              f"Journal: {len(j)} verdicts, {j.as_of.nunique()} trading days ({j.as_of.min()} → {j.as_of.max()}), "
              f"{j.symbol.nunique()} symbols. Updated {pd.Timestamp.now(tz='UTC'):%Y-%m-%d %H:%M} UTC.", "",
              "Each call is graded once its window has passed (entry = next open). 'Expected' is the rulebook's",
-             "stated probability; 'calibrated?' tests realized vs expected at 95% (binomial).", ""]
+             "stated probability; 'calibrated?' tests realized vs expected at 95% (binomial). The test treats calls as",
+             f"independent, but calls from one date share one market path: a verdict rests on {MIN_CAL_DATES}+ distinct call",
+             "dates, and fewer than that is shown as 'provisional'.", ""]
     for h, col, thr, pcol, lab in [(60, "mdd60", -0.20, "p_dd20_60d_est", "≥20% drawdown within 60 days"),
                                    (10, "mdd10", -0.10, "p_drop10_10d_est", "≥10% drop within 10 days")]:
         m = s[s.get(col).notna()] if col in s else s.iloc[0:0]
-        lines += [f"## {lab}", "", "| Class | matured calls | realized | expected | calibrated? | mean excess vs SPY |",
-                  "|---|---|---|---|---|---|"]
+        lines += [f"## {lab}", "", "| Class | matured calls | call dates | realized | expected | calibrated? | mean excess vs SPY |",
+                  "|---|---|---|---|---|---|---|"]
         for c in ["BULLISH", "NO_SIGNAL", "BEARISH"]:
             g = m[m.signal == c]
             n = len(g)
             if n == 0:
-                lines.append(f"| {c} | 0 | – | – | – | – |")
+                lines.append(f"| {c} | 0 | 0 | – | – | – | – |")
                 continue
             k = int((g[col] <= thr).sum())
             p = float(g[pcol].mean())
             ok = _binom_ok(k, n, p)
-            lines.append(f"| {c} | {n} | {k/n:.1%} | {p:.1%} | {'yes' if ok else 'NO'} | {g[f'exc{h}'].mean():+.2%} |")
+            nd = int(g.as_of.nunique())
+            verdict = ("yes" if ok else "NO") + ("" if nd >= MIN_CAL_DATES else f" (provisional, {nd} date{'s' if nd != 1 else ''})")
+            lines.append(f"| {c} | {n} | {nd} | {k/n:.1%} | {p:.1%} | {verdict} | {g[f'exc{h}'].mean():+.2%} |")
         lines.append("")
     s20 = s[s.get("exc20").notna()] if "exc20" in s else s.iloc[0:0]
     if len(s20):

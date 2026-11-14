@@ -1,25 +1,27 @@
 # Paper-trading scoreboard (rulebook v2.3)
 
-Journal: 1078 verdicts, 11 trading days (2026-10-30 → 2026-11-13), 98 symbols. Updated 2026-11-13 23:25 UTC.
+Journal: 1078 verdicts, 11 trading days (2026-10-30 → 2026-11-13), 98 symbols. Updated 2026-11-14 00:09 UTC.
 
 Each call is graded once its window has passed (entry = next open). 'Expected' is the rulebook's
-stated probability; 'calibrated?' tests realized vs expected at 95% (binomial).
+stated probability; 'calibrated?' tests realized vs expected at 95% (binomial). The test treats calls as
+independent, but calls from one date share one market path: a verdict rests on 20+ distinct call
+dates, and fewer than that is shown as 'provisional'.
 
 ## ≥20% drawdown within 60 days
 
-| Class | matured calls | realized | expected | calibrated? | mean excess vs SPY |
-|---|---|---|---|---|---|
-| BULLISH | 0 | – | – | – | – |
-| NO_SIGNAL | 0 | – | – | – | – |
-| BEARISH | 0 | – | – | – | – |
+| Class | matured calls | call dates | realized | expected | calibrated? | mean excess vs SPY |
+|---|---|---|---|---|---|---|
+| BULLISH | 0 | 0 | – | – | – | – |
+| NO_SIGNAL | 0 | 0 | – | – | – | – |
+| BEARISH | 0 | 0 | – | – | – | – |
 
 ## ≥10% drop within 10 days
 
-| Class | matured calls | realized | expected | calibrated? | mean excess vs SPY |
-|---|---|---|---|---|---|
-| BULLISH | 23 | 21.7% | 5.6% | NO | +1.30% |
-| NO_SIGNAL | 42 | 21.4% | 8.4% | NO | +0.39% |
-| BEARISH | 33 | 24.2% | 13.7% | yes | +1.83% |
+| Class | matured calls | call dates | realized | expected | calibrated? | mean excess vs SPY |
+|---|---|---|---|---|---|---|
+| BULLISH | 23 | 1 | 21.7% | 5.6% | NO (provisional, 1 date) | +1.30% |
+| NO_SIGNAL | 42 | 1 | 21.4% | 8.4% | NO (provisional, 1 date) | +0.39% |
+| BEARISH | 33 | 1 | 24.2% | 13.7% | yes (provisional, 1 date) | +1.83% |
 
 ## Latest verdicts (2026-11-13)
 
