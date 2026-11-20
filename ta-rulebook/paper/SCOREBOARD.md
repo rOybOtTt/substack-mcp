@@ -1,6 +1,6 @@
 # Paper-trading scoreboard (rulebook v2.3)
 
-Journal: 1469 verdicts, 15 trading days (2026-10-30 → 2026-11-19), 98 symbols. Updated 2026-11-19 23:24 UTC.
+Journal: 1567 verdicts, 16 trading days (2026-10-30 → 2026-11-20), 98 symbols. Updated 2026-11-20 23:24 UTC.
 
 Each call is graded once its window has passed (entry = next open). 'Expected' is the rulebook's
 stated probability; 'calibrated?' tests realized vs expected at 95% (binomial). The test treats calls as
@@ -19,11 +19,11 @@ dates, and fewer than that is shown as 'provisional'.
 
 | Class | matured calls | call dates | realized | expected | calibrated? | mean excess vs SPY |
 |---|---|---|---|---|---|---|
-| BULLISH | 113 | 5 | 11.5% | 4.3% | NO (provisional, 5 dates) | +1.12% |
-| NO_SIGNAL | 219 | 5 | 16.0% | 7.4% | NO (provisional, 5 dates) | +0.73% |
-| BEARISH | 153 | 5 | 24.2% | 12.8% | NO (provisional, 5 dates) | +1.34% |
+| BULLISH | 139 | 6 | 12.2% | 4.2% | NO (provisional, 6 dates) | +1.31% |
+| NO_SIGNAL | 257 | 6 | 16.0% | 7.3% | NO (provisional, 6 dates) | +0.98% |
+| BEARISH | 192 | 6 | 30.2% | 12.8% | NO (provisional, 6 dates) | +0.16% |
 
-## Latest verdicts (2026-11-19)
+## Latest verdicts (2026-11-20)
 
 | Symbol | Signal | Row | Health | Timing | Risk | Earnings ≤10d | Warnings |
 |---|---|---|---|---|---|---|---|
@@ -40,7 +40,9 @@ dates, and fewer than that is shown as 'provisional'.
 | NASDAQ:MRVL | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NASDAQ:MU | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NASDAQ:NFLX | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
+| NASDAQ:NVDA | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NASDAQ:PEP | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
+| NASDAQ:SNDK | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NASDAQ:TMUS | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NASDAQ:TSLA | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:BA | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
@@ -50,13 +52,14 @@ dates, and fewer than that is shown as 'provisional'.
 | NYSE:CBRE | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:CRH | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:ETN | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
+| NYSE:FCX | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:GEV | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:GS | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:MCD | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:MLM | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:NEM | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:NKE | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
-| NYSE:PCG | BEARISH | D2 | BROKEN | EXTENDED | HIGH | nan |  |
+| NYSE:PCG | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:T | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:TJX | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:UBER | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
@@ -64,7 +67,6 @@ dates, and fewer than that is shown as 'provisional'.
 | NYSE:VST | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NASDAQ:AAPL | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NASDAQ:AMGN | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
-| NASDAQ:AMZN | BULLISH | D3 | HEALTHY | NORMAL | NORMAL | nan |  |
 | NASDAQ:COST | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NASDAQ:MDLZ | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NYSE:ABBV | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
@@ -85,12 +87,12 @@ dates, and fewer than that is shown as 'provisional'.
 | NYSE:WELL | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NASDAQ:AEP | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:AMD | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
+| NASDAQ:AMZN | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:EQIX | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:EXC | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:LIN | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:MRNA | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:MSFT | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NASDAQ:NVDA | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:WMT | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:XEL | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:AZO | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
@@ -100,7 +102,6 @@ dates, and fewer than that is shown as 'provisional'.
 | NYSE:CVX | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:DLR | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:DUK | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:FCX | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:GE | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:HD | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:JPM | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
