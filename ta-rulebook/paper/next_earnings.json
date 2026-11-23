@@ -1,3 +1,26 @@
 {
-"_source": "yfinance calendar 2026-11-19"
+"_source": "yfinance calendar 2026-11-23",
+"NYSE:PG": "2027-01-22",
+"NYSE:BA": "2027-01-26",
+"NYSE:UBER": "2027-02-03",
+"NYSE:C": "2027-01-14",
+"NYSE:NKE": "2026-12-17",
+"NYSE:VLO": "2027-01-28",
+"NASDAQ:AMGN": "2027-02-02",
+"NYSE:VZ": "2027-01-28",
+"NYSE:MPC": "2027-02-02",
+"NYSE:NEE": "2027-01-27",
+"NYSE:T": "2027-01-27",
+"NYSE:PFE": "2027-02-02",
+"NYSE:COP": "2027-02-04",
+"NYSE:RTX": "2027-01-26",
+"NYSE:DIS": "2027-02-01",
+"NYSE:FCX": "2027-01-21",
+"NYSE:ETN": "2027-02-02",
+"NYSE:AZO": "2026-12-08",
+"NYSE:SLB": "2027-01-22",
+"NYSE:MO": "2027-01-28",
+"NYSE:SHW": "2027-01-26",
+"NYSE:PLD": "2027-01-20",
+"NYSE:NUE": "2027-01-25"
 }

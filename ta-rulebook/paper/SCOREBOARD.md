@@ -1,6 +1,6 @@
 # Paper-trading scoreboard (rulebook v2.3)
 
-Journal: 1567 verdicts, 16 trading days (2026-10-30 → 2026-11-20), 98 symbols. Updated 2026-11-20 23:24 UTC.
+Journal: 1665 verdicts, 17 trading days (2026-10-30 → 2026-11-23), 98 symbols. Updated 2026-11-23 23:24 UTC.
 
 Each call is graded once its window has passed (entry = next open). 'Expected' is the rulebook's
 stated probability; 'calibrated?' tests realized vs expected at 95% (binomial). The test treats calls as
@@ -19,11 +19,11 @@ dates, and fewer than that is shown as 'provisional'.
 
 | Class | matured calls | call dates | realized | expected | calibrated? | mean excess vs SPY |
 |---|---|---|---|---|---|---|
-| BULLISH | 139 | 6 | 12.2% | 4.2% | NO (provisional, 6 dates) | +1.31% |
-| NO_SIGNAL | 257 | 6 | 16.0% | 7.3% | NO (provisional, 6 dates) | +0.98% |
-| BEARISH | 192 | 6 | 30.2% | 12.8% | NO (provisional, 6 dates) | +0.16% |
+| BULLISH | 162 | 7 | 12.3% | 4.1% | NO (provisional, 7 dates) | +1.06% |
+| NO_SIGNAL | 301 | 7 | 16.3% | 7.3% | NO (provisional, 7 dates) | +0.92% |
+| BEARISH | 222 | 7 | 33.3% | 12.8% | NO (provisional, 7 dates) | -0.02% |
 
-## Latest verdicts (2026-11-20)
+## Latest verdicts (2026-11-23)
 
 | Symbol | Signal | Row | Health | Timing | Risk | Earnings ≤10d | Warnings |
 |---|---|---|---|---|---|---|---|
@@ -44,43 +44,44 @@ dates, and fewer than that is shown as 'provisional'.
 | NASDAQ:PEP | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NASDAQ:SNDK | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NASDAQ:TMUS | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
-| NASDAQ:TSLA | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
-| NYSE:BA | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
+| NYSE:BA | BEARISH | D2 | BROKEN | NORMAL | HIGH | False |  |
 | NYSE:BAC | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:BE | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:CAT | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:CBRE | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:CRH | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
-| NYSE:ETN | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
-| NYSE:FCX | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
+| NYSE:ETN | BEARISH | D2 | BROKEN | NORMAL | HIGH | False |  |
+| NYSE:FCX | BEARISH | D2 | BROKEN | NORMAL | HIGH | False |  |
 | NYSE:GEV | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:GS | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:MCD | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:MLM | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:NEM | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
-| NYSE:NKE | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
-| NYSE:PCG | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
-| NYSE:T | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
+| NYSE:NKE | BEARISH | D2 | BROKEN | NORMAL | HIGH | False |  |
+| NYSE:O | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
+| NYSE:PCG | BEARISH | D2 | BROKEN | EXTENDED | HIGH | nan |  |
+| NYSE:PLD | BEARISH | D2 | BROKEN | NORMAL | HIGH | False |  |
+| NYSE:T | BEARISH | D2 | BROKEN | NORMAL | HIGH | False |  |
 | NYSE:TJX | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
-| NYSE:UBER | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
+| NYSE:UBER | BEARISH | D2 | BROKEN | NORMAL | HIGH | False |  |
 | NYSE:VRT | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NYSE:VST | BEARISH | D2 | BROKEN | NORMAL | HIGH | nan |  |
 | NASDAQ:AAPL | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
-| NASDAQ:AMGN | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
+| NASDAQ:AMGN | BULLISH | D3 | HEALTHY | NORMAL | LOW | False |  |
 | NASDAQ:COST | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NASDAQ:MDLZ | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NYSE:ABBV | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NYSE:AMT | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NYSE:BRK.B | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
-| NYSE:DIS | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
+| NYSE:DIS | BULLISH | D3 | HEALTHY | NORMAL | LOW | False |  |
 | NYSE:ECL | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NYSE:JNJ | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NYSE:KO | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NYSE:LLY | BULLISH | D3 | HEALTHY | NORMAL | NORMAL | nan |  |
 | NYSE:MA | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
-| NYSE:MO | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
-| NYSE:PFE | BULLISH | D3 | HEALTHY | PULLBACK | LOW | nan |  |
-| NYSE:PG | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
+| NYSE:MO | BULLISH | D3 | HEALTHY | NORMAL | LOW | False |  |
+| NYSE:PFE | BULLISH | D3 | HEALTHY | PULLBACK | LOW | False |  |
+| NYSE:PG | BULLISH | D3 | HEALTHY | NORMAL | LOW | False |  |
 | NYSE:TGT | BULLISH | D3 | HEALTHY | NORMAL | NORMAL | nan |  |
 | NYSE:TMO | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
 | NYSE:V | BULLISH | D3 | HEALTHY | NORMAL | LOW | nan |  |
@@ -93,36 +94,35 @@ dates, and fewer than that is shown as 'provisional'.
 | NASDAQ:LIN | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:MRNA | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:MSFT | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
+| NASDAQ:TSLA | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:WMT | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NASDAQ:XEL | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:AZO | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:C | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
+| NYSE:AZO | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
+| NYSE:C | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
 | NYSE:CF | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:COP | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
+| NYSE:COP | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
 | NYSE:CVX | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:DLR | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:DUK | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:GE | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:HD | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:JPM | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:MPC | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
+| NYSE:MPC | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
 | NYSE:MRK | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:NEE | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:NUE | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:O | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
+| NYSE:NEE | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
+| NYSE:NUE | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
 | NYSE:OXY | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:PLD | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:PM | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:PSX | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:RTX | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:SHW | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:SLB | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
+| NYSE:RTX | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
+| NYSE:SHW | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
+| NYSE:SLB | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
 | NYSE:SO | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:UNH | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:VLO | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
+| NYSE:VLO | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
 | NYSE:VMRK | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:VTR | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
-| NYSE:VZ | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
+| NYSE:VZ | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | False |  |
 | NYSE:WMB | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 | NYSE:XOM | NO_SIGNAL | D6 | NEUTRAL | NORMAL | NORMAL | nan |  |
 
