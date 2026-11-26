@@ -1,6 +1,6 @@
 # Paper-trading scoreboard (rulebook v2.3)
 
-Journal: 1861 verdicts, 19 trading days (2026-10-30 → 2026-11-25), 98 symbols. Updated 2026-11-25 23:24 UTC.
+Journal: 1862 verdicts, 19 trading days (2026-10-30 → 2026-11-25), 98 symbols. Updated 2026-11-26 23:24 UTC.
 
 Each call is graded once its window has passed (entry = next open). 'Expected' is the rulebook's
 stated probability; 'calibrated?' tests realized vs expected at 95% (binomial). The test treats calls as
@@ -21,7 +21,7 @@ dates, and fewer than that is shown as 'provisional'.
 |---|---|---|---|---|---|---|
 | BULLISH | 217 | 9 | 12.0% | 4.1% | NO (provisional, 9 dates) | +1.39% |
 | NO_SIGNAL | 379 | 9 | 18.5% | 7.2% | NO (provisional, 9 dates) | +0.83% |
-| BEARISH | 283 | 9 | 38.5% | 12.7% | NO (provisional, 9 dates) | -0.43% |
+| BEARISH | 282 | 9 | 38.3% | 12.7% | NO (provisional, 9 dates) | -0.34% |
 
 ## Latest verdicts (2026-11-25)
 
